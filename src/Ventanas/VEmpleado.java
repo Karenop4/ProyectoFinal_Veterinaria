@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 public class VEmpleado extends javax.swing.JFrame {
     VPrincipal vPrincipal;
     VCliente VCliente=new VCliente(this);
+    VServicioListado VservicioListado = new VServicioListado(this);
     /**
      * Creates new form VEmpleado
      */
@@ -140,6 +141,11 @@ public class VEmpleado extends javax.swing.JFrame {
         LblClienteIcono1.setText("IMAGEN");
 
         BtnServicios.setText("Servicios");
+        BtnServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnServiciosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelServLayout = new javax.swing.GroupLayout(PanelServ);
         PanelServ.setLayout(PanelServLayout);
@@ -257,6 +263,12 @@ public class VEmpleado extends javax.swing.JFrame {
         VCliente.setLocationRelativeTo(null);
         VCliente.setVisible(true);
     }//GEN-LAST:event_BtnClientesMouseClicked
+
+    private void BtnServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnServiciosMouseClicked
+        this.setEnabled(false);
+        VservicioListado.setLocationRelativeTo(null);
+        VservicioListado.setVisible(true);
+    }//GEN-LAST:event_BtnServiciosMouseClicked
 
     /**
      * @param args the command line arguments
