@@ -14,6 +14,8 @@ public class VEmpleado extends javax.swing.JFrame {
     VPrincipal vPrincipal;
     VCliente VCliente=new VCliente(this);
     VServicioListado VservicioListado = new VServicioListado(this);
+    VFacturacion VFacturacion = new VFacturacion(this);
+    VListarFacturas VListarFacturas = new VListarFacturas(this);
     /**
      * Creates new form VEmpleado
      */
@@ -39,6 +41,7 @@ public class VEmpleado extends javax.swing.JFrame {
         PanelFac = new javax.swing.JPanel();
         LblFacIcono = new javax.swing.JLabel();
         BtnFacturacion = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
         PanelServ = new javax.swing.JPanel();
         LblClienteIcono1 = new javax.swing.JLabel();
         BtnServicios = new javax.swing.JToggleButton();
@@ -109,20 +112,33 @@ public class VEmpleado extends javax.swing.JFrame {
         LblFacIcono.setText("IMAGEN");
 
         BtnFacturacion.setText("Facturación");
+        BtnFacturacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnFacturacionMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("Buscar Fact.");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelFacLayout = new javax.swing.GroupLayout(PanelFac);
         PanelFac.setLayout(PanelFacLayout);
         PanelFacLayout.setHorizontalGroup(
             PanelFacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFacLayout.createSequentialGroup()
-                .addGroup(PanelFacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelFacLayout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(BtnFacturacion))
-                    .addGroup(PanelFacLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(LblFacIcono)))
+                .addGap(106, 106, 106)
+                .addComponent(LblFacIcono)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelFacLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(BtnFacturacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(19, 19, 19))
         );
         PanelFacLayout.setVerticalGroup(
             PanelFacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +146,9 @@ public class VEmpleado extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(LblFacIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BtnFacturacion)
+                .addGroup(PanelFacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnFacturacion)
+                    .addComponent(jButton1))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -270,6 +288,18 @@ public class VEmpleado extends javax.swing.JFrame {
         VservicioListado.setVisible(true);
     }//GEN-LAST:event_BtnServiciosMouseClicked
 
+    private void BtnFacturacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFacturacionMouseClicked
+        this.setEnabled(false);
+        VFacturacion.setLocationRelativeTo(null);
+        VFacturacion.setVisible(true);
+    }//GEN-LAST:event_BtnFacturacionMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.setEnabled(false);
+        //VListarFacturas.setLocationRelativeTo(null);
+        VListarFacturas.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -301,5 +331,6 @@ public class VEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel PanelClientes;
     private javax.swing.JPanel PanelFac;
     private javax.swing.JPanel PanelServ;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
