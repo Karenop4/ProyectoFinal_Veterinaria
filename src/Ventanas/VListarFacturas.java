@@ -51,6 +51,7 @@ public class VListarFacturas extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestón Facturas");
 
         jPanel1.setName("Listar Facturas"); // NOI18N
 

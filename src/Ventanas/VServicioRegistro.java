@@ -6,6 +6,7 @@ package Ventanas;
 
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,9 @@ public class VServicioRegistro extends javax.swing.JFrame {
     public VServicioRegistro(VServicioListado v){
         initComponents();
         this.v = v;
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\shower.png");
+        setIconImage(icono.getImage());
     }
     
     /**

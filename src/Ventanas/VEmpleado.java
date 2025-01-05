@@ -19,7 +19,10 @@ public class VEmpleado extends javax.swing.JFrame {
     VFacturacion VFacturacion = new VFacturacion(this);
     VListarFacturas VListarFacturas = new VListarFacturas(this);
     VListarEmpleados VListarEmpleados = new VListarEmpleados(this);
-    
+    VTiposMascotas VTiposMascotas = new VTiposMascotas(this);
+    VRazasMascotas VRazasMascotas = new VRazasMascotas(this);
+    VCitas VCitas = new VCitas(this);
+    VMascotas VMascotas = new VMascotas(this);
     /**
      * Creates new form VEmpleado
      */
@@ -218,6 +221,11 @@ public class VEmpleado extends javax.swing.JFrame {
         PanelMascotas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnMascotas.setText("Mascotas");
+        btnMascotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMascotasMouseClicked(evt);
+            }
+        });
 
         LblMascIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblMascIcono.setLabelFor(BtnFacturacion);
@@ -332,6 +340,11 @@ public class VEmpleado extends javax.swing.JFrame {
         LblCitaIcono2.setLabelFor(BtnClientes);
 
         BtnCitas.setText("Citas");
+        BtnCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnCitasMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelCitasLayout = new javax.swing.GroupLayout(PanelCitas);
         PanelCitas.setLayout(PanelCitasLayout);
@@ -390,8 +403,18 @@ public class VEmpleado extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton3.setText("Tipos");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Razas");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel1.setText("Mascotas");
@@ -540,6 +563,30 @@ public class VEmpleado extends javax.swing.JFrame {
         VListarEmpleados.setLocationRelativeTo(null);
         VListarEmpleados.setVisible(true);
     }//GEN-LAST:event_btnEmpleadoMouseClicked
+
+    private void BtnCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCitasMouseClicked
+        this.setEnabled(false);
+        VCitas.setLocationRelativeTo(null);
+        VCitas.setVisible(true);
+    }//GEN-LAST:event_BtnCitasMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        this.setEnabled(false);
+        VTiposMascotas.setLocationRelativeTo(null);
+        VTiposMascotas.setVisible(true);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        this.setEnabled(false);
+        VRazasMascotas.setLocationRelativeTo(null);
+        VRazasMascotas.setVisible(true);
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void btnMascotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMascotasMouseClicked
+        this.setEnabled(false);
+        VMascotas.setLocationRelativeTo(null);
+        VMascotas.setVisible(true);
+    }//GEN-LAST:event_btnMascotasMouseClicked
 
     /**
      * @param args the command line arguments

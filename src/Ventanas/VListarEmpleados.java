@@ -5,6 +5,7 @@
 package Ventanas;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,6 +20,9 @@ public class VListarEmpleados extends javax.swing.JFrame {
     public VListarEmpleados(VEmpleado v) {
         initComponents();
         this.v = v;
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\veterinarian.png");
+        setIconImage(icono.getImage());
     }
 
     /**
@@ -44,6 +48,7 @@ public class VListarEmpleados extends javax.swing.JFrame {
         BtnEliminarReg = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestión de Empleados");
 
         PanelBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 

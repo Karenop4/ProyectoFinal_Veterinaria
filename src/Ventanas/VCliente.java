@@ -6,6 +6,7 @@ package Ventanas;
 
 import Clases.Busquedas;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -26,6 +27,9 @@ public class VCliente extends javax.swing.JFrame {
         PanelInformacion.setEnabled(false);
         estadoBotones(false);
         //BtnAgregar.setEnabled(false);
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\client.png");
+        setIconImage(icono.getImage());
     }
 
     /**

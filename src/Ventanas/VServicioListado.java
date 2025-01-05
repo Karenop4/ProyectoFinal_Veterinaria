@@ -4,6 +4,8 @@
  */
 package Ventanas;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author USER
@@ -14,6 +16,9 @@ public class VServicioListado extends javax.swing.JFrame {
     public VServicioListado(VEmpleado VEmpleado){
         initComponents();
         this.v = VEmpleado;
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\shower.png");
+        setIconImage(icono.getImage());
     }
     /**
      * Creates new form VEmpleado

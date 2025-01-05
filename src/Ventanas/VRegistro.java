@@ -4,6 +4,8 @@
  */
 package Ventanas;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author karen
@@ -25,6 +27,8 @@ public class VRegistro extends javax.swing.JFrame {
         if(tipoRegistro == "C"){
             panelDetalleEmp.setVisible(false);
         }
+        
+        agregarIcono();
     }
     
     public VRegistro(VListarEmpleados v) {
@@ -32,6 +36,12 @@ public class VRegistro extends javax.swing.JFrame {
         this.vEmpleado = v;
         tipoRegistro = "E";
         
+        agregarIcono();
+    }
+    
+    private void agregarIcono(){
+        ImageIcon icono = new ImageIcon("src\\imagenes\\add.png");
+        setIconImage(icono.getImage());
     }
 
     /**
@@ -71,6 +81,7 @@ public class VRegistro extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro");
 
         panelPrincipal.setMinimumSize(new java.awt.Dimension(455, 100));
 
