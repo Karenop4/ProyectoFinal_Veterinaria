@@ -41,7 +41,6 @@ public class VPrincipal extends javax.swing.JFrame {
         TxtUsuario = new javax.swing.JTextField();
         TxtContraseña = new javax.swing.JTextField();
         BtnIngresar = new javax.swing.JToggleButton();
-        BtnRegistrar = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,8 +77,6 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
-        BtnRegistrar.setText("Registrar");
-
         javax.swing.GroupLayout PanelUsuarioLayout = new javax.swing.GroupLayout(PanelUsuario);
         PanelUsuario.setLayout(PanelUsuarioLayout);
         PanelUsuarioLayout.setHorizontalGroup(
@@ -87,12 +84,12 @@ public class VPrincipal extends javax.swing.JFrame {
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                        .addComponent(BtnIngresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                        .addComponent(BtnRegistrar))
                     .addComponent(TxtUsuario)
-                    .addComponent(TxtContraseña, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(TxtContraseña, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelUsuarioLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnIngresar)
+                        .addGap(70, 70, 70)))
                 .addContainerGap())
         );
         PanelUsuarioLayout.setVerticalGroup(
@@ -102,15 +99,14 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnIngresar)
-                    .addComponent(BtnRegistrar))
-                .addGap(17, 17, 17))
+                .addGap(35, 35, 35)
+                .addComponent(BtnIngresar)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         TxtUsuario.getAccessibleContext().setAccessibleName("");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("Inicio de sesión");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,14 +114,13 @@ public class VPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel1)))
+                .addGap(180, 180, 180)
+                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(180, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(229, 229, 229))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +129,7 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,7 +217,6 @@ public class VPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnIngresar;
-    private javax.swing.JToggleButton BtnRegistrar;
     private javax.swing.JPanel PanelUsuario;
     private javax.swing.JTextField TxtContraseña;
     private javax.swing.JTextField TxtUsuario;

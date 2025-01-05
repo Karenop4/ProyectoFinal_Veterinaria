@@ -1,31 +1,24 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Ventanas;
 
-import Clases.Busquedas;
 import java.awt.Color;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
- * @author USER
+ * @author karen
  */
-public class VCliente extends javax.swing.JFrame {
-    Busquedas b=new Busquedas();
+public class VListarEmpleados extends javax.swing.JFrame {
+    VRegistro VRegistro = new VRegistro(this);
     VEmpleado v;
-    VRegistro VRegistro=new VRegistro(this);
     /**
-     * Creates new form VClientes
+     * Creates new form VListarEmpleados
      */
-    public VCliente(VEmpleado v) {
+    public VListarEmpleados(VEmpleado v) {
         initComponents();
-        this.v=v;
-        PanelInformacion.setEnabled(false);
-        estadoBotones(false);
-        //BtnAgregar.setEnabled(false);
+        this.v = v;
     }
 
     /**
@@ -43,23 +36,16 @@ public class VCliente extends javax.swing.JFrame {
         PanelInformacion = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxAreaInfoCliente = new javax.swing.JTextArea();
+        BtnAgregar = new javax.swing.JToggleButton();
+        BtnCancelar = new javax.swing.JToggleButton();
         PanelBotones = new javax.swing.JPanel();
         BtnGuardarCambios = new javax.swing.JToggleButton();
         BtnActualizarInfo = new javax.swing.JToggleButton();
         BtnEliminarReg = new javax.swing.JToggleButton();
-        BtnCancelar = new javax.swing.JToggleButton();
-        BtnAgregar = new javax.swing.JToggleButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Gestion de Clientes");
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        PanelBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        PanelBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         TxtCedula.setForeground(new java.awt.Color(153, 153, 153));
         TxtCedula.setText("Numero de cedula");
@@ -97,7 +83,7 @@ public class VCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        PanelInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        PanelInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         TxAreaInfoCliente.setColumns(20);
         TxAreaInfoCliente.setRows(5);
@@ -116,9 +102,23 @@ public class VCliente extends javax.swing.JFrame {
         PanelInformacionLayout.setVerticalGroup(
             PanelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelInformacionLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        BtnAgregar.setText("Agregar Empleado");
+        BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnAgregarMouseClicked(evt);
+            }
+        });
+
+        BtnCancelar.setText("Salir sin Guardar");
+        BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnCancelarMouseClicked(evt);
+            }
+        });
 
         PanelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -136,7 +136,7 @@ public class VCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnGuardarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnActualizarInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(BtnActualizarInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                     .addComponent(BtnEliminarReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -152,20 +152,6 @@ public class VCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtnCancelar.setText("Salir sin Guardar");
-        BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnCancelarMouseClicked(evt);
-            }
-        });
-
-        BtnAgregar.setText("Agregar Cliente");
-        BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnAgregarMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,80 +161,51 @@ public class VCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BtnCancelar)
+                            .addComponent(BtnAgregar)))
+                    .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(236, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(399, 399, 399)
+                    .addComponent(PanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(10, 10, 10)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addContainerGap()
+                        .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnAgregar)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PanelInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(PanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(BtnCancelar)
+                        .addGap(18, 18, 18)))
+                .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(149, 149, 149)
+                    .addComponent(PanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarCedula(JTextField Txt){
-        Txt.setText("");
-        Txt.setForeground(Color.GRAY);
-    }
-    public void estadoBotones(boolean t){
-        BtnActualizarInfo.setEnabled(t);
-        BtnEliminarReg.setEnabled(t);
-        BtnGuardarCambios.setEnabled(t);
-    }
-    public void salir(){
-        PanelInformacion.setEnabled(false);
-        estadoBotones(false);
-        BtnAgregar.setEnabled(false);
-        this.setVisible(false);
-        v.setEnabled(true);
-        v.setVisible(true);
-    }
     private void TxtCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtCedulaMouseClicked
         TxtCedula.setText("");
         TxtCedula.setForeground(Color.BLACK);
     }//GEN-LAST:event_TxtCedulaMouseClicked
 
     private void BtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseClicked
-        if(b.validarCliente(TxtCedula.getText())){
-            PanelInformacion.setEnabled(true);
-            estadoBotones(true);
-        }    
-        else{
-            JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido registrado.");
-            BtnAgregar.setEnabled(true);
-        }
-        limpiarCedula(TxtCedula);   
+        
     }//GEN-LAST:event_BtnBuscarMouseClicked
-
-    private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
-        salir();
-    }//GEN-LAST:event_BtnCancelarMouseClicked
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        salir();
-    }//GEN-LAST:event_formWindowClosing
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         this.setEnabled(false);
@@ -256,6 +213,20 @@ public class VCliente extends javax.swing.JFrame {
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked
 
+    private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
+        salir();
+    }//GEN-LAST:event_BtnCancelarMouseClicked
+    
+    
+    public void salir(){
+        this.setVisible(false);
+        v.setEnabled(true);
+        v.setVisible(true);
+    }
+    /**
+     * @param args the command line arguments
+     */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnActualizarInfo;

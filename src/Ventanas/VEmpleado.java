@@ -18,6 +18,8 @@ public class VEmpleado extends javax.swing.JFrame {
     VServicioListado VservicioListado = new VServicioListado(this);
     VFacturacion VFacturacion = new VFacturacion(this);
     VListarFacturas VListarFacturas = new VListarFacturas(this);
+    VListarEmpleados VListarEmpleados = new VListarEmpleados(this);
+    
     /**
      * Creates new form VEmpleado
      */
@@ -55,11 +57,24 @@ public class VEmpleado extends javax.swing.JFrame {
         citaIcon = new ImageIcon(newImage5);
         LblCitaIcono2.setIcon(citaIcon);
         
-        ImageIcon vetIcon = new ImageIcon("src\\imagenes\\veterinarian.png");
+        ImageIcon vetIcon = new ImageIcon("src\\imagenes\\veterinarian_logo.png");
         Image image6 = vetIcon.getImage(); // Obtener la imagen
         Image newImage6 = image6.getScaledInstance(100, 100, Image.SCALE_SMOOTH); // Redimensionar
         vetIcon = new ImageIcon(newImage6);
         LblVetIcono.setIcon(vetIcon);
+        LblVetIcono1.setIcon(vetIcon);
+        
+        ImageIcon empIcon = new ImageIcon("src\\imagenes\\veterinarian.png");
+        Image image7 = empIcon.getImage(); // Obtener la imagen
+        Image newImage7 = image7.getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Redimensionar
+        empIcon = new ImageIcon(newImage7);
+        lblEmpIcono.setIcon(empIcon);
+        
+        ImageIcon razaIcon = new ImageIcon("src\\imagenes\\animals.png");
+        Image image8 = razaIcon.getImage(); // Obtener la imagen
+        Image newImage8 = image8.getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Redimensionar
+        razaIcon = new ImageIcon(newImage8);
+        LblRazaIcono.setIcon(razaIcon);
     }
 
     /**
@@ -71,8 +86,9 @@ public class VEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         LblTipo = new javax.swing.JLabel();
-        BtnCerrarSesion = new javax.swing.JToggleButton();
         PanelClientes = new javax.swing.JPanel();
         LblClienteIcono = new javax.swing.JLabel();
         BtnClientes = new javax.swing.JToggleButton();
@@ -80,16 +96,27 @@ public class VEmpleado extends javax.swing.JFrame {
         LblFacIcono = new javax.swing.JLabel();
         BtnFacturacion = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
+        PanelMascotas = new javax.swing.JPanel();
+        btnMascotas = new javax.swing.JButton();
+        LblMascIcono = new javax.swing.JLabel();
+        LblVetIcono = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         PanelServ = new javax.swing.JPanel();
         LblServIcono = new javax.swing.JLabel();
         BtnServicios = new javax.swing.JToggleButton();
         PanelCitas = new javax.swing.JPanel();
         LblCitaIcono2 = new javax.swing.JLabel();
         BtnCitas = new javax.swing.JToggleButton();
-        jPanel1 = new javax.swing.JPanel();
-        btnMascotas = new javax.swing.JButton();
-        LblMascIcono = new javax.swing.JLabel();
-        LblVetIcono = new javax.swing.JLabel();
+        PanelEmpleado = new javax.swing.JPanel();
+        btnEmpleado = new javax.swing.JButton();
+        lblEmpIcono = new javax.swing.JLabel();
+        LblVetIcono1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        LblRazaIcono = new javax.swing.JLabel();
+        BtnCerrarSesion = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Atencion al cliente");
@@ -100,15 +127,9 @@ public class VEmpleado extends javax.swing.JFrame {
             }
         });
 
-        LblTipo.setFont(new java.awt.Font("Microsoft YaHei", 0, 10)); // NOI18N
+        jTabbedPane3.setName("Empleado"); // NOI18N
 
-        BtnCerrarSesion.setText("Cerrar Sesión");
-        BtnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCerrarSesionActionPerformed(evt);
-            }
-        });
+        LblTipo.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
 
         PanelClientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelClientes.setPreferredSize(new java.awt.Dimension(260, 130));
@@ -130,21 +151,21 @@ public class VEmpleado extends javax.swing.JFrame {
             .addGroup(PanelClientesLayout.createSequentialGroup()
                 .addGroup(PanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelClientesLayout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(BtnClientes))
+                        .addGap(93, 93, 93)
+                        .addComponent(LblClienteIcono))
                     .addGroup(PanelClientesLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(LblClienteIcono)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addGap(84, 84, 84)
+                        .addComponent(BtnClientes)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         PanelClientesLayout.setVerticalGroup(
             PanelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelClientesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(LblClienteIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnClientes)
-                .addGap(23, 23, 23))
+                .addGap(17, 17, 17))
         );
 
         PanelFac.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -172,13 +193,13 @@ public class VEmpleado extends javax.swing.JFrame {
         PanelFacLayout.setHorizontalGroup(
             PanelFacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFacLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(101, 101, 101)
                 .addComponent(LblFacIcono)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(PanelFacLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(BtnFacturacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(19, 19, 19))
         );
@@ -193,6 +214,79 @@ public class VEmpleado extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        PanelMascotas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        btnMascotas.setText("Mascotas");
+
+        LblMascIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblMascIcono.setLabelFor(BtnFacturacion);
+
+        javax.swing.GroupLayout PanelMascotasLayout = new javax.swing.GroupLayout(PanelMascotas);
+        PanelMascotas.setLayout(PanelMascotasLayout);
+        PanelMascotasLayout.setHorizontalGroup(
+            PanelMascotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelMascotasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LblMascIcono)
+                .addGap(106, 106, 106))
+            .addGroup(PanelMascotasLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(btnMascotas)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelMascotasLayout.setVerticalGroup(
+            PanelMascotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMascotasLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(LblMascIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMascotas)
+                .addGap(20, 20, 20))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(PanelMascotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelFac, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PanelFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelMascotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        jTabbedPane3.addTab("Empleado", jPanel1);
 
         PanelServ.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelServ.setPreferredSize(new java.awt.Dimension(260, 130));
@@ -214,10 +308,10 @@ public class VEmpleado extends javax.swing.JFrame {
             .addGroup(PanelServLayout.createSequentialGroup()
                 .addGroup(PanelServLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelServLayout.createSequentialGroup()
-                        .addGap(97, 97, 97)
+                        .addGap(94, 94, 94)
                         .addComponent(LblServIcono))
                     .addGroup(PanelServLayout.createSequentialGroup()
-                        .addGap(87, 87, 87)
+                        .addGap(79, 79, 79)
                         .addComponent(BtnServicios)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -244,11 +338,11 @@ public class VEmpleado extends javax.swing.JFrame {
         PanelCitasLayout.setHorizontalGroup(
             PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCitasLayout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
-                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(82, Short.MAX_VALUE)
+                .addGroup(PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BtnCitas)
                     .addComponent(LblCitaIcono2))
-                .addGap(89, 89, 89))
+                .addGap(96, 96, 96))
         );
         PanelCitasLayout.setVerticalGroup(
             PanelCitasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,91 +354,144 @@ public class VEmpleado extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        PanelEmpleado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnMascotas.setText("Mascotas");
+        btnEmpleado.setText("Empleados");
+        btnEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEmpleadoMouseClicked(evt);
+            }
+        });
 
-        LblMascIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LblMascIcono.setLabelFor(BtnFacturacion);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnMascotas)
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(LblMascIcono)
-                        .addGap(100, 100, 100))))
+        javax.swing.GroupLayout PanelEmpleadoLayout = new javax.swing.GroupLayout(PanelEmpleado);
+        PanelEmpleado.setLayout(PanelEmpleadoLayout);
+        PanelEmpleadoLayout.setHorizontalGroup(
+            PanelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEmpleadoLayout.createSequentialGroup()
+                .addGroup(PanelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEmpleadoLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(btnEmpleado))
+                    .addGroup(PanelEmpleadoLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(lblEmpIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LblMascIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+        PanelEmpleadoLayout.setVerticalGroup(
+            PanelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEmpleadoLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(lblEmpIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEmpleado)
+                .addGap(22, 22, 22))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jButton3.setText("Tipos");
+
+        jButton4.setText("Razas");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jLabel1.setText("Mascotas");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(LblRazaIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(7, 7, 7)
+                .addComponent(LblRazaIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMascotas)
-                .addGap(20, 20, 20))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(21, 21, 21))
         );
 
-        LblVetIcono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LblVetIcono.setLabelFor(BtnFacturacion);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelServ, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelCitas, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addComponent(LblVetIcono1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblVetIcono1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PanelEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jTabbedPane3.addTab("Administrador", jPanel3);
+
+        BtnCerrarSesion.setText("Cerrar Sesión");
+        BtnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(BtnCerrarSesion)
-                .addGap(325, 325, 325))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LblTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PanelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                            .addComponent(PanelServ, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PanelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(PanelFac, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 66, Short.MAX_VALUE)))))
-                .addContainerGap())
+                .addGap(335, 335, 335))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PanelClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelFac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(BtnCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jTabbedPane3.getAccessibleContext().setAccessibleName("Empleado");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -384,9 +531,15 @@ public class VEmpleado extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         this.setEnabled(false);
-        //VListarFacturas.setLocationRelativeTo(null);
+        VListarFacturas.setLocationRelativeTo(null);
         VListarFacturas.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpleadoMouseClicked
+        this.setEnabled(false);
+        VListarEmpleados.setLocationRelativeTo(null);
+        VListarEmpleados.setVisible(true);
+    }//GEN-LAST:event_btnEmpleadoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -399,7 +552,7 @@ public class VEmpleado extends javax.swing.JFrame {
             PanelCitas.setVisible(false);
         }
         else{
-             PanelServ.setVisible(true);
+            PanelServ.setVisible(true);
             PanelCitas.setVisible(true);
         }
     }
@@ -414,15 +567,27 @@ public class VEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel LblClienteIcono;
     private javax.swing.JLabel LblFacIcono;
     private javax.swing.JLabel LblMascIcono;
+    private javax.swing.JLabel LblRazaIcono;
     private javax.swing.JLabel LblServIcono;
     private javax.swing.JLabel LblTipo;
     private javax.swing.JLabel LblVetIcono;
+    private javax.swing.JLabel LblVetIcono1;
     private javax.swing.JPanel PanelCitas;
     private javax.swing.JPanel PanelClientes;
+    private javax.swing.JPanel PanelEmpleado;
     private javax.swing.JPanel PanelFac;
+    private javax.swing.JPanel PanelMascotas;
     private javax.swing.JPanel PanelServ;
+    private javax.swing.JButton btnEmpleado;
     private javax.swing.JButton btnMascotas;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JLabel lblEmpIcono;
     // End of variables declaration//GEN-END:variables
 }

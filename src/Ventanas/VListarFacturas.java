@@ -4,6 +4,8 @@
  */
 package Ventanas;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author karen
@@ -18,6 +20,9 @@ public class VListarFacturas extends javax.swing.JFrame {
     public VListarFacturas(VEmpleado v) {
         initComponents();
         this.v = v;
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\bill.png");
+        setIconImage(icono.getImage());
     }
 
     /**

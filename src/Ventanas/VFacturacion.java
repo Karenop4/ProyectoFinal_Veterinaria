@@ -4,6 +4,8 @@
  */
 package Ventanas;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author karen
@@ -16,7 +18,11 @@ public class VFacturacion extends javax.swing.JFrame {
     public VFacturacion(VEmpleado v) {
         initComponents();
         this.v = v;
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\bill.png");
+        setIconImage(icono.getImage());
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,7 +74,7 @@ public class VFacturacion extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Facturación");
 
         jPanel1.setAutoscrolls(true);
@@ -381,7 +387,7 @@ public class VFacturacion extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
                     .addComponent(btnEnviar))
                 .addContainerGap(14, Short.MAX_VALUE))
