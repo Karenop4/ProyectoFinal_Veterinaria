@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Ventanas.*;
 import Clases.*;
+import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -26,6 +31,57 @@ public class VPrincipal extends javax.swing.JFrame {
     public VPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        ImageIcon cliIcon = new ImageIcon("src\\imagenes\\user.png");
+        Image image = cliIcon.getImage(); // Obtener la imagen
+        Image newImage = image.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Redimensionar
+        cliIcon = new ImageIcon(newImage);
+        lblUsuIcono.setIcon(cliIcon);
+        
+        ImageIcon contIcon = new ImageIcon("src\\imagenes\\padlock.png");
+        Image image2 = contIcon.getImage(); // Obtener la imagen
+        Image newImage2 = image2.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Redimensionar
+        contIcon = new ImageIcon(newImage2);
+        lblContIcono.setIcon(contIcon);
+        
+        ImageIcon mostrarContrasenia = new ImageIcon("src\\imagenes\\hide.png");
+        Image scaledImage = mostrarContrasenia.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        mostrarContrasenia = new ImageIcon(scaledImage);
+        button.setIcon(mostrarContrasenia);
+        
+        ImageIcon icono = new ImageIcon("src\\imagenes\\login.png");
+        setIconImage(icono.getImage());
+        
+        
+        // Cadena para almacenar el texto ingresado
+        StringBuilder passwordBuilder = new StringBuilder();
+
+        // Listener para ocultar caracteres al escribir
+        TxtContraseña.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && passwordBuilder.length() > 0) {
+                    // Eliminar el último carácter si se presiona Backspace
+                    passwordBuilder.deleteCharAt(passwordBuilder.length() - 1);
+                } else if (Character.isLetterOrDigit(e.getKeyChar()) || Character.isWhitespace(e.getKeyChar())) {
+                    // Agregar el carácter ingresado al "passwordBuilder"
+                    passwordBuilder.append(e.getKeyChar());
+                } else {
+                    e.consume(); // Ignorar caracteres no válidos
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Reemplazar el texto del campo con asteriscos después de procesar el carácter
+                TxtContraseña.setText("*".repeat(passwordBuilder.length()));
+            }
+        });
+
+        
+        button.addActionListener(e -> JOptionPane.showMessageDialog(PanelUsuario, 
+            "Contraseña: " + passwordBuilder.toString()));
+
     }
 
     /**
@@ -41,6 +97,9 @@ public class VPrincipal extends javax.swing.JFrame {
         TxtUsuario = new javax.swing.JTextField();
         TxtContraseña = new javax.swing.JTextField();
         BtnIngresar = new javax.swing.JToggleButton();
+        lblUsuIcono = new javax.swing.JLabel();
+        lblContIcono = new javax.swing.JLabel();
+        button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,50 +136,67 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
+        button.setToolTipText("Ver contraseña");
+
         javax.swing.GroupLayout PanelUsuarioLayout = new javax.swing.GroupLayout(PanelUsuario);
         PanelUsuario.setLayout(PanelUsuarioLayout);
         PanelUsuarioLayout.setHorizontalGroup(
             PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblContIcono, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                    .addComponent(lblUsuIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxtUsuario)
-                    .addComponent(TxtContraseña, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelUsuarioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnIngresar)
-                        .addGap(70, 70, 70)))
-                .addContainerGap())
+                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
+            .addGroup(PanelUsuarioLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(BtnIngresar)
+                .addGap(17, 17, 17))
         );
         PanelUsuarioLayout.setVerticalGroup(
             PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUsuIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblContIcono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnIngresar)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         TxtUsuario.getAccessibleContext().setAccessibleName("");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setText("Inicio de sesión");
+        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(229, 229, 229))
+                .addContainerGap(154, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(229, 229, 229))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,8 +204,8 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,11 +231,8 @@ public class VPrincipal extends javax.swing.JFrame {
     private void TxtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtUsuarioMouseClicked
        this.limpiarTXT(TxtUsuario);
     }//GEN-LAST:event_TxtUsuarioMouseClicked
-
-    private void TxtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtContraseñaMouseClicked
-        this.limpiarTXT(TxtContraseña);
-    }//GEN-LAST:event_TxtContraseñaMouseClicked
-
+ 
+    
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
         //En caso de que los datos esten correctos
             //if(b.validarUsr(TxtUsuario.getText(), TxtContraseña.getText())){
@@ -179,6 +252,10 @@ public class VPrincipal extends javax.swing.JFrame {
         this.llenarTXT(TxtUsuario);
         this.llenarTXT(TxtContraseña);
     }//GEN-LAST:event_BtnIngresarActionPerformed
+
+    private void TxtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtContraseñaMouseClicked
+        this.limpiarTXT(TxtContraseña);
+    }//GEN-LAST:event_TxtContraseñaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -220,6 +297,9 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel PanelUsuario;
     private javax.swing.JTextField TxtContraseña;
     private javax.swing.JTextField TxtUsuario;
+    private javax.swing.JButton button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblContIcono;
+    private javax.swing.JLabel lblUsuIcono;
     // End of variables declaration//GEN-END:variables
 }

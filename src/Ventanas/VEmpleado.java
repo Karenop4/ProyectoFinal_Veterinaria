@@ -30,6 +30,9 @@ public class VEmpleado extends javax.swing.JFrame {
         initComponents();
         vPrincipal=vP;
         
+        ImageIcon icono = new ImageIcon("src\\imagenes\\veterinarian_logo.png");
+        setIconImage(icono.getImage());
+        
         ImageIcon cliIcon = new ImageIcon("src\\imagenes\\client.png");
         Image image = cliIcon.getImage(); // Obtener la imagen
         Image newImage = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Redimensionar
@@ -89,8 +92,8 @@ public class VEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JTabbedPane();
+        panelEmpleado = new javax.swing.JPanel();
         LblTipo = new javax.swing.JLabel();
         PanelClientes = new javax.swing.JPanel();
         LblClienteIcono = new javax.swing.JLabel();
@@ -103,7 +106,7 @@ public class VEmpleado extends javax.swing.JFrame {
         btnMascotas = new javax.swing.JButton();
         LblMascIcono = new javax.swing.JLabel();
         LblVetIcono = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panelAdmin = new javax.swing.JPanel();
         PanelServ = new javax.swing.JPanel();
         LblServIcono = new javax.swing.JLabel();
         BtnServicios = new javax.swing.JToggleButton();
@@ -130,7 +133,7 @@ public class VEmpleado extends javax.swing.JFrame {
             }
         });
 
-        jTabbedPane3.setName("Empleado"); // NOI18N
+        panelPrincipal.setName("Empleado"); // NOI18N
 
         LblTipo.setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
 
@@ -253,19 +256,19 @@ public class VEmpleado extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelEmpleadoLayout = new javax.swing.GroupLayout(panelEmpleado);
+        panelEmpleado.setLayout(panelEmpleadoLayout);
+        panelEmpleadoLayout.setHorizontalGroup(
+            panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEmpleadoLayout.createSequentialGroup()
                         .addComponent(LblTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelEmpleadoLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(PanelMascotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PanelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,27 +277,27 @@ public class VEmpleado extends javax.swing.JFrame {
                         .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelEmpleadoLayout.setVerticalGroup(
+            panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEmpleadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEmpleadoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PanelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PanelFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PanelMascotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelEmpleadoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LblVetIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jTabbedPane3.addTab("Empleado", jPanel1);
+        panelPrincipal.addTab("Empleado", panelEmpleado);
 
         PanelServ.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PanelServ.setPreferredSize(new java.awt.Dimension(260, 130));
@@ -451,39 +454,39 @@ public class VEmpleado extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
+        panelAdmin.setLayout(panelAdminLayout);
+        panelAdminLayout.setHorizontalGroup(
+            panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAdminLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelServ, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelCitas, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(LblVetIcono1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        panelAdminLayout.setVerticalGroup(
+            panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAdminLayout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PanelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PanelServ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblVetIcono1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PanelEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTabbedPane3.addTab("Administrador", jPanel3);
+        panelPrincipal.addTab("Administrador", panelAdmin);
 
         BtnCerrarSesion.setText("Cerrar Sesión");
         BtnCerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -498,7 +501,7 @@ public class VEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane3)
+                .addComponent(panelPrincipal)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -508,13 +511,13 @@ public class VEmpleado extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.getAccessibleContext().setAccessibleName("Empleado");
+        panelPrincipal.getAccessibleContext().setAccessibleName("Empleado");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -595,12 +598,10 @@ public class VEmpleado extends javax.swing.JFrame {
     public void setTipo(String tipo){
         LblTipo.setText("Usted está registrado como usuario "+tipo);
         if(tipo.equals("General")){
-            PanelServ.setVisible(false);
-            PanelCitas.setVisible(false);
+            panelPrincipal.setEnabled(false);
         }
         else{
-            PanelServ.setVisible(true);
-            PanelCitas.setVisible(true);
+            panelPrincipal.setVisible(true);
         }
     }
 
@@ -631,10 +632,10 @@ public class VEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lblEmpIcono;
+    private javax.swing.JPanel panelAdmin;
+    private javax.swing.JPanel panelEmpleado;
+    private javax.swing.JTabbedPane panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
