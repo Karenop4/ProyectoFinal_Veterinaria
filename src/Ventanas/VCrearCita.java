@@ -4,7 +4,13 @@
  */
 package Ventanas;
 
+import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -21,6 +27,30 @@ public class VCrearCita extends javax.swing.JFrame {
         
         ImageIcon icono = new ImageIcon("src\\imagenes\\reserve.png");
         setIconImage(icono.getImage());
+        
+        
+        int valorInicial = 8;  // Valor por defecto
+        int valorMinimo = 8;   // Límite inferior
+        int valorMaximo = 20;  // Límite superior
+        int incremento = 1;   // Paso al incrementar o decrementar
+        SpinnerNumberModel modelo = new SpinnerNumberModel(valorInicial, valorMinimo, valorMaximo, incremento);
+        horaCita.setModel(modelo);
+        
+        valorInicial = 0;  // Valor por defecto
+        valorMinimo = 0;   // Límite inferior
+        valorMaximo = 59;  // Límite superior
+        SpinnerNumberModel modelo2 = new SpinnerNumberModel(valorInicial, valorMinimo, valorMaximo, incremento);
+        minutosCita.setModel(modelo2);
+        
+        DecimalFormat formato = new DecimalFormat("00");
+        NumberFormatter formateador = new NumberFormatter(formato);
+        formateador.setMinimum(0);  // Límite inferior
+        formateador.setMaximum(99); // Límite superior
+        formateador.setAllowsInvalid(false); // No permitir valores no numéricos
+        JFormattedTextField textField = ((JSpinner.NumberEditor) horaCita.getEditor()).getTextField();
+        textField.setFormatterFactory(new DefaultFormatterFactory(formateador));
+        textField = ((JSpinner.NumberEditor) minutosCita.getEditor()).getTextField();
+        textField.setFormatterFactory(new DefaultFormatterFactory(formateador));
     }
 
     /**
