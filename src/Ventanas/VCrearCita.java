@@ -50,7 +50,7 @@ public class VCrearCita extends javax.swing.JFrame {
         horaCita = new javax.swing.JSpinner();
         minutosCita = new javax.swing.JSpinner();
         btnRegistrar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,10 +198,10 @@ public class VCrearCita extends javax.swing.JFrame {
 
         btnRegistrar.setText("Registrar");
 
-        jButton5.setText("Cancelar");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                btnCancelarMouseClicked(evt);
             }
         });
 
@@ -223,7 +223,7 @@ public class VCrearCita extends javax.swing.JFrame {
                                 .addGap(89, 89, 89)
                                 .addComponent(btnRegistrar)
                                 .addGap(38, 38, 38)
-                                .addComponent(jButton5)))
+                                .addComponent(btnCancelar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -237,7 +237,7 @@ public class VCrearCita extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
-                    .addComponent(jButton5))
+                    .addComponent(btnCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -255,9 +255,9 @@ public class VCrearCita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         salir();
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_btnCancelarMouseClicked
     
     public void salir(){
         this.setVisible(false);
@@ -271,11 +271,11 @@ public class VCrearCita extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnBuscarVeterinario;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSeleccionarMascota;
     private com.toedter.calendar.JDateChooser fechaCita;
     private javax.swing.JSpinner horaCita;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
