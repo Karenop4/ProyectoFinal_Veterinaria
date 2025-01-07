@@ -47,9 +47,14 @@ public class VServicioListado extends javax.swing.JFrame {
         BtnActualizarServicio = new javax.swing.JButton();
         BtnEliminarServicio = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Listado de Servicios");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,6 +175,10 @@ public class VServicioListado extends javax.swing.JFrame {
         servicioRegistro.setLocationRelativeTo(null);
         servicioRegistro.setVisible(true);
     }//GEN-LAST:event_BtnNuevoServicioMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        salir();
+    }//GEN-LAST:event_formWindowClosing
     
     
     private void salir(){

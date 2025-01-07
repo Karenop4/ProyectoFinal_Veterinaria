@@ -45,8 +45,13 @@ public class VTiposMascotas extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Tipos de Animales");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Tipo:");
 
@@ -143,6 +148,10 @@ public class VTiposMascotas extends javax.swing.JFrame {
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         salir();
     }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        salir();
+    }//GEN-LAST:event_formWindowClosing
     
     
     public void salir(){

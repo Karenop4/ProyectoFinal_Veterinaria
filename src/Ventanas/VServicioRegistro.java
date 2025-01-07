@@ -54,6 +54,11 @@ public class VServicioRegistro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Servicio");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Código:");
 
@@ -185,6 +190,10 @@ public class VServicioRegistro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Servicio Guardado Correctamente");
         }  
     }//GEN-LAST:event_BtnGuardarMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        salir();
+    }//GEN-LAST:event_formWindowClosing
     
     
     private void salir(){
