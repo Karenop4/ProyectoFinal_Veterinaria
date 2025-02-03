@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="vet_tipomascotas_fk_vet_mascotas_fk" directorySegmentName="seg_0" id="EFAE8AA1-2162-B8AF-C11A-3A686F199156">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:38:10 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<sourcePk>F94E1FD1-9054-FF8B-0022-601D382E4AA4</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>Agrupar</nameOnSource>
+<nameOnTarget>pertenecer</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C5C570A9-9D65-3567-C7D2-587B83E96BFE</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>B7DCCFFF-F772-C182-F8AC-FE42C7D2B21A</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6AABBEBB-0B3F-2EC5-9B6A-1F8A88B2D742" name="VET_USUARIOS">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:56:12 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="us_id" id="FB29C255-B8DA-7811-9028-57736928E4B8">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-14 19:11:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico del usuario]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="us_usuario" id="4C5B514E-D848-41EA-ED32-36CE618C8BE2">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:56:33 UTC</createdTime>
+<commentInRDBMS><![CDATA[Usuario (longitud max. de 10 caracteres)]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="us_contrasenia" id="C820D1D9-3AE4-E340-574F-87C4EC7DB246">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:56:46 UTC</createdTime>
+<commentInRDBMS><![CDATA[Contraseña del usuario (longitud max. de 10 caracteres)]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="us_tipo" id="C93A23AC-EAF6-4384-BD06-6AFD766EED11">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-14 19:11:35 UTC</createdTime>
+<commentInRDBMS><![CDATA[G si es un usuario  general o A si es un usaurio  administrativo]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_id" id="05F4AFFF-6EAF-C9B5-9242-21130BB7024F">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:28:55 UTC</createdTime>
+<generatorID>503A0D29-4CC8-343B-31CD-2F4F43EDC7BE</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<referedAttribute>951FD922-E657-FEEA-7F81-F8FC61D1B070</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="61B5ECA0-96F0-8E9A-F479-453798322E1E" name="VET_USUARIOS_SIS PK">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:56:57 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FB29C255-B8DA-7811-9028-57736928E4B8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

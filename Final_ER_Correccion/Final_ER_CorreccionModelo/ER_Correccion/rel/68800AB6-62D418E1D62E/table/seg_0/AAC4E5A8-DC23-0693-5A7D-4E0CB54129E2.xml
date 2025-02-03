@@ -1,0 +1,162 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AAC4E5A8-DC23-0693-5A7D-4E0CB54129E2" name="VET_DETALLES_FAC">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>B3441A2A-1A24-99C8-C96A-AC174EE0B2AA</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="facD_id" id="4EB13BC7-DADC-C8A3-0F2B-D31754AFB46C">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico del detalle de factura]]></commentInRDBMS>
+<generatorID>CA8675A3-7EFD-030C-4A18-188265AA8963</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="facD_cantidad" id="B9B137E2-A3EB-E235-E70B-1E2C9F2FA6A1">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Cantidad facturada de los servicios]]></commentInRDBMS>
+<generatorID>4E73F246-1C93-2F04-249D-5C1C3A0A4663</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>3</dataTypePrecision>
+<ownDataTypeParameters>,3,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="facD_subtotal" id="AD50126A-1773-E243-3A8A-BB0DE0360E5E">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Subtotal por la cantidad de  servicios o productos, precio unitario x cantidad]]></commentInRDBMS>
+<generatorID>92E33E95-A5D9-FFE9-5D1B-A5B1E512FAF8</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="facD_valorIVA" id="AD02AA75-9B1C-854D-84BD-90CDB3FF8867">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Valor del IVA aplicado total del servicio]]></commentInRDBMS>
+<generatorID>2E959A35-FB00-6292-75B2-42B7EAC9673D</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fac_total" id="830EB133-F388-757A-8F2B-A095CE0CABEE">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Total a pagar por el servicio]]></commentInRDBMS>
+<generatorID>B07A5188-BFD0-3972-047D-7890C8D93830</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="facD_precioS" id="78E4378C-2916-C313-9F63-2DD748949108">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Precio por el servicio otorgado (individualmente)]]></commentInRDBMS>
+<generatorID>AB369C68-D2C6-5FFE-0143-51C38C365F73</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VET_SERVICIOS_serv_codigo" id="A92E2669-A4E6-C072-6B20-8233E43C2E7F">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>CA447149-71AA-CF5E-19FE-D833FC243AAA</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="04A4A7C4-F909-1661-6BC1-61AE47621939" referredColumn="8BFE8F8F-5889-C167-1645-748FFCA3C1F6"/>
+</associations>
+</Column>
+<Column name="VET_FACTURAS_fac_id" id="BC3A5364-478D-587F-713C-3AC306874B79">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>F2BA33F6-6BD9-B337-14AD-D51B509A2331</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="78D30F37-4955-C44F-9A3D-3EE58453E5A9" referredColumn="7EE4F0CF-0DBB-32BF-790C-AF08B8D7FF14"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="61F715BA-8EE6-36D3-70C6-F604EDB91ED0" name="VET_DETALLES_FAC_PK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>5FA9AFEC-E57A-91D2-6165-A2C7D0D57B1C</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4EB13BC7-DADC-C8A3-0F2B-D31754AFB46C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="28809C94-90AF-E06C-9342-BC0D7538EF8D" name="VET_DETALLES_FAC_VET_FACTURAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>7946FBCC-8B92-920D-ACE7-5510EB5425C5</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BC3A5364-478D-587F-713C-3AC306874B79"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AEF8D0A8-DC41-63EF-5147-1DB93235341E" name="VET_DETALLES_FAC_VET_SERVICIOS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>F99DC7C6-EF20-EC98-9116-668E0E84AB1D</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A92E2669-A4E6-C072-6B20-8233E43C2E7F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

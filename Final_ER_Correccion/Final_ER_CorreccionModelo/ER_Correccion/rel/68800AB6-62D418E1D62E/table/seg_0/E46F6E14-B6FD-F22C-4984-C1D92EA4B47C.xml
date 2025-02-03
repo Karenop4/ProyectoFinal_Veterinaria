@@ -1,0 +1,119 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E46F6E14-B6FD-F22C-4984-C1D92EA4B47C" name="VET_CITAS">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>CE02CE0F-5E64-23A2-C88B-802E05F41774</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="cita_id" id="7CA20420-FE73-5858-3B11-569BEADF1D7C">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico de la cita]]></commentInRDBMS>
+<generatorID>0B4C2064-88FF-333F-3FC7-ADF9129F3FC7</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cita_fecha" id="6AF759EC-3350-FF7E-75CD-EA62C4512954">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Fecha agendada para la cita]]></commentInRDBMS>
+<generatorID>3523C10D-54AC-08DE-524C-58366ADE4497</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>0</dataTypePrecision>
+<ownDataTypeParameters>,0,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cita_estado" id="81A631D5-4CFF-4082-3513-28FB5FD55AD4">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[el estado de la cita será activo 'A' o cancelada 'C']]></commentInRDBMS>
+<generatorID>519E0ACE-3188-4A83-E051-30FD05AA5E80</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VET_MASCOTAS_masc_id" id="F5C46682-8A24-3C37-87E0-74E27BB3ED9A">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>5DF66893-20AD-F0EC-6D2B-C35779DABC04</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FC78EA3D-60B4-9AF1-3677-84EC7A229DD9" referredColumn="578793F4-F346-2BFA-1163-B8CC708712CA"/>
+</associations>
+</Column>
+<Column name="VET_PERSONAS_per_id" id="21591C90-5B0A-CED4-CD6B-9D4D1770E10B">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>D42FC1A8-FF35-3054-7E84-615EC385E1FA</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="346F83CA-313A-3EA2-2363-2A2C6985ADF5" referredColumn="728D6A5E-DB39-726E-DAFB-DEE5CD281823"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="011B98BE-7968-9959-D34B-0C135B9AC9B1" name="VET_CITAS_PK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>FFB887A3-B62C-DD15-E5CB-A6ED540860C1</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7CA20420-FE73-5858-3B11-569BEADF1D7C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BC35282E-1988-195B-4FD1-A23D14ABF4C3" name="VET_CITAS_VET_PERSONAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>4F8C2398-3434-20AF-6CB7-ADBC4F4C8F2F</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="21591C90-5B0A-CED4-CD6B-9D4D1770E10B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FCA04605-DACA-F007-1F2B-1748E27DD7D0" name="VET_CITAS_VET_MASCOTAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>604A997F-9079-5465-6424-F4744A1B4A80</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F5C46682-8A24-3C37-87E0-74E27BB3ED9A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

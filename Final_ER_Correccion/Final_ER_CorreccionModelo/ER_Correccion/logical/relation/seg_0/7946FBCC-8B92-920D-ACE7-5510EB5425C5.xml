@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="vet_factura_vet_detalle_fac_fk" directorySegmentName="seg_0" id="7946FBCC-8B92-920D-ACE7-5510EB5425C5">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 05:01:01 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<sourcePk>80DD17DB-21AE-9F6E-FD95-F809A08E551A</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>tener</nameOnSource>
+<nameOnTarget>pertenecer</nameOnTarget>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>FB194040-6C42-F58F-462D-6B7CAD67294A</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>B3441A2A-1A24-99C8-C96A-AC174EE0B2AA</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

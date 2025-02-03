@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Ventanas.*;
 import Clases.*;
+import DAO.ConeccionBD;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -25,6 +26,7 @@ import javax.swing.JFrame;
 public class VPrincipal extends javax.swing.JFrame {
     VEmpleado vEmpleado=new VEmpleado(this);
     Busquedas b=new Busquedas();
+    ConeccionBD bd = new ConeccionBD();
     /**
      * Creates new form VPrincipal
      */
@@ -251,6 +253,8 @@ public class VPrincipal extends javax.swing.JFrame {
         */
         this.llenarTXT(TxtUsuario);
         this.llenarTXT(TxtContraseña);
+        bd.conectar();
+        
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void TxtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtContraseñaMouseClicked

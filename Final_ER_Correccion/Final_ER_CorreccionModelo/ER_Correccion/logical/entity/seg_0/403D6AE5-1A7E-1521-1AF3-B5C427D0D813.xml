@@ -1,0 +1,174 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="403D6AE5-1A7E-1521-1AF3-B5C427D0D813" name="VET_PERSONAS">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:31 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="per_id" id="951FD922-E657-FEEA-7F81-F8FC61D1B070">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_cedula" id="0F712BAC-D89C-169F-20DE-7EF5C9457069">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Cedula de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_nombre" id="59E71CA6-EDEF-DC46-C98A-C11B1419E22F">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Nombre(s) de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_apellido" id="D6678B18-2A39-2E47-F461-923F33A3FA08">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Apellido(s) de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_direccion" id="426FDFFF-F098-E6C5-56B8-06F7DEA89D7E">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Direccion de domicilio de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_telefono" id="D28F1E3D-0237-0408-22B2-98B6C0582939">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Numero de contacto de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_correo" id="504B6DC1-8E70-A409-5E3C-4DF636015D93">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:22:53 UTC</createdTime>
+<commentInRDBMS><![CDATA[Correo electronico de la persona]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_CoE" id="E3DB2457-04A6-857E-576C-70CAB9731222">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:25:52 UTC</createdTime>
+<commentInRDBMS><![CDATA[C si es cliente o E si es empleado]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_empleadoAoV" id="3C1EC59C-05A9-F9F5-990D-8B9C0F225B39">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:30:27 UTC</createdTime>
+<commentInRDBMS><![CDATA[A si es un empleado que brinda atencion al cliente o V si es veterinario]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_estado" id="80E2F434-BD2C-E6CE-C92F-7B38E265E0EA">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:34:00 UTC</createdTime>
+<commentInRDBMS><![CDATA[A si está activo o I si esta inactivo]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F4ED5407-9530-2B22-DE20-9923055BE7D4" name="VET_PERSONAS PK">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:23:45 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>951FD922-E657-FEEA-7F81-F8FC61D1B070</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

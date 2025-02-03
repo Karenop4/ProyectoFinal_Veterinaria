@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CF62E21A-7D0B-9040-C627-CB912DA72329" name="VET_FACTURAS">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>FB194040-6C42-F58F-462D-6B7CAD67294A</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="fac_id" id="7EE4F0CF-0DBB-32BF-790C-AF08B8D7FF14">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico de la factura]]></commentInRDBMS>
+<generatorID>14C388DF-8A08-952C-9272-C872016B96CC</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fac_fecha" id="48AB0906-24A5-07AF-D7A4-845687339315">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Fecha de emision de la factura]]></commentInRDBMS>
+<generatorID>1DC33F08-4224-FB7F-7EF1-4A3B5135EF8F</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fac_subtotal" id="5B9BB722-C6C5-7BC0-7D32-97349833FD03">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Subtotal de la factura]]></commentInRDBMS>
+<generatorID>196C516D-AE1C-4C0B-63A2-B1BB82629107</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fac_totalIVA" id="04F5A18A-6B7E-D869-D75C-2521755A6FF3">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Valor total del IVA a pagar]]></commentInRDBMS>
+<generatorID>F2C70589-9B3C-E58F-6314-5FBD92F8A8EA</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fac_total" id="47886E27-0A87-8934-3CFF-5F633D3D672C">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Total a pagar]]></commentInRDBMS>
+<generatorID>E4C01BEF-84AA-5123-D34A-99CDDF34DB53</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VET_USUARIOS_us_id" id="9D17FEB2-6791-667A-C825-CD37A73F7376">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>39CB9BF2-371D-7C00-447F-A596E8D4367F</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="94874CC1-C030-E2CB-01BB-E2D2A16E2D0F" referredColumn="212716F4-8091-CB23-BA3E-0C74A5A41949"/>
+</associations>
+</Column>
+<Column name="VET_PERSONAS_per_id" id="CF7B0303-6C8A-0C7F-F357-3F540489FFFC">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>D130DABE-5655-444D-8C49-967FF76D210D</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="656E9609-68ED-752C-E67D-967C89AEE648" referredColumn="728D6A5E-DB39-726E-DAFB-DEE5CD281823"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AB4EB64B-7FF5-1643-3670-9C71AC1D7946" name="VET_FACTURAS_PK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>80DD17DB-21AE-9F6E-FD95-F809A08E551A</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7EE4F0CF-0DBB-32BF-790C-AF08B8D7FF14"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D8FD0E12-A4A4-325A-1405-2D117DDEB0A1" name="VET_FACTURAS_VET_PERSONAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>950575BD-8437-8A10-B4E9-1BC9B9F2E269</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CF7B0303-6C8A-0C7F-F357-3F540489FFFC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3DC3FFFB-F475-977F-9B46-8405CED28015" name="VET_FACTURAS_VET_USUARIOS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>8ECCC82D-A246-463F-0622-BCEEDCE4DAD4</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9D17FEB2-6791-667A-C825-CD37A73F7376"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

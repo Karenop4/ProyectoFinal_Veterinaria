@@ -1,0 +1,135 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FB194040-6C42-F58F-462D-6B7CAD67294A" name="VET_FACTURAS">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:58:35 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="fac_id" id="14C388DF-8A08-952C-9272-C872016B96CC">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:58:43 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico de la factura]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fac_fecha" id="1DC33F08-4224-FB7F-7EF1-4A3B5135EF8F">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:58:48 UTC</createdTime>
+<commentInRDBMS><![CDATA[Fecha de emision de la factura]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fac_subtotal" id="196C516D-AE1C-4C0B-63A2-B1BB82629107">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:59:04 UTC</createdTime>
+<commentInRDBMS><![CDATA[Subtotal de la factura]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fac_totalIVA" id="F2C70589-9B3C-E58F-6314-5FBD92F8A8EA">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:59:19 UTC</createdTime>
+<commentInRDBMS><![CDATA[Valor total del IVA a pagar]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,5,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fac_total" id="E4C01BEF-84AA-5123-D34A-99CDDF34DB53">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-13 04:59:14 UTC</createdTime>
+<commentInRDBMS><![CDATA[Total a pagar]]></commentInRDBMS>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,6,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="us_id" id="39CB9BF2-371D-7C00-447F-A596E8D4367F">
+<createdBy>karen</createdBy>
+<createdTime>2024-12-18 01:28:38 UTC</createdTime>
+<generatorID>8ECCC82D-A246-463F-0622-BCEEDCE4DAD4</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<referedAttribute>FB29C255-B8DA-7811-9028-57736928E4B8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="per_id" id="D130DABE-5655-444D-8C49-967FF76D210D">
+<createdBy>USER</createdBy>
+<createdTime>2025-01-02 05:27:45 UTC</createdTime>
+<generatorID>950575BD-8437-8A10-B4E9-1BC9B9F2E269</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<referedAttribute>951FD922-E657-FEEA-7F81-F8FC61D1B070</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="80DD17DB-21AE-9F6E-FD95-F809A08E551A" name="VET_FACTURA PK">
+<createdBy>USER</createdBy>
+<createdTime>2024-12-14 19:42:46 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>14C388DF-8A08-952C-9272-C872016B96CC</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

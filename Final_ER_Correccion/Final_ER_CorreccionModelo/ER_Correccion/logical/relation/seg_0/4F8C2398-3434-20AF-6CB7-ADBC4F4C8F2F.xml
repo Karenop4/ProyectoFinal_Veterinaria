@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="vet_empleados_vet_citas" directorySegmentName="seg_0" id="4F8C2398-3434-20AF-6CB7-ADBC4F4C8F2F">
+<createdBy>karen</createdBy>
+<createdTime>2024-12-18 01:07:41 UTC</createdTime>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<engineerTo>
+<item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
+</engineerTo>
+<sourcePk>F4ED5407-9530-2B22-DE20-9923055BE7D4</sourcePk>
+<identifying>false</identifying>
+<nameOnSource> asistir</nameOnSource>
+<nameOnTarget>atenderse por</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>403D6AE5-1A7E-1521-1AF3-B5C427D0D813</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>CE02CE0F-5E64-23A2-C88B-802E05F41774</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

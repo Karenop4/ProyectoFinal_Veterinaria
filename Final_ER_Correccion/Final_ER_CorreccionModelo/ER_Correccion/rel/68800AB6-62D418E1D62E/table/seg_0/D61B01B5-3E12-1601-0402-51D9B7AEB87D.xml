@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D61B01B5-3E12-1601-0402-51D9B7AEB87D" name="VET_RAZAS">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>A4547F02-3909-CC86-5B23-9951BF983E7B</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="raza_id" id="1A15A26A-F891-5006-CA45-1B9D4DE75479">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo unico de la raza]]></commentInRDBMS>
+<generatorID>BD10911C-0928-156B-4360-127FECF66ACB</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="raza_nombre" id="A2881D63-30CA-38AD-73EF-DD062D03553B">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Raza de la mascota]]></commentInRDBMS>
+<generatorID>742AB24F-BFDF-9DB2-F1A2-023F3B11E6EF</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VET_TIPOSMASCOTAS_tipoM_id" id="5383266E-ADAA-D822-A614-C08C4F50165E">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>7932EDEE-F8EF-C8D2-0116-CF0AC08870EC</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="49571D1B-CCB0-98F1-8116-1C67CED6A5A7" referredColumn="065882A6-CEE8-2FA1-2435-92AF2A5B1A25"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="329F8CC6-E103-F0B3-D5AC-3F89452D98D2" name="VET_RAZAS_PK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>04F0E839-4481-07FF-BA80-3906D7FEC644</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1A15A26A-F891-5006-CA45-1B9D4DE75479"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6364DB8B-8FC0-02DF-AD54-D2A5D8607E37" name="VET_RAZAS_VET_TIPOSMASCOTAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>8EAF884F-12C8-EB41-30A2-2C0370CBCE83</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5383266E-ADAA-D822-A614-C08C4F50165E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

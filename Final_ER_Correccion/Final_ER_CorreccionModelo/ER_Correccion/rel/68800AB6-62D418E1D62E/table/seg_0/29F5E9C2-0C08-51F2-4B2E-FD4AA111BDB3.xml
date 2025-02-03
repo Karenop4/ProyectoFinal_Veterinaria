@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="29F5E9C2-0C08-51F2-4B2E-FD4AA111BDB3" name="VET_MASCOTAS">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>B7DCCFFF-F772-C182-F8AC-FE42C7D2B21A</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="masc_id" id="578793F4-F346-2BFA-1163-B8CC708712CA">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Codigo Unico de la mascota]]></commentInRDBMS>
+<generatorID>ECAE7A4C-A60A-E575-226C-1B49157FA186</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="masc_nombre" id="13BDCC30-2133-9B1E-9C5B-EA7B97C035EA">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<commentInRDBMS><![CDATA[Nombre(s) de la mascota]]></commentInRDBMS>
+<generatorID>288B1B28-CD47-B89B-9884-115E43A791E7</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VET_PERSONAS_per_id" id="2C68E408-4617-3DF5-4584-FFCE9462FCE9">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>3A3BDF59-F058-3FD8-1C13-9FB06536CBE0</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3E65E7A9-BF7F-B660-28D5-FF6AEBF2D31E" referredColumn="728D6A5E-DB39-726E-DAFB-DEE5CD281823"/>
+</associations>
+</Column>
+<Column name="VET_TIPOSMASCOTAS_tipoM_id" id="939BFA9D-3E2D-0F48-545B-191025B8AE2D">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>7FD6FDF8-4CE5-EE1C-7834-D55FDEB7D3E7</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>5</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="97984C1C-D6C7-8645-5A43-180AE482DAB1" referredColumn="065882A6-CEE8-2FA1-2435-92AF2A5B1A25"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FA9E596E-95B6-16EC-D085-3FBAD5E12FD8" name="VET_MASCOTAS_PK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>DC8DDF65-CD2F-45B8-4B66-A2F8754084D7</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="578793F4-F346-2BFA-1163-B8CC708712CA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="422123A5-68DF-228C-8F79-6B84F11B2CBE" name="VET_MASCOTAS_VET_PERSONAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>0234FA4A-31E0-6723-C853-F4C163D149DD</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2C68E408-4617-3DF5-4584-FFCE9462FCE9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="58742365-81AB-A3EA-6A5F-C3DFB20244FF" name="VET_MASCOTAS_VET_TIPOSMASCOTAS_FK">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<generatorID>EFAE8AA1-2162-B8AF-C11A-3A686F199156</generatorID>
+<ownerDesignName>ER_Correccion</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="939BFA9D-3E2D-0F48-545B-191025B8AE2D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
