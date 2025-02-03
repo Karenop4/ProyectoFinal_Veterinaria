@@ -10,6 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Controlador.CPersonas;
+import Modelo.MPersonas;
+
 /**
  *
  * @author USER
@@ -18,6 +21,8 @@ public class VCliente extends javax.swing.JFrame {
     Busquedas b=new Busquedas();
     VEmpleado v;
     VRegistro VRegistro=new VRegistro(this);
+    
+    CPersonas persona = new CPersonas();
     /**
      * Creates new form VClientes
      */
@@ -46,7 +51,7 @@ public class VCliente extends javax.swing.JFrame {
         BtnBuscar = new javax.swing.JToggleButton();
         PanelInformacion = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TxAreaInfoCliente = new javax.swing.JTextArea();
+        TxtAreaInfoCliente = new javax.swing.JTextArea();
         PanelBotones = new javax.swing.JPanel();
         BtnGuardarCambios = new javax.swing.JToggleButton();
         BtnActualizarInfo = new javax.swing.JToggleButton();
@@ -79,6 +84,11 @@ public class VCliente extends javax.swing.JFrame {
                 BtnBuscarMouseClicked(evt);
             }
         });
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelBuscarLayout = new javax.swing.GroupLayout(PanelBuscar);
         PanelBuscar.setLayout(PanelBuscarLayout);
@@ -103,10 +113,10 @@ public class VCliente extends javax.swing.JFrame {
 
         PanelInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        TxAreaInfoCliente.setColumns(20);
-        TxAreaInfoCliente.setRows(5);
-        TxAreaInfoCliente.setEnabled(false);
-        jScrollPane2.setViewportView(TxAreaInfoCliente);
+        TxtAreaInfoCliente.setColumns(20);
+        TxtAreaInfoCliente.setRows(5);
+        TxtAreaInfoCliente.setEnabled(false);
+        jScrollPane2.setViewportView(TxtAreaInfoCliente);
 
         javax.swing.GroupLayout PanelInformacionLayout = new javax.swing.GroupLayout(PanelInformacion);
         PanelInformacion.setLayout(PanelInformacionLayout);
@@ -260,6 +270,25 @@ public class VCliente extends javax.swing.JFrame {
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked
 
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        String celdula = TxtCedula.getText();
+        char CoE = 'C';
+        MPersonas cliente = persona.buscarCliente(celdula, CoE);
+        
+        if(cliente != null){
+            TxtAreaInfoCliente.setText(
+                                        "Cedula: " + cliente.getPer_cedula() + "\n"+
+                                        "Nombre: " + cliente.getPer_nombre() + "\n"+
+                                        "Apellido: " + cliente.getPer_apellido() + "\n" +
+                                        "Dirección: " + cliente.getPer_direccion() + "\n" +
+                                        "Telefono: " + cliente.getPer_telefono() + "\n" +
+                                        "Correo: " + cliente.getPer_correo());
+                    
+        }else{
+            TxtAreaInfoCliente.setText("Datos del cliente no encontrados");
+        }
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnActualizarInfo;
@@ -271,7 +300,7 @@ public class VCliente extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBotones;
     private javax.swing.JPanel PanelBuscar;
     private javax.swing.JPanel PanelInformacion;
-    private javax.swing.JTextArea TxAreaInfoCliente;
+    private javax.swing.JTextArea TxtAreaInfoCliente;
     private javax.swing.JTextField TxtCedula;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

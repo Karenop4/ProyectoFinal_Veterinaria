@@ -4,10 +4,23 @@
  */
 package Controlador;
 
+import DAO.ConeccionBD;
+import DAO.PersonasDAO;
+import Modelo.MPersonas;
+import java.sql.*;
+
 /**
  *
  * @author karen
  */
 public class CPersonas {
+    PersonasDAO personaDAO;
     
+    public CPersonas(){
+        personaDAO = new PersonasDAO();
+    }
+    
+    public MPersonas buscarCliente(String cedula, char CoE){
+        return personaDAO.buscarClientePorCedula(cedula, CoE);
+    }
 }

@@ -253,7 +253,6 @@ public class VPrincipal extends javax.swing.JFrame {
         */
         this.llenarTXT(TxtUsuario);
         this.llenarTXT(TxtContraseña);
-        bd.conectar();
         
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
