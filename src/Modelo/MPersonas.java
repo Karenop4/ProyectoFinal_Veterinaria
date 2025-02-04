@@ -41,6 +41,7 @@ public class MPersonas {
         this.per_direccion = per_direccion;
         this.per_telefono = per_telefono;
         this.per_correo = per_correo;
+        
         this.per_estado = per_estado;
     }
 
