@@ -1,9 +1,11 @@
 ----TABLESPACE y CREACION DE USUARIO-------
-/*
-alter session set "_ORACLE_SCRIPT"=TRUE;
-create user admin_vet identified by 1234;
-*/
-create tablespace TB_VET_FINAL datafile 'tbs_vet_final.ora' size 40M online;
+--/*
+--alter session set "_ORACLE_SCRIPT"=TRUE;
+--create user admin_vet identified by 1234;
+--*/
+GRANT DBA TO admin_vet;
+
+create tablespace TBS_VET_FINAL datafile 'tbs_vet_final.ora' size 40M online;
 create temporary tablespace TBS_VET_FINAL_TEMP tempfile 'tbs_vet_final_temp.ora' size 5M autoextend on;
 
 alter user admin_vet default tablespace TBS_VET_FINAL
@@ -294,11 +296,22 @@ insert into vet_razas values(v_ra_seq.nextval,'Labrador',(select tipom_id from v
 insert into vet_razas values(v_ra_seq.nextval,'n/d',(select tipom_id from vet_tiposmascotas where tipom_nombre like 'otro'));
 --SELECT * FROM vet_razas;
 --------------------------------------------------------------------------------
-----------------------------    MASCOTAS   -------------------------------------
-insert into vet_mascotas values(v_masc_seq.nextval,'Rufus',(select per_id from vet_personas where per_nombre like 'Andrés'),(
-select tipom_id from vet_tiposmascotas where tipom_nombre like 'canino'));
-insert into vet_mascotas values(v_masc_seq.nextval,'Toby',(select per_id from vet_personas where per_nombre like 'Karen'),(
-select tipom_id from vet_tiposmascotas where tipom_nombre like 'canino'));
+insert into vet_mascotas 
+values (
+  v_masc_seq.nextval,
+  'Rufus',
+  (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Andrés' AND ROWNUM = 1),
+  (SELECT tipom_id FROM vet_tiposmascotas WHERE tipom_nombre LIKE 'canino' AND ROWNUM = 1)
+);
+
+insert into vet_mascotas 
+values (
+  v_masc_seq.nextval,
+  'Toby',
+  (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Karen' AND ROWNUM = 1),
+  (SELECT tipom_id FROM vet_tiposmascotas WHERE tipom_nombre LIKE 'canino' AND ROWNUM = 1)
+);
+
 --select * from vet_mascotas;
 --------------------------------------------------------------------------------
 ----------------------------    PERSONAS   -------------------------------------
@@ -311,8 +324,8 @@ INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Paula', 'Aceve
 --select * from vet_personas;
 --------------------------------------------------------------------------------
 ----------------------------    CITAS   ----------------------------------------
-insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',2,
-(select vet_personas_per_id from vet_mascotas where masc_id like 2));
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',29,
+(select vet_personas_per_id from vet_mascotas where masc_id like 29));
 --select * from vet_citas;
 --------------------------------------------------------------------------------
 ----------------------------    USUARIOS   -------------------------------------
@@ -337,7 +350,7 @@ insert into vet_servicios values (v_serv_seq.nextval, 'Vacunacion completa',30.4
 --------------------------------------------------------------------------------
 ----------------------------    DETALLES FACTURA   -----------------------------
 insert into vet_detalles_fac values (v_detf_seq.nextval,1,30.43,0,30.43,30.43,(select serv_codigo from vet_servicios where serv_nombre like 'Vacunacion completa'),
-(select fac_id from vet_facturas where fac_id like 2 ));
+(select fac_id from vet_facturas where fac_id like 1 ));
 
 --select * from vet_detalles_fac;
 commit;
