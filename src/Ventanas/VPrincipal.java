@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Ventanas.*;
 import Clases.*;
-import DAO.ConeccionBD;
+import DAO.ConexionBD;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -26,7 +26,7 @@ import javax.swing.JFrame;
 public class VPrincipal extends javax.swing.JFrame {
     VEmpleado vEmpleado=new VEmpleado(this);
     Busquedas b=new Busquedas();
-    ConeccionBD bd = new ConeccionBD();
+    ConexionBD bd = new ConexionBD();
     /**
      * Creates new form VPrincipal
      */

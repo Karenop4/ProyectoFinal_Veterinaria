@@ -5,7 +5,7 @@
 package DAO;
 
 import Modelo.MPersonas;
-import DAO.ConeccionBD;
+import DAO.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ public class PersonasDAO {
     
     public MPersonas buscarClientePorCedula(String cedula, char CoE){
         MPersonas cliente = null;
-        Connection con = ConeccionBD.conectar();
+        Connection con = ConexionBD.conectar();
         if (con != null) {
             try {
                 String sql = "SELECT * FROM vet_personas WHERE per_cedula = ? AND per_coe = ?";

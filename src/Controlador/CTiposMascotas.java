@@ -4,10 +4,18 @@
  */
 package Controlador;
 
+import DAO.TiposMascotasDAO;
+import Modelo.MTiposMascotas;
+import java.util.List;
+
 /**
  *
  * @author karen
  */
 public class CTiposMascotas {
+    private TiposMascotasDAO tiposMascotasDAO;
     
+    public List<MTiposMascotas> listarTiposMascotas(){
+        return null;
+    }
 }

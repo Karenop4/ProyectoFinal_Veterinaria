@@ -4,10 +4,22 @@
  */
 package DAO;
 
+import Modelo.MTiposMascotas;
+import java.util.List;
+import DAO.ConexionBD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author karen
  */
 public class TiposMascotasDAO {
-    
+    public List<MTiposMascotas> listarTiposMascotas(){
+        Connection con = ConexionBD.conectar();
+        
+        return null;
+    }
 }

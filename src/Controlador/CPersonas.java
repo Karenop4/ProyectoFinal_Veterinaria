@@ -4,7 +4,7 @@
  */
 package Controlador;
 
-import DAO.ConeccionBD;
+import DAO.ConexionBD;
 import DAO.PersonasDAO;
 import Modelo.MPersonas;
 import java.sql.*;
@@ -14,7 +14,7 @@ import java.sql.*;
  * @author karen
  */
 public class CPersonas {
-    PersonasDAO personaDAO;
+    private PersonasDAO personaDAO;
     
     public CPersonas(){
         personaDAO = new PersonasDAO();
