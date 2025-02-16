@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
  * @author karen
  */
 public class VCitas extends javax.swing.JFrame {
-    VCrearCita VcrearCitas = new VCrearCita(this);
-    VEmpleado v;
+    private VCrearCita VcrearCitas;
+    private VEmpleado v;
     /**
      * Creates new form VCitas
      */
@@ -217,6 +217,7 @@ public class VCitas extends javax.swing.JFrame {
 
     private void btnIngresarCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarCitaMouseClicked
         this.setEnabled(false);
+        VcrearCitas = new VCrearCita(this);
         VcrearCitas.setLocationRelativeTo(null);
         VcrearCitas.setVisible(true);
     }//GEN-LAST:event_btnIngresarCitaMouseClicked

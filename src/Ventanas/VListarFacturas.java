@@ -15,7 +15,7 @@ public class VListarFacturas extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    VEmpleado v;
+    private VEmpleado v;
     
     public VListarFacturas(VEmpleado v) {
         initComponents();

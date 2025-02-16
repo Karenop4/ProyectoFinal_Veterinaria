@@ -16,8 +16,8 @@ public class VRegistro extends javax.swing.JFrame {
     /**
      * Creates new form VRegistro
      */
-    VCliente vCliente;
-    VListarEmpleados vEmpleado;
+    private VCliente vCliente;
+    private VListarEmpleados vEmpleado;
     
     public VRegistro(VCliente v) {
         initComponents();

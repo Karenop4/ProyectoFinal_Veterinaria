@@ -24,9 +24,8 @@ import javax.swing.JFrame;
  * @author USER
  */
 public class VPrincipal extends javax.swing.JFrame {
-    VEmpleado vEmpleado=new VEmpleado(this);
+    private VEmpleado vEmpleado=new VEmpleado(this);
     Busquedas b=new Busquedas();
-    ConexionBD bd = new ConexionBD();
     /**
      * Creates new form VPrincipal
      */

@@ -11,8 +11,8 @@ import javax.swing.ImageIcon;
  * @author USER
  */
 public class VServicioListado extends javax.swing.JFrame {
-    VEmpleado v;
-    VServicioRegistro servicioRegistro = new VServicioRegistro(this);
+    private VEmpleado v;
+    private VServicioRegistro servicioRegistro;
     public VServicioListado(VEmpleado VEmpleado){
         initComponents();
         this.v = VEmpleado;
@@ -172,6 +172,7 @@ public class VServicioListado extends javax.swing.JFrame {
 
     private void BtnNuevoServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnNuevoServicioMouseClicked
         this.setEnabled(false);
+        servicioRegistro = new VServicioRegistro(this);
         servicioRegistro.setLocationRelativeTo(null);
         servicioRegistro.setVisible(true);
     }//GEN-LAST:event_BtnNuevoServicioMouseClicked

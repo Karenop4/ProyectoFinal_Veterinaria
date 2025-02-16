@@ -17,7 +17,7 @@ import javax.swing.text.NumberFormatter;
  * @author karen
  */
 public class VCrearCita extends javax.swing.JFrame {
-    VCitas v;
+    private VCitas v;
     /**
      * Creates new form VCrearCita
      */

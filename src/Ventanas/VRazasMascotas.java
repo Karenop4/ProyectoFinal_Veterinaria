@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
  * @author karen
  */
 public class VRazasMascotas extends javax.swing.JFrame {
-    VEmpleado v;
+    private VEmpleado v;
     /**
      * Creates new form VRazasMascotas
      */

@@ -18,7 +18,7 @@ public class VServicioRegistro extends javax.swing.JFrame {
     /**
      * Creates new form VEmpleado
      */
-    VServicioListado v;
+    private VServicioListado v;
     public VServicioRegistro(VServicioListado v){
         initComponents();
         this.v = v;

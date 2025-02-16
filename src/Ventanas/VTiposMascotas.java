@@ -15,7 +15,7 @@ public class VTiposMascotas extends javax.swing.JFrame {
     /**
      * Creates new form VTiposMascotas
      */
-    VEmpleado v;
+    private VEmpleado v;
     
     public VTiposMascotas(VEmpleado v) {
         initComponents();

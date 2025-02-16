@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
  * @author karen
  */
 public class VListarEmpleados extends javax.swing.JFrame {
-    VRegistro VRegistro = new VRegistro(this);
-    VEmpleado v;
+    private VRegistro VRegistro;
+    private VEmpleado v;
     /**
      * Creates new form VListarEmpleados
      */
@@ -219,6 +219,7 @@ public class VListarEmpleados extends javax.swing.JFrame {
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         this.setEnabled(false);
+        VRegistro = new VRegistro(this);
         VRegistro.setLocationRelativeTo(null);
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked

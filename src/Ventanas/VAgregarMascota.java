@@ -4,6 +4,7 @@
  */
 package Ventanas;
 
+import Controlador.CTiposMascotas;
 import javax.swing.ImageIcon;
 
 /**
@@ -11,16 +12,19 @@ import javax.swing.ImageIcon;
  * @author karen
  */
 public class VAgregarMascota extends javax.swing.JFrame {
-    VMascotas v;
+    private VMascotas v;
+    private CTiposMascotas cTipoMascotas;
     /**
      * Creates new form VAgregarMascota
      */
-    public VAgregarMascota(VMascotas v) {
+    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas) {
         initComponents();
         this.v = v;
         
         ImageIcon icono = new ImageIcon("src\\imagenes\\pets.png");
         setIconImage(icono.getImage());
+        
+        this.cTipoMascotas = cTipoMascotas;
     }
 
     /**

@@ -19,8 +19,8 @@ import Modelo.MPersonas;
  */
 public class VCliente extends javax.swing.JFrame {
     Busquedas b=new Busquedas();
-    VEmpleado v;
-    VRegistro VRegistro=new VRegistro(this);
+    private VEmpleado v;
+    private VRegistro VRegistro;
     
     CPersonas persona;
     /**
@@ -268,6 +268,7 @@ public class VCliente extends javax.swing.JFrame {
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         this.setEnabled(false);
+        VRegistro=new VRegistro(this);
         VRegistro.setLocationRelativeTo(null);
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked
