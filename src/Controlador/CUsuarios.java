@@ -4,18 +4,17 @@
  */
 package Controlador;
 
-import DAO.RazasDAO;
+import DAO.UsuariosDAO;
 
 /**
  *
  * @author karen
  */
-public class CRazas {
-    private RazasDAO razasDAO;
+public class CUsuarios {
+    private UsuariosDAO usuariosDAO;
 
-    public CRazas(RazasDAO razasDAO) {
-        this.razasDAO = razasDAO;
+    public CUsuarios(UsuariosDAO usuariosDAO) {
+        this.usuariosDAO = usuariosDAO;
     }
-    
     
 }

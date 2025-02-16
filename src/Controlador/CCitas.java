@@ -4,10 +4,18 @@
  */
 package Controlador;
 
+import DAO.CitasDAO;
+
 /**
  *
  * @author karen
  */
 public class CCitas {
+    private CitasDAO citasDAO;
+
+    public CCitas(CitasDAO citasDAO) {
+        this.citasDAO = citasDAO;
+    }
+    
     
 }

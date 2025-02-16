@@ -4,10 +4,18 @@
  */
 package Controlador;
 
+import DAO.FacturasDAO;
+
 /**
  *
  * @author karen
  */
 public class CFacturas {
+    private FacturasDAO facturasDAO;
+
+    public CFacturas(FacturasDAO facturasDAO) {
+        this.facturasDAO = facturasDAO;
+    }
+    
     
 }

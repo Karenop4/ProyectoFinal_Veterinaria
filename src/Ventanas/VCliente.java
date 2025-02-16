@@ -22,11 +22,11 @@ public class VCliente extends javax.swing.JFrame {
     VEmpleado v;
     VRegistro VRegistro=new VRegistro(this);
     
-    CPersonas persona = new CPersonas();
+    CPersonas persona;
     /**
      * Creates new form VClientes
      */
-    public VCliente(VEmpleado v) {
+    public VCliente(VEmpleado v, CPersonas persona) {
         initComponents();
         this.v=v;
         PanelInformacion.setEnabled(false);
@@ -35,6 +35,8 @@ public class VCliente extends javax.swing.JFrame {
         
         ImageIcon icono = new ImageIcon("src\\imagenes\\client.png");
         setIconImage(icono.getImage());
+        
+        this.persona = persona;
     }
 
     /**

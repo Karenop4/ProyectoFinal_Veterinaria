@@ -14,8 +14,12 @@ import java.util.List;
  */
 public class CTiposMascotas {
     private TiposMascotasDAO tiposMascotasDAO;
+
+    public CTiposMascotas(TiposMascotasDAO tiposMascotasDAO) {
+        this.tiposMascotasDAO = tiposMascotasDAO;
+    }
     
     public List<MTiposMascotas> listarTiposMascotas(){
-        return null;
+        return tiposMascotasDAO.listarTiposMascotas();
     }
 }

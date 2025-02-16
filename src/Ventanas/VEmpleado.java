@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Ventanas;
+import Controlador.*;
+import DAO.*;
 import Ventanas.*;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -13,16 +15,40 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class VEmpleado extends javax.swing.JFrame {
+    //Instancia ventanas
     VPrincipal vPrincipal;
-    VCliente VCliente=new VCliente(this);
-    VServicioListado VservicioListado = new VServicioListado(this);
-    VFacturacion VFacturacion = new VFacturacion(this);
-    VListarFacturas VListarFacturas = new VListarFacturas(this);
-    VListarEmpleados VListarEmpleados = new VListarEmpleados(this);
-    VTiposMascotas VTiposMascotas = new VTiposMascotas(this);
-    VRazasMascotas VRazasMascotas = new VRazasMascotas(this);
-    VCitas VCitas = new VCitas(this);
-    VMascotas VMascotas = new VMascotas(this);
+    VCliente VCliente;
+    VServicioListado VservicioListado;
+    VFacturacion VFacturacion;
+    VListarFacturas VListarFacturas;
+    VListarEmpleados VListarEmpleados;
+    VTiposMascotas VTiposMascotas;
+    VRazasMascotas VRazasMascotas;
+    VCitas VCitas;
+    VMascotas VMascotas;
+    
+    //Instancia DAOS
+    private CitasDAO citasDAO;
+    private FacturasDAO facturasDAO;
+    private MascotasDAO mascotasDAO;
+    private PersonasDAO personasDAO;
+    private RazasDAO razasDAO;
+    private ServiciosDAO serviciosDAO;
+    private TiposMascotasDAO tiposMascotasDAO;
+    private DetalleFacturaDAO detalleFacturaDAO;
+    private UsuariosDAO usuariosDAO;
+    
+    //Instancia controladores
+    private CCitas cCitas;
+    private CFacturas cFacturas;
+    private CMascotas cMascotas;
+    private CPersonas cPersonas;
+    private CRazas cRazas;
+    private CServicios cServicios;
+    private CTiposMascotas cTiposMascotas;
+    private CUsuarios cUsuarios;
+    private CDetalleFactura cDetalleFactura;
+    
     /**
      * Creates new form VEmpleado
      */
@@ -81,6 +107,28 @@ public class VEmpleado extends javax.swing.JFrame {
         Image newImage8 = image8.getScaledInstance(50, 50, Image.SCALE_SMOOTH); // Redimensionar
         razaIcon = new ImageIcon(newImage8);
         LblRazaIcono.setIcon(razaIcon);
+        
+        //Creacion DAOS
+        citasDAO = new CitasDAO();
+        facturasDAO = new FacturasDAO();
+        mascotasDAO = new MascotasDAO();
+        personasDAO = new PersonasDAO();
+        razasDAO = new RazasDAO();
+        serviciosDAO = new ServiciosDAO();
+        tiposMascotasDAO = new TiposMascotasDAO();
+        usuariosDAO = new UsuariosDAO();
+        detalleFacturaDAO = new DetalleFacturaDAO();
+        
+        //Creacion controladores
+        cCitas = new CCitas(citasDAO);
+        cFacturas = new CFacturas(facturasDAO);
+        cMascotas = new CMascotas(mascotasDAO);
+        cPersonas = new CPersonas(personasDAO);
+        cRazas = new CRazas(razasDAO);
+        cServicios = new CServicios(serviciosDAO);
+        cTiposMascotas = new CTiposMascotas(tiposMascotasDAO);
+        cUsuarios = new CUsuarios(usuariosDAO);
+        cDetalleFactura = new CDetalleFactura(detalleFacturaDAO);
     }
 
     /**
@@ -538,54 +586,63 @@ public class VEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnClientesMouseClicked
+        VCliente=new VCliente(this, cPersonas);
         this.setEnabled(false);
         VCliente.setLocationRelativeTo(null);
         VCliente.setVisible(true);
     }//GEN-LAST:event_BtnClientesMouseClicked
 
     private void BtnServiciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnServiciosMouseClicked
+        VservicioListado = new VServicioListado(this);
         this.setEnabled(false);
         VservicioListado.setLocationRelativeTo(null);
         VservicioListado.setVisible(true);
     }//GEN-LAST:event_BtnServiciosMouseClicked
 
     private void BtnFacturacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFacturacionMouseClicked
+        VFacturacion = new VFacturacion(this);
         this.setEnabled(false);
         VFacturacion.setLocationRelativeTo(null);
         VFacturacion.setVisible(true);
     }//GEN-LAST:event_BtnFacturacionMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        VListarFacturas = new VListarFacturas(this);
         this.setEnabled(false);
         VListarFacturas.setLocationRelativeTo(null);
         VListarFacturas.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void btnEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpleadoMouseClicked
+        VListarEmpleados = new VListarEmpleados(this);
         this.setEnabled(false);
         VListarEmpleados.setLocationRelativeTo(null);
         VListarEmpleados.setVisible(true);
     }//GEN-LAST:event_btnEmpleadoMouseClicked
 
     private void BtnCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCitasMouseClicked
+        VCitas = new VCitas(this);
         this.setEnabled(false);
         VCitas.setLocationRelativeTo(null);
         VCitas.setVisible(true);
     }//GEN-LAST:event_BtnCitasMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        VTiposMascotas = new VTiposMascotas(this);
         this.setEnabled(false);
         VTiposMascotas.setLocationRelativeTo(null);
         VTiposMascotas.setVisible(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        VRazasMascotas = new VRazasMascotas(this);
         this.setEnabled(false);
         VRazasMascotas.setLocationRelativeTo(null);
         VRazasMascotas.setVisible(true);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void btnMascotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMascotasMouseClicked
+        VMascotas = new VMascotas(this);
         this.setEnabled(false);
         VMascotas.setLocationRelativeTo(null);
         VMascotas.setVisible(true);

@@ -4,17 +4,17 @@
  */
 package Controlador;
 
-import DAO.RazasDAO;
+import DAO.DetalleFacturaDAO;
 
 /**
  *
  * @author karen
  */
-public class CRazas {
-    private RazasDAO razasDAO;
+public class CDetalleFactura {
+    private DetalleFacturaDAO detalleFacturaDAO;
 
-    public CRazas(RazasDAO razasDAO) {
-        this.razasDAO = razasDAO;
+    public CDetalleFactura(DetalleFacturaDAO detalleFacturaDAO) {
+        this.detalleFacturaDAO = detalleFacturaDAO;
     }
     
     

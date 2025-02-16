@@ -16,8 +16,8 @@ import java.sql.*;
 public class CPersonas {
     private PersonasDAO personaDAO;
     
-    public CPersonas(){
-        personaDAO = new PersonasDAO();
+    public CPersonas(PersonasDAO personaDAO){
+        this.personaDAO = personaDAO;
     }
     
     public MPersonas buscarCliente(String cedula, char CoE){

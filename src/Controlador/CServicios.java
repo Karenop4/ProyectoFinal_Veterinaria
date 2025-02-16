@@ -4,10 +4,17 @@
  */
 package Controlador;
 
+import DAO.ServiciosDAO;
+
 /**
  *
  * @author karen
  */
 public class CServicios {
+    private ServiciosDAO serviciosDAO;
+
+    public CServicios(ServiciosDAO serviciosDAO) {
+        this.serviciosDAO = serviciosDAO;
+    }
     
 }

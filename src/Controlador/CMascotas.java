@@ -4,10 +4,17 @@
  */
 package Controlador;
 
+import DAO.MascotasDAO;
+
 /**
  *
  * @author karen
  */
 public class CMascotas {
+    private MascotasDAO mascotasDAO;
+
+    public CMascotas(MascotasDAO mascotasDAO) {
+        this.mascotasDAO = mascotasDAO;
+    }
     
 }
