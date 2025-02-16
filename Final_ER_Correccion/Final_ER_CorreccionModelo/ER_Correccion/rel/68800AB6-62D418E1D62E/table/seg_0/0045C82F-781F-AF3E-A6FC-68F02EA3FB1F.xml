@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="07B2AEE4-7F79-E69D-B79D-C5677834F028" name="VET_SERVICIOS">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0045C82F-781F-AF3E-A6FC-68F02EA3FB1F" name="VET_SERVICIOS">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <generatorID>7333DA86-4272-96C8-AFCE-FFA5C78F9339</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="serv_codigo" id="8BFE8F8F-5889-C167-1645-748FFCA3C1F6">
+<Column name="serv_codigo" id="7928F535-3DA1-69B6-8314-86150AE090C5">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Codigo Unico del servicio]]></commentInRDBMS>
 <generatorID>7944DB59-4DA3-8232-686D-6D2B3DEA21AE</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -21,9 +21,9 @@
 <ownDataTypeParameters>,5,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="serv_nombre" id="46F0EB80-EE21-A1D1-E6DB-FDE1599C29A4">
+<Column name="serv_nombre" id="EFAA67AA-B717-E894-6E5A-ECEB80327221">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Nombre del servicio]]></commentInRDBMS>
 <generatorID>539EA64E-59B5-99DC-8197-47ED51E082FC</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -34,9 +34,9 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="serv_precio" id="A2D744CF-C6E6-B35F-6183-6AB91F0F389D">
+<Column name="serv_precio" id="3602A0C7-6C80-BF37-0D3E-F496CE5A0104">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Precio del servicio]]></commentInRDBMS>
 <generatorID>BC84A612-86BA-D1EC-8394-F84C74C43F3E</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -48,9 +48,9 @@
 <ownDataTypeParameters>,5,2</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="serv_estado" id="1268A113-3817-DCD9-9C47-8F19AB8FE382">
+<Column name="serv_estado" id="D91211E1-AEDB-F6C2-682F-8A39F441A308">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[A si está activo o I si esta inactivo]]></commentInRDBMS>
 <generatorID>636422A6-0261-DD95-7650-5101027D5274</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -61,9 +61,9 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="serv_IVA" id="7BB62942-5E1D-ECFB-CC3F-0E18FFA2C672">
+<Column name="serv_IVA" id="A006E2DF-E142-A279-47DE-918F55E46F97">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[S si posee IVA o N en caso contrario]]></commentInRDBMS>
 <generatorID>7DCD0497-0791-1C3C-E2E1-E06148B5FE38</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -76,16 +76,16 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="0C5F7E22-2BEE-088B-3AAE-99433AD57AA0" name="VET_SERVICIOS_PK">
+<ind_PK_UK id="9D21193E-6855-3C30-FAE5-34CF1266F133" name="VET_SERVICIOS_PK">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <generatorID>FAAB2671-A346-F417-A9F1-4D81B1E48808</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="8BFE8F8F-5889-C167-1645-748FFCA3C1F6"/>
+<colUsage columnID="7928F535-3DA1-69B6-8314-86150AE090C5"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

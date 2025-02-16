@@ -642,7 +642,7 @@ public class VEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void btnMascotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMascotasMouseClicked
-        VMascotas = new VMascotas(this, cTiposMascotas);
+        VMascotas = new VMascotas(this, cTiposMascotas, cRazas);
         this.setEnabled(false);
         VMascotas.setLocationRelativeTo(null);
         VMascotas.setVisible(true);

@@ -25,9 +25,9 @@
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>5</dataTypeSize>
-<ownDataTypeParameters>5,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="tipoM_nombre" id="E1ADF998-4701-56C2-CE76-B11386C72D30">
 <createdBy>USER</createdBy>

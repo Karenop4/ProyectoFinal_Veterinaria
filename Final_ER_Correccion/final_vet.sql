@@ -1,9 +1,21 @@
+------ELIMINAR TABLAS---------
+-- DROP TABLE VET_RAZAS;
+-- DROP TABLE VET_CITAS;
+-- DROP TABLE VET_MASCOTAS;
+-- DROP TABLE VET_TIPOSMASCOTAS;
+-- DROP TABLE VET_DETALLES_FAC;
+-- DROP TABLE VET_FACTURAS;
+-- DROP TABLE VET_SERVICIOS;
+-- DROP TABLE VET_USUARIOS;
+-- DROP TABLE VET_PERSONAS;
+
 ----TABLESPACE y CREACION DE USUARIO-------
 --/*
 --alter session set "_ORACLE_SCRIPT"=TRUE;
 --create user admin_vet identified by 1234;
+--GRANT DBA TO admin_vet;
 --*/
-GRANT DBA TO admin_vet;
+
 
 create tablespace TBS_VET_FINAL datafile 'tbs_vet_final.ora' size 40M online;
 create temporary tablespace TBS_VET_FINAL_TEMP tempfile 'tbs_vet_final_temp.ora' size 5M autoextend on;
@@ -13,6 +25,7 @@ temporary tablespace TBS_VET_FINAL_TEMP
 quota unlimited on TBS_VET_FINAL;
 
 
+--------------------------------Cración tablas----------------------------------
 CREATE TABLE vet_citas (
     cita_id              NUMBER(5) NOT NULL,
     cita_fecha           TIMESTAMP(0) NOT NULL,
@@ -91,10 +104,10 @@ COMMENT ON COLUMN vet_facturas.fac_total IS
 ALTER TABLE vet_facturas ADD CONSTRAINT vet_facturas_pk PRIMARY KEY ( fac_id );
 
 CREATE TABLE vet_mascotas (
-    masc_id                    NUMBER(5) NOT NULL,
-    masc_nombre                VARCHAR2(50) NOT NULL,
-    vet_personas_per_id        NUMBER(5) NOT NULL,
-    vet_tiposmascotas_tipom_id VARCHAR2(5) NOT NULL
+    masc_id             NUMBER(5) NOT NULL,
+    masc_nombre         VARCHAR2(50) NOT NULL,
+    vet_personas_per_id NUMBER(5) NOT NULL,
+    vet_razas_raza_id   NUMBER(5) NOT NULL
 );
 
 COMMENT ON COLUMN vet_mascotas.masc_id IS
@@ -107,7 +120,7 @@ ALTER TABLE vet_mascotas ADD CONSTRAINT vet_mascotas_pk PRIMARY KEY ( masc_id );
 
 CREATE TABLE vet_personas (
     per_id          NUMBER(5) NOT NULL,
-    per_cedula      VARCHAR2(10) NOT NULL,
+    per_cedula      VARCHAR2(10) NOT NULL UNIQUE,
     per_nombre      VARCHAR2(50) NOT NULL,
     per_apellido    VARCHAR2(50) NOT NULL,
     per_direccion   VARCHAR2(100) NOT NULL,
@@ -151,9 +164,9 @@ COMMENT ON COLUMN vet_personas.per_estado IS
 ALTER TABLE vet_personas ADD CONSTRAINT vet_personas_pk PRIMARY KEY ( per_id );
 
 CREATE TABLE vet_razas (
-    raza_id                    VARCHAR2(5) NOT NULL,
-    raza_nombre                VARCHAR2(20) NOT NULL,
-    vet_tiposmascotas_tipom_id VARCHAR2(5) NOT NULL
+    raza_id                    NUMBER(5) NOT NULL,
+    raza_nombre                VARCHAR2(20) NOT NULL UNIQUE,
+    vet_tiposmascotas_tipom_id NUMBER(5) NOT NULL
 );
 
 COMMENT ON COLUMN vet_razas.raza_id IS
@@ -166,7 +179,7 @@ ALTER TABLE vet_razas ADD CONSTRAINT vet_razas_pk PRIMARY KEY ( raza_id );
 
 CREATE TABLE vet_servicios (
     serv_codigo NUMBER(5) NOT NULL,
-    serv_nombre VARCHAR2(50) NOT NULL,
+    serv_nombre VARCHAR2(50) NOT NULL UNIQUE,
     serv_precio NUMBER(5, 2) NOT NULL,
     serv_estado CHAR(1) NOT NULL,
     serv_iva    CHAR(1) NOT NULL
@@ -190,8 +203,8 @@ COMMENT ON COLUMN vet_servicios.serv_iva IS
 ALTER TABLE vet_servicios ADD CONSTRAINT vet_servicios_pk PRIMARY KEY ( serv_codigo );
 
 CREATE TABLE vet_tiposmascotas (
-    tipom_id     VARCHAR2(5) NOT NULL,
-    tipom_nombre VARCHAR2(20) NOT NULL
+    tipom_id     NUMBER(5) NOT NULL,
+    tipom_nombre VARCHAR2(20) NOT NULL UNIQUE
 );
 
 COMMENT ON COLUMN vet_tiposmascotas.tipom_id IS
@@ -204,7 +217,7 @@ ALTER TABLE vet_tiposmascotas ADD CONSTRAINT vet_tiposmascotas_pk PRIMARY KEY ( 
 
 CREATE TABLE vet_usuarios (
     us_id               NUMBER(5) NOT NULL,
-    us_usuario          VARCHAR2(10) NOT NULL,
+    us_usuario          VARCHAR2(10) NOT NULL UNIQUE,
     us_contrasenia      VARCHAR2(10) NOT NULL,
     us_tipo             CHAR(1) NOT NULL,
     vet_personas_per_id NUMBER(5) NOT NULL
@@ -238,11 +251,11 @@ ALTER TABLE vet_citas
         REFERENCES vet_personas ( per_id );
 
 ALTER TABLE vet_detalles_fac
-    ADD CONSTRAINT vet_detf_fac_fk FOREIGN KEY ( vet_facturas_fac_id )
+    ADD CONSTRAINT vet_detalles_fac_vet_facturas_fk FOREIGN KEY ( vet_facturas_fac_id )
         REFERENCES vet_facturas ( fac_id );
- 
+
 ALTER TABLE vet_detalles_fac
-    ADD CONSTRAINT vet_detf_serv_fk FOREIGN KEY ( vet_servicios_serv_codigo )
+    ADD CONSTRAINT vet_detalles_fac_vet_servicios_fk FOREIGN KEY ( vet_servicios_serv_codigo )
         REFERENCES vet_servicios ( serv_codigo );
 
 ALTER TABLE vet_facturas
@@ -256,10 +269,10 @@ ALTER TABLE vet_facturas
 ALTER TABLE vet_mascotas
     ADD CONSTRAINT vet_mascotas_vet_personas_fk FOREIGN KEY ( vet_personas_per_id )
         REFERENCES vet_personas ( per_id );
- 
+
 ALTER TABLE vet_mascotas
-    ADD CONSTRAINT vet_masc_tp_fk FOREIGN KEY ( vet_tiposmascotas_tipom_id )
-        REFERENCES vet_tiposmascotas ( tipom_id );
+    ADD CONSTRAINT vet_mascotas_vet_razas_fk FOREIGN KEY ( vet_razas_raza_id )
+        REFERENCES vet_razas ( raza_id );
 
 ALTER TABLE vet_razas
     ADD CONSTRAINT vet_razas_vet_tiposmascotas_fk FOREIGN KEY ( vet_tiposmascotas_tipom_id )
@@ -268,7 +281,7 @@ ALTER TABLE vet_razas
 ALTER TABLE vet_usuarios
     ADD CONSTRAINT vet_usuarios_vet_personas_fk FOREIGN KEY ( vet_personas_per_id )
         REFERENCES vet_personas ( per_id );
-        
+
 -----------------------------------------------
 -- Secuencias para auto-increment de tablas ---
 create sequence v_tmas_seq start with 1;
@@ -280,8 +293,21 @@ create sequence v_us_seq start with 1;
 create sequence v_fac_seq start with 1;
 create sequence v_serv_seq start with 1;
 create sequence v_detf_seq start with 1;
+
+--Eliminar sequencias
+--drop sequence v_tmas_seq;
+--drop sequence v_ra_seq;
+--drop sequence v_masc_seq; 
+--drop sequence v_per_seq;
+--drop sequence v_cit_seq;
+--drop sequence v_us_seq;
+--drop sequence v_fac_seq;
+--drop sequence v_serv_seq;
+--drop sequence v_detf_seq;
 ------------------------------------------------
 ------------------------------------------------
+-------------------------------Insertar datos-----------------------------------
+
 ----------------------------    TIPOS DE MASCOTAS   ----------------------------
 insert into vet_tiposmascotas values (v_tmas_seq.nextval,'canino');
 insert into vet_tiposmascotas values (v_tmas_seq.nextval,'felino');
@@ -301,7 +327,7 @@ values (
   v_masc_seq.nextval,
   'Rufus',
   (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Andrés' AND ROWNUM = 1),
-  (SELECT tipom_id FROM vet_tiposmascotas WHERE tipom_nombre LIKE 'canino' AND ROWNUM = 1)
+  (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1)
 );
 
 insert into vet_mascotas 
@@ -309,7 +335,7 @@ values (
   v_masc_seq.nextval,
   'Toby',
   (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Karen' AND ROWNUM = 1),
-  (SELECT tipom_id FROM vet_tiposmascotas WHERE tipom_nombre LIKE 'canino' AND ROWNUM = 1)
+  (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1)
 );
 
 --select * from vet_mascotas;
@@ -317,15 +343,15 @@ values (
 ----------------------------    PERSONAS   -------------------------------------
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0000000000', 'Admin', 'Vet', '-', '0000000000', 'admin@ejemplo.com', 'E', 'A', 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0950094508', 'Andrés', 'Encalada', '-', '0983586619', 'andres23102004@gmail.com', 'C', null, 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0000000000', 'Karen', 'Ortiz', '-', '0000000000', 'karen@ejemplo.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0150741742', 'Karen', 'Ortiz', '-', '0994441682', 'karen@ejemplo.com', 'C', null, 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124466754', 'Carlos', 'General', '-', '0937162846', 'carlos@ejemplo.com', 'E', 'V', 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'1123544634', 'Mateo', 'Suarez', '-', '0987654321', 'mateo@ejemplo.com', 'E', 'A', 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Paula', 'Acevedo', '-', '0981253462', 'paula@ejemplo.com', 'E', 'A', 'I');
 --select * from vet_personas;
 --------------------------------------------------------------------------------
 ----------------------------    CITAS   ----------------------------------------
-insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',29,
-(select vet_personas_per_id from vet_mascotas where masc_id like 29));
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,
+(select vet_personas_per_id from vet_mascotas where masc_id like 1));
 --select * from vet_citas;
 --------------------------------------------------------------------------------
 ----------------------------    USUARIOS   -------------------------------------
@@ -341,10 +367,10 @@ insert into vet_facturas values (v_fac_seq.nextval,(TO_DATE('2024/02/20 10:35:23
 --select * from vet_facturas;
 --------------------------------------------------------------------------------
 ----------------------------    SERVICIOS  -------------------------------------
-insert into vet_servicios values (v_serv_seq.nextval, 'Estirilización Perro Raza Pequeña',120,'A','S');
-insert into vet_servicios values (v_serv_seq.nextval, 'Estirilización Perro Raza Mediana',150,'A','S');
-insert into vet_servicios values (v_serv_seq.nextval, 'Estirilización Perro Raza Grande',200,'I','S');
-insert into vet_servicios values (v_serv_seq.nextval, 'Estirilización Gato Pequeño',80,'A','S');
+insert into vet_servicios values (v_serv_seq.nextval, 'Esterilización Perro Raza Pequeña',120,'A','S');
+insert into vet_servicios values (v_serv_seq.nextval, 'Esterilización Perro Raza Mediana',150,'A','S');
+insert into vet_servicios values (v_serv_seq.nextval, 'Esterilización Perro Raza Grande',200,'I','S');
+insert into vet_servicios values (v_serv_seq.nextval, 'Esterilización Gato Pequeño',80,'A','S');
 insert into vet_servicios values (v_serv_seq.nextval, 'Vacunacion completa',30.43,'A','N');
 --select * from vet_servicios;
 --------------------------------------------------------------------------------
@@ -354,3 +380,5 @@ insert into vet_detalles_fac values (v_detf_seq.nextval,1,30.43,0,30.43,30.43,(s
 
 --select * from vet_detalles_fac;
 commit;
+
+

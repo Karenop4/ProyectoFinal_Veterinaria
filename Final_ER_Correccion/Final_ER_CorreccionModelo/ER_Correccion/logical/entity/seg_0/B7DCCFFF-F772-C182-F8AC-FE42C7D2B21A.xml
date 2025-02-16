@@ -56,22 +56,23 @@
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
 <dataTypePrecision>5</dataTypePrecision>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>,5,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="tipoM_id" id="7FD6FDF8-4CE5-EE1C-7834-D55FDEB7D3E7">
-<createdBy>USER</createdBy>
-<createdTime>2025-01-02 05:38:55 UTC</createdTime>
-<generatorID>EFAE8AA1-2162-B8AF-C11A-3A686F199156</generatorID>
+<Attribute name="raza_id" id="8CB42361-C200-1300-97CA-521E6E34ADDB">
+<createdBy>karen</createdBy>
+<createdTime>2025-02-16 20:44:50 UTC</createdTime>
+<generatorID>4CD11269-DDB1-FF27-C7B6-4E05B0BEB68C</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
 <engineerTo>
 <item key="68800AB6-1B70-20F2-7F84-62D418E1D62E" value="true"/>
 </engineerTo>
-<referedAttribute>AD548E80-BA13-AAE3-0EDC-733D08D3AC8D</referedAttribute>
+<referedAttribute>BD10911C-0928-156B-4360-127FECF66ACB</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>5</dataTypePrecision>
 <dataTypeSize>5</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

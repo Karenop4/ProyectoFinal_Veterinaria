@@ -1,16 +1,16 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0489D8F2-216D-6344-62C1-53F2D1E873A2" name="VET_PERSONAS">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="1DF538AF-E3B3-0590-F033-060601B41CDD" name="VET_PERSONAS">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <generatorID>403D6AE5-1A7E-1521-1AF3-B5C427D0D813</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
 <allowColumnReorder>false</allowColumnReorder>
 <existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
 <parsed>true</parsed>
 <columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
-<Column name="per_id" id="728D6A5E-DB39-726E-DAFB-DEE5CD281823">
+<Column name="per_id" id="30B2586D-6467-D8FA-7063-9824485B5236">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Codigo Unico de la persona]]></commentInRDBMS>
 <generatorID>951FD922-E657-FEEA-7F81-F8FC61D1B070</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -21,9 +21,9 @@
 <ownDataTypeParameters>,5,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_cedula" id="37D8B0D4-A8A6-82BA-160D-E1E206C0A03F">
+<Column name="per_cedula" id="ED72F16B-0434-72F0-1677-0D86BBEE3423">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Cedula de la persona]]></commentInRDBMS>
 <generatorID>0F712BAC-D89C-169F-20DE-7EF5C9457069</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -34,9 +34,9 @@
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_nombre" id="FD204CC0-4073-F1B1-D4B1-7809C7388CCD">
+<Column name="per_nombre" id="075EE884-DCE7-7579-8002-DB3644C9C227">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Nombre(s) de la persona]]></commentInRDBMS>
 <generatorID>59E71CA6-EDEF-DC46-C98A-C11B1419E22F</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -47,9 +47,9 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_apellido" id="3440BDCE-7835-8189-8812-FAE6CCD75C76">
+<Column name="per_apellido" id="78606F8C-4E25-B864-82E3-871CE76ED9D2">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Apellido(s) de la persona]]></commentInRDBMS>
 <generatorID>D6678B18-2A39-2E47-F461-923F33A3FA08</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -60,9 +60,9 @@
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_direccion" id="E54ED80B-76A8-A42C-7D2F-A7861C913970">
+<Column name="per_direccion" id="7C410B1B-845D-4548-8F24-DC2BAE2F414E">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Direccion de domicilio de la persona]]></commentInRDBMS>
 <generatorID>426FDFFF-F098-E6C5-56B8-06F7DEA89D7E</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -73,9 +73,9 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_telefono" id="92D64C4C-F484-7337-45D0-EBAED0A2BCAB">
+<Column name="per_telefono" id="F021A757-1B64-16D2-2CD1-CEFE0C926718">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Numero de contacto de la persona]]></commentInRDBMS>
 <generatorID>D28F1E3D-0237-0408-22B2-98B6C0582939</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -86,9 +86,9 @@
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_correo" id="F2E3F442-DEAC-BCBE-1584-BB090BB118D5">
+<Column name="per_correo" id="0F8631FB-AF21-7BC0-CDA5-522EB151437E">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[Correo electronico de la persona]]></commentInRDBMS>
 <generatorID>504B6DC1-8E70-A409-5E3C-4DF636015D93</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -99,9 +99,9 @@
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_CoE" id="EDD2F035-25A0-722A-E92F-5C593B02800B">
+<Column name="per_CoE" id="E94F08BE-6DEF-9915-301B-C04CC886F635">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[C si es cliente o E si es empleado]]></commentInRDBMS>
 <generatorID>E3DB2457-04A6-857E-576C-70CAB9731222</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -112,9 +112,9 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_empleadoAoV" id="108D1B84-6483-9E1E-2BA0-2216E6878137">
+<Column name="per_empleadoAoV" id="1C70C3F7-74EB-1BDC-EE0C-4E8140CA0322">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[A si es un empleado que brinda atencion al cliente o V si es veterinario]]></commentInRDBMS>
 <generatorID>3C1EC59C-05A9-F9F5-990D-8B9C0F225B39</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -126,9 +126,9 @@
 <ownDataTypeParameters>1,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
-<Column name="per_estado" id="AC636E45-702E-960D-00CE-2749F63D3B68">
+<Column name="per_estado" id="BC676EEB-63CB-39DC-47C0-AE08BB36AD92">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <commentInRDBMS><![CDATA[A si está activo o I si esta inactivo]]></commentInRDBMS>
 <generatorID>80E2F434-BD2C-E6CE-C92F-7B38E265E0EA</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
@@ -141,16 +141,16 @@
 </Column>
 </columns>
 <indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
-<ind_PK_UK id="92861346-CCE5-F271-FBEC-55DD0A148BBF" name="VET_PERSONAS_PK">
+<ind_PK_UK id="45A7C1FA-425F-A58F-9851-19032FC03FEB" name="VET_PERSONAS_PK">
 <createdBy>karen</createdBy>
-<createdTime>2025-02-03 00:45:20 UTC</createdTime>
+<createdTime>2025-02-16 21:47:24 UTC</createdTime>
 <generatorID>F4ED5407-9530-2B22-DE20-9923055BE7D4</generatorID>
 <ownerDesignName>ER_Correccion</ownerDesignName>
 <pk>true</pk>
 <indexState>Primary Constraint</indexState>
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
-<colUsage columnID="728D6A5E-DB39-726E-DAFB-DEE5CD281823"/>
+<colUsage columnID="30B2586D-6467-D8FA-7063-9824485B5236"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

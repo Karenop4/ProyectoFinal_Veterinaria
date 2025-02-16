@@ -5,6 +5,9 @@
 package Controlador;
 
 import DAO.RazasDAO;
+import Modelo.MRazas;
+import Modelo.MTiposMascotas;
+import java.util.List;
 
 /**
  *
@@ -17,5 +20,7 @@ public class CRazas {
         this.razasDAO = razasDAO;
     }
     
-    
+    public List<MRazas> listarRazasPorTipo (List<MTiposMascotas> listaTiposMacotas, String tipoMascota){
+        return razasDAO.devolverRazas(listaTiposMacotas, tipoMascota);
+    }
 }

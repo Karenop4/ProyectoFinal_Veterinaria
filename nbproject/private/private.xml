@@ -5,8 +5,10 @@
         <group>
             <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/Ventanas/VEmpleado.java</file>
             <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/Ventanas/VMascotas.java</file>
-            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/Controlador/CTiposMascotas.java</file>
-            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/DAO/TiposMascotasDAO.java</file>
+            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/Controlador/CMascotas.java</file>
+            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/DAO/MascotasDAO.java</file>
+            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/Ventanas/VAgregarMascota.java</file>
+            <file>file:/C:/Users/karen/Desktop/Base%20de%20datos/trabajo%20final/ProyectoPrototipo/ProyectoPrototipo/src/DAO/RazasDAO.java</file>
         </group>
     </open-files>
 </project-private>

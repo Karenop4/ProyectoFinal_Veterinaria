@@ -4,7 +4,13 @@
  */
 package Ventanas;
 
+import Controlador.CRazas;
 import Controlador.CTiposMascotas;
+import Modelo.MRazas;
+import Modelo.MTiposMascotas;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
 /**
@@ -14,10 +20,13 @@ import javax.swing.ImageIcon;
 public class VAgregarMascota extends javax.swing.JFrame {
     private VMascotas v;
     private CTiposMascotas cTipoMascotas;
+    private CRazas cRazas;
+    private List<MTiposMascotas> listaTiposMascotas;
+    private List <MRazas> listaRazasBD;
     /**
      * Creates new form VAgregarMascota
      */
-    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas) {
+    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas, CRazas cRazas) {
         initComponents();
         this.v = v;
         
@@ -25,6 +34,10 @@ public class VAgregarMascota extends javax.swing.JFrame {
         setIconImage(icono.getImage());
         
         this.cTipoMascotas = cTipoMascotas;
+        this.cRazas = cRazas;
+        
+        listaTiposMascotas = new ArrayList<>();
+        listarTiposMascotas();
     }
 
     /**
@@ -83,13 +96,13 @@ public class VAgregarMascota extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaTipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaTipoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaTipo);
 
-        listaRaza.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listaRaza);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -143,9 +156,9 @@ public class VAgregarMascota extends javax.swing.JFrame {
                     .addComponent(btnBuscarTipo)
                     .addComponent(btnBuscarRaza))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,7 +180,7 @@ public class VAgregarMascota extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 5, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,12 +232,37 @@ public class VAgregarMascota extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
+
+    private void listaTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTipoMouseClicked
+        listaRazasBD = new ArrayList<>();
+        listaRazasBD = cRazas.listarRazasPorTipo(listaTiposMascotas, listaTipo.getSelectedValue().toString());
+        
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (MRazas elemento : listaRazasBD) {
+            modelo.addElement(elemento.getRaza_nombre());
+        }
+        
+        listaRaza.setModel(modelo);
+    }//GEN-LAST:event_listaTipoMouseClicked
     
     public void salir(){
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
     }
+    
+    public void listarTiposMascotas(){
+        listaTiposMascotas = cTipoMascotas.listarTiposMascotas();
+        
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (MTiposMascotas elemento : listaTiposMascotas) {
+            modelo.addElement(elemento.getTipoM_nombre());
+        }
+        
+        listaTipo.setModel(modelo);
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

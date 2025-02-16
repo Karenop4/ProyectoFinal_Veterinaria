@@ -4,6 +4,7 @@
  */
 package Ventanas;
 
+import Controlador.CRazas;
 import Controlador.CTiposMascotas;
 import javax.swing.ImageIcon;
 
@@ -16,11 +17,12 @@ public class VMascotas extends javax.swing.JFrame {
     private VAgregarMascota VAgregar;
     private VEmpleado v;
     
-    CTiposMascotas cTiposMascotas;
+    private CTiposMascotas cTiposMascotas;
+    private CRazas cRazas;
     /**
      * Creates new form VMascotas
      */
-    public VMascotas(VEmpleado v, CTiposMascotas cTiposMascotas) {
+    public VMascotas(VEmpleado v, CTiposMascotas cTiposMascotas, CRazas cRazas) {
         initComponents();
         this.v = v;
         
@@ -28,6 +30,7 @@ public class VMascotas extends javax.swing.JFrame {
         setIconImage(icono.getImage());
         
         this.cTiposMascotas = cTiposMascotas;
+        this.cRazas = cRazas;
     }
 
     /**
@@ -201,7 +204,7 @@ public class VMascotas extends javax.swing.JFrame {
 
     private void btnAgregarMascotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMascotaMouseClicked
         this.setEnabled(false);
-        VAgregar = new VAgregarMascota(this, cTiposMascotas);
+        VAgregar = new VAgregarMascota(this, cTiposMascotas, cRazas);
         VAgregar.setLocationRelativeTo(null);
         VAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarMascotaMouseClicked
