@@ -106,7 +106,6 @@ public class VPrincipal extends javax.swing.JFrame {
         lblContIcono = new javax.swing.JLabel();
         button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Gestor Veterinaria");
@@ -190,8 +189,6 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Inicio de sesión");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jPasswordField1.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,10 +201,7 @@ public class VPrincipal extends javax.swing.JFrame {
                         .addGap(229, 229, 229))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(250, 250, 250))))
+                        .addGap(153, 153, 153))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,9 +210,7 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
@@ -308,7 +300,6 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField TxtUsuario;
     private javax.swing.JButton button;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblContIcono;
     private javax.swing.JLabel lblUsuIcono;
     // End of variables declaration//GEN-END:variables

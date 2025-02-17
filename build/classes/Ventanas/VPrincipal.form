@@ -39,10 +39,6 @@
                       <Component id="PanelUsuario" min="-2" pref="284" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jPasswordField1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="250" max="-2" attributes="0"/>
-                  </Group>
               </Group>
           </Group>
       </Group>
@@ -54,9 +50,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="PanelUsuario" min="-2" pref="194" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="jPasswordField1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="72" max="32767" attributes="0"/>
+              <EmptySpace pref="130" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -185,11 +179,6 @@
             <BevelBorder/>
           </Border>
         </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JPasswordField" name="jPasswordField1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
       </Properties>
     </Component>
   </SubComponents>
