@@ -4,6 +4,13 @@
  */
 package Ventanas;
 
+import Controlador.CRazas;
+import Controlador.CTiposMascotas;
+import Modelo.MRazas;
+import Modelo.MTiposMascotas;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 
 /**
@@ -12,14 +19,24 @@ import javax.swing.ImageIcon;
  */
 public class VRazasMascotas extends javax.swing.JFrame {
     private VEmpleado v;
+    private CTiposMascotas cTipoMascotas;
+    private CRazas cRazas;
+    private List<MTiposMascotas> listaTiposMascotas;
+    private List <MRazas> listaRazasBD;
     /**
      * Creates new form VRazasMascotas
      */
-    public VRazasMascotas(VEmpleado v) {
+    public VRazasMascotas(VEmpleado v, CTiposMascotas cTipoMascotas, CRazas cRazas) {
         initComponents();
         this.v =v;
         ImageIcon icono = new ImageIcon("src\\imagenes\\animals.png");
         setIconImage(icono.getImage());
+        
+        this.cRazas = cRazas;
+        this.cTipoMascotas = cTipoMascotas;
+        
+        listaTiposMascotas = new ArrayList<>();
+        listarTiposMascotas();
     }
 
     /**
@@ -46,6 +63,8 @@ public class VRazasMascotas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         listaTipo = new javax.swing.JList<>();
         btnAgregar = new javax.swing.JButton();
+        btnActualizar1 = new javax.swing.JButton();
+        btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Razas de Animales");
@@ -86,10 +105,19 @@ public class VRazasMascotas extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaTipo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaTipoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaTipo);
 
         btnAgregar.setText("Agregar");
         btnAgregar.setEnabled(false);
+
+        btnActualizar1.setText("Actualizar");
+
+        btnEliminar1.setText("Eliminar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,7 +133,10 @@ public class VRazasMascotas extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)
                             .addComponent(txtTipoAnimal))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBuscarTipo))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarTipo)
+                            .addComponent(btnActualizar1)
+                            .addComponent(btnEliminar1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
@@ -135,9 +166,17 @@ public class VRazasMascotas extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarTipo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnActualizar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,10 +221,32 @@ public class VRazasMascotas extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_formWindowClosing
 
+    private void listaTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTipoMouseClicked
+        listaRazasBD = new ArrayList<>();
+        listaRazasBD = cRazas.listarRazasPorTipo(listaTiposMascotas, listaTipo.getSelectedValue().toString());
+        
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (MRazas elemento : listaRazasBD) {
+            modelo.addElement(elemento.getRaza_nombre());
+        }
+        
+        listaRazas.setModel(modelo);
+    }//GEN-LAST:event_listaTipoMouseClicked
+
     /**
      * @param args the command line arguments
      */
     
+    public void listarTiposMascotas(){
+        listaTiposMascotas = cTipoMascotas.listarTiposMascotas();
+        
+        DefaultListModel<String> modelo = new DefaultListModel<>();
+        for (MTiposMascotas elemento : listaTiposMascotas) {
+            modelo.addElement(elemento.getTipoM_nombre());
+        }
+        
+        listaTipo.setModel(modelo);
+    }
     
     public void salir(){
         this.setVisible(false);
@@ -195,10 +256,12 @@ public class VRazasMascotas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnActualizar1;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarRaza;
     private javax.swing.JButton btnBuscarTipo;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
