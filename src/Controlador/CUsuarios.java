@@ -17,4 +17,7 @@ public class CUsuarios {
         this.usuariosDAO = usuariosDAO;
     }
     
+    public String buscarUsuario(String nombreUsuario, String contrasenia){
+        return usuariosDAO.buscarUsuario(nombreUsuario, contrasenia);
+    }
 }

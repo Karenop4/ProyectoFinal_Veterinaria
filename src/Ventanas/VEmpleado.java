@@ -571,8 +571,10 @@ public class VEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarSesionActionPerformed
+        vPrincipal.passwordBuilder.setLength(0);
         this.setVisible(false);
         vPrincipal.setVisible(true);
+        panelPrincipal.setVisible(true);
         
     }//GEN-LAST:event_BtnCerrarSesionActionPerformed
 
@@ -642,7 +644,7 @@ public class VEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void btnMascotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMascotasMouseClicked
-        VMascotas = new VMascotas(this, cTiposMascotas, cRazas);
+        VMascotas = new VMascotas(this, cTiposMascotas, cRazas, cPersonas, cMascotas);
         this.setEnabled(false);
         VMascotas.setLocationRelativeTo(null);
         VMascotas.setVisible(true);
@@ -653,12 +655,14 @@ public class VEmpleado extends javax.swing.JFrame {
      */
     //Para establecer el mensaje y esconder o mostrar las opciones disponibles
     public void setTipo(String tipo){
-        LblTipo.setText("Usted está registrado como usuario "+tipo);
-        if(tipo.equals("General")){
+        
+        if(tipo.equals("G")){
             panelPrincipal.setEnabled(false);
+            LblTipo.setText("Usted está registrado como usuario General");
         }
         else{
             panelPrincipal.setVisible(true);
+            LblTipo.setText("Usted está registrado como usuario Administrativo");
         }
     }
 

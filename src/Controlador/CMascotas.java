@@ -5,6 +5,9 @@
 package Controlador;
 
 import DAO.MascotasDAO;
+import Modelo.MMascotas;
+import Modelo.MPersonas;
+import java.util.List;
 
 /**
  *
@@ -17,5 +20,7 @@ public class CMascotas {
         this.mascotasDAO = mascotasDAO;
     }
     
-    
+    public List<MMascotas> listarMascotasCliente(MPersonas cliente){
+        return mascotasDAO.buscarMascotasCliente(cliente);
+    }
 }

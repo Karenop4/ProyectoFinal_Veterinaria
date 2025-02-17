@@ -9,17 +9,22 @@ package Modelo;
  * @author karen
  */
 public class MRazas {
-    private String raza_id;
+    private int raza_id;
     private String raza_nombre;
     private MTiposMascotas tipo_mascota;
 
-    public MRazas(String raza_id, String raza_nombre, MTiposMascotas tipo_mascota) {
+    public MRazas(int raza_id, String raza_nombre, MTiposMascotas tipo_mascota) {
         this.raza_id = raza_id;
         this.raza_nombre = raza_nombre;
         this.tipo_mascota = tipo_mascota;
     }
+    
+    public MRazas(String raza_nombre, MTiposMascotas tipo_mascota) {
+        this.raza_nombre = raza_nombre;
+        this.tipo_mascota = tipo_mascota;
+    }
 
-    public String getRaza_id() {
+    public int getRaza_id() {
         return raza_id;
     }
 

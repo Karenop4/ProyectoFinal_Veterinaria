@@ -11,7 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Ventanas.*;
 import Clases.*;
+import Controlador.CUsuarios;
 import DAO.ConexionBD;
+import DAO.UsuariosDAO;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -24,10 +26,13 @@ import javax.swing.JFrame;
  * @author USER
  */
 public class VPrincipal extends javax.swing.JFrame {
-    private VEmpleado vEmpleado=new VEmpleado(this);
+    private VEmpleado vEmpleado;
     Busquedas b=new Busquedas();
-    /**
-     * Creates new form VPrincipal
+    private UsuariosDAO usuariosDAO;
+    private CUsuarios cUsuarios;
+    
+    public StringBuilder passwordBuilder = new StringBuilder();
+     /* Creates new form VPrincipal
      */
     public VPrincipal() {
         initComponents();
@@ -53,10 +58,9 @@ public class VPrincipal extends javax.swing.JFrame {
         ImageIcon icono = new ImageIcon("src\\imagenes\\login.png");
         setIconImage(icono.getImage());
         
+        usuariosDAO = new UsuariosDAO();
+        cUsuarios = new CUsuarios(usuariosDAO);
         
-        // Cadena para almacenar el texto ingresado
-        StringBuilder passwordBuilder = new StringBuilder();
-
         // Listener para ocultar caracteres al escribir
         TxtContraseña.addKeyListener(new KeyAdapter() {
             @Override
@@ -102,6 +106,7 @@ public class VPrincipal extends javax.swing.JFrame {
         lblContIcono = new javax.swing.JLabel();
         button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Gestor Veterinaria");
@@ -164,7 +169,7 @@ public class VPrincipal extends javax.swing.JFrame {
         PanelUsuarioLayout.setVerticalGroup(
             PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsuIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,6 +190,8 @@ public class VPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Inicio de sesión");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jPasswordField1.setText("jPasswordField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,7 +204,10 @@ public class VPrincipal extends javax.swing.JFrame {
                         .addGap(229, 229, 229))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(153, 153, 153))))
+                        .addGap(153, 153, 153))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(250, 250, 250))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,8 +215,10 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,24 +247,19 @@ public class VPrincipal extends javax.swing.JFrame {
  
     
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        //En caso de que los datos esten correctos
-            //if(b.validarUsr(TxtUsuario.getText(), TxtContraseña.getText())){
-                    this.setVisible(false);
-                    vEmpleado.setLocationRelativeTo(null);
-                    vEmpleado.setVisible(true);
-                    String tipo=this.tipoEmpl(TxtUsuario.getText());
-                    vEmpleado.setTipo(tipo);
-            //}
-        /*
-        Caso contrario:
-            else{
-                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
-                
-            }
-        */
+        String tipoUsuario = cUsuarios.buscarUsuario(TxtUsuario.getText(), passwordBuilder.toString());
+        
+        if(tipoUsuario == null){
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
+        }else{
+            this.setVisible(false);
+            vEmpleado=new VEmpleado(this);
+            vEmpleado.setLocationRelativeTo(null);
+            vEmpleado.setVisible(true);
+            vEmpleado.setTipo(tipoUsuario);
+        }
         this.llenarTXT(TxtUsuario);
         this.llenarTXT(TxtContraseña);
-        
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void TxtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtContraseñaMouseClicked
@@ -301,6 +308,7 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField TxtUsuario;
     private javax.swing.JButton button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel lblContIcono;
     private javax.swing.JLabel lblUsuIcono;
     // End of variables declaration//GEN-END:variables

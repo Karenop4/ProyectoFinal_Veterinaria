@@ -32,7 +32,7 @@ public class TiposMascotasDAO {
                 ResultSet rs = stmt.executeQuery();
                 
                 while(rs.next()){
-                    tipo = new MTiposMascotas(rs.getString("tipoM_id"), rs.getString("tipoM_nombre"));
+                    tipo = new MTiposMascotas(rs.getInt("tipoM_id"), rs.getString("tipoM_nombre"));
                     listaTipos.add(tipo);
                 }
                 return listaTipos;

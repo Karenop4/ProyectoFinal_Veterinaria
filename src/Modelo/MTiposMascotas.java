@@ -9,15 +9,19 @@ package Modelo;
  * @author karen
  */
 public class MTiposMascotas {
-    private String tipoM_id;
+    private int tipoM_id;
     private String tipoM_nombre;
 
-    public MTiposMascotas(String tipoM_id, String tipoM_nombre) {
+    public MTiposMascotas(int tipoM_id, String tipoM_nombre) {
         this.tipoM_id = tipoM_id;
         this.tipoM_nombre = tipoM_nombre;
     }
+    
+    public MTiposMascotas(String tipoM_nombre) {
+        this.tipoM_nombre = tipoM_nombre;
+    }
 
-    public String getTipoM_id() {
+    public int getTipoM_id() {
         return tipoM_id;
     }
 

@@ -37,13 +37,13 @@ public class RazasDAO {
                 
                 String sql = "SELECT * FROM vet_razas WHERE vet_tiposmascotas_tipom_id = ?";
                 PreparedStatement stmt = con.prepareStatement(sql);
-                stmt.setString(1, tipo.getTipoM_id());
+                stmt.setInt(1, tipo.getTipoM_id());
                 ResultSet rs = stmt.executeQuery();
                 
                 
                 
                 while(rs.next()){
-                    raza = new MRazas(rs.getString("raza_id"), rs.getString("raza_nombre"), tipo);
+                    raza = new MRazas(rs.getInt("raza_id"), rs.getString("raza_nombre"), tipo);
                     listaRazas.add(raza);
                 }
                 return listaRazas;

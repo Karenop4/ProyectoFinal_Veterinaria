@@ -12,9 +12,9 @@ public class MMascotas {
     private int masc_id;
     private String masc_nombre;
     private MPersonas cliente;
-    private MTiposMascotas mascota;
+    private MRazas mascota;
 
-    public MMascotas(int masc_id, String masc_nombre, MPersonas cliente, MTiposMascotas mascota) {
+    public MMascotas(int masc_id, String masc_nombre, MPersonas cliente, MRazas mascota) {
         this.masc_id = masc_id;
         this.masc_nombre = masc_nombre;
         this.cliente = cliente;
@@ -33,7 +33,7 @@ public class MMascotas {
         return cliente;
     }
 
-    public MTiposMascotas getMascota() {
+    public MRazas getMascota() {
         return mascota;
     }
     

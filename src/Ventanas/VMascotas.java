@@ -2,11 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+
 package Ventanas;
 
+import Controlador.CMascotas;
+import Controlador.CPersonas;
 import Controlador.CRazas;
 import Controlador.CTiposMascotas;
+import Modelo.MMascotas;
+import Modelo.MPersonas;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,10 +27,12 @@ public class VMascotas extends javax.swing.JFrame {
     
     private CTiposMascotas cTiposMascotas;
     private CRazas cRazas;
+    private CPersonas cPersonas;
+    private CMascotas cMascotas;
     /**
      * Creates new form VMascotas
      */
-    public VMascotas(VEmpleado v, CTiposMascotas cTiposMascotas, CRazas cRazas) {
+    public VMascotas(VEmpleado v, CTiposMascotas cTiposMascotas, CRazas cRazas, CPersonas cPersonas, CMascotas cMascotas) {
         initComponents();
         this.v = v;
         
@@ -31,6 +41,8 @@ public class VMascotas extends javax.swing.JFrame {
         
         this.cTiposMascotas = cTiposMascotas;
         this.cRazas = cRazas;
+        this.cPersonas = cPersonas;
+        this.cMascotas = cMascotas;
     }
 
     /**
@@ -50,7 +62,7 @@ public class VMascotas extends javax.swing.JFrame {
         txtNombreCliente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaMascotas = new javax.swing.JTable();
         btnAgregarMascota = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -67,6 +79,11 @@ public class VMascotas extends javax.swing.JFrame {
         jLabel1.setText("C.I. Cliente:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre:");
 
@@ -74,7 +91,7 @@ public class VMascotas extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mascotas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMascotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -85,7 +102,7 @@ public class VMascotas extends javax.swing.JFrame {
                 "Nombre", "Tipo", "Raza"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaMascotas);
 
         btnAgregarMascota.setText("Agregar");
         btnAgregarMascota.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -212,6 +229,26 @@ public class VMascotas extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        MPersonas cliente = cPersonas.buscarCliente(txtCedulaCliente.getText(), 'C');
+        txtNombreCliente.setText(cliente.getPer_nombre() + " " + cliente.getPer_apellido());
+        List<MMascotas> lista = new ArrayList<>();
+        lista = cMascotas.listarMascotasCliente(cliente);
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nombre");
+        model.addColumn("Tipo");
+        model.addColumn("Raza");
+        
+        for (MMascotas elemento : lista) {
+            model.addRow(new Object[]{elemento.getMasc_nombre(), elemento.getMascota().getTipo_mascota().getTipoM_nombre(), elemento.getMascota().getRaza_nombre()});
+        
+        }
+        
+        tablaMascotas.setModel(model);
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
     
     public void salir(){
         this.setVisible(false);
@@ -234,7 +271,7 @@ public class VMascotas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaMascotas;
     private javax.swing.JTextField txtCedulaCliente;
     private javax.swing.JTextField txtNombreCliente;
     // End of variables declaration//GEN-END:variables
