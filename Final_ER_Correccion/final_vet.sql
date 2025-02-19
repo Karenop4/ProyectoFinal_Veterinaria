@@ -318,6 +318,7 @@ insert into vet_tiposmascotas values (v_tmas_seq.nextval,'felino');
 insert into vet_tiposmascotas values (v_tmas_seq.nextval,'reptil');
 insert into vet_tiposmascotas values (v_tmas_seq.nextval,'roedor');
 insert into vet_tiposmascotas values (v_tmas_seq.nextval,'otro');
+
 --select * from vet_tiposmascotas;
 --------------------------------------------------------------------------------
 ----------------------------    RAZAS   ----------------------------------------
@@ -328,34 +329,74 @@ insert into vet_razas values(v_ra_seq.nextval,'n/d',(select tipom_id from vet_ti
 --------------------------------------------------------------------------------
 ----------------------------    PERSONAS   -------------------------------------
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0000000000', 'Admin', 'Vet', '-', '0000000000', 'admin@ejemplo.com', 'E', 'A', 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0950094508', 'Andrés', 'Encalada', '-', '0983586619', 'andres23102004@gmail.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0950094508', 'Andrés', 'Encalada', '-', '0983586619', 'andres@gmail.com', 'C', null, 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0150741742', 'Karen', 'Ortiz', '-', '0994441682', 'karen@ejemplo.com', 'C', null, 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124466754', 'Carlos', 'General', '-', '0937162846', 'carlos@ejemplo.com', 'E', 'V', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124466750', 'Carlos', 'Medina', 'El Sagrario', '0937162846', 'carlos@ejemplo.com', 'E', 'V', 'A');
 INSERT INTO vet_personas VALUES (v_per_seq.nextval,'1123544634', 'Mateo', 'Suarez', '-', '0987654321', 'mateo@ejemplo.com', 'E', 'A', 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Paula', 'Acevedo', '-', '0981253462', 'paula@ejemplo.com', 'E', 'A', 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435454', 'Paula', 'Acevedo', '-', '0981253462', 'paula@ejemplo.com', 'E', 'A', 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435455', 'Diora', 'Acosta', 'Via Patamarca', '0987654321', 'diora@ejemplo.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Aurora', 'Yoo', 'Las Retamas', '0987654321', 'aurora@ejemplo.com', 'C', null, 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435457', 'George', 'Bass', 'Leopoldo Espinoza', '0987654321', 'george@ejemplo.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435458', 'Alex', 'Campos', 'Sucre', '0987654321', 'alex@ejemplo.com', 'C', null, 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435459', 'Celina', 'Wong', 'San Blas', '0987654321', 'celina@ejemplo.com', 'E', 'V', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435460', 'Claudia', 'Acosta', 'Via Patamarca', '0987654321', 'claudia@ejemplo.com', 'E', 'A', 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435461', 'Ema', 'Washington', 'Cañaribamba', '0987654321', 'ema@ejemplo.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435462', 'Dexter', 'Lim', 'Yanuncay', '0987654321', 'dexter@ejemplo.com', 'C', null, 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435463', 'Ciara', 'Ross', 'La victoria', '0987654321', 'ciara@ejemplo.com', 'E', 'V', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435464', 'Isaac', 'Lucero', 'San Sebastian', '0987654321', 'isaac@ejemplo.com', 'E', 'A', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435465', 'Angela', 'Garrison', 'Av Loja', '0987654321', 'angela@ejemplo.com', 'C', null, 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435466', 'Nayeli', 'Campos', 'Francisco Cisneros', '0987654321', 'nayeli@ejemplo.com', 'C', null, 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435467', 'Juan', 'Escobar', 'San Blas', '0987654321', 'juan@ejemplo.com', 'E', 'V', 'I');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435468', 'Matthew', 'Cortes', 'Luis Moscoso', '0987654321', 'matthew@ejemplo.com', 'E', 'V', 'A');
 --select * from vet_personas;
 --------------------------------------------------------------------------------
 ----------------------------    MASCOTAS   -------------------------------------
-insert into vet_mascotas 
-values (
-  v_masc_seq.nextval,
-  'Rufus',
-  (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Andrés' AND ROWNUM = 1),
-  (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1)
-);
-
-insert into vet_mascotas 
-values (
-  v_masc_seq.nextval,
-  'Toby',
-  (SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Karen' AND ROWNUM = 1),
-  (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1)
-);
-
+insert into vet_mascotas values (v_masc_seq.nextval,'Rufus',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Andrés' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Toby',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Karen' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Jack',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Celina' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Eli',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Ciara' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Cairo',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Aurora' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Conrad',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Alex' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'n/d' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Dane',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Isaac' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'n/d' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Alida',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'George' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Amina',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Juan' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Colin',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Diora' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Jaden',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Nayeli' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'n/d' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Dakota',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Mateo' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Archie',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Ema' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Edward',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Paula' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Demetrius',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Angela' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'n/d' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Erik',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Claudia' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Hendrix',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Dexter' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Finn',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Ema' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Eli',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Carlos' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Siames' AND ROWNUM = 1));
+insert into vet_mascotas values (v_masc_seq.nextval,'Harley',(SELECT per_id FROM vet_personas WHERE per_nombre LIKE 'Ciara' AND ROWNUM = 1),
+(SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE 'Labrador' AND ROWNUM = 1));
 --select * from vet_mascotas;
 --------------------------------------------------------------------------------
 ----------------------------    CITAS   ----------------------------------------
-insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,4);
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/25 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,4);
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/03/15 11:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,4);
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/16 14:20:00', 'YYYY/MM/DD HH24:MI:SS')),'C',1,4);
 --select * from vet_citas;
 --------------------------------------------------------------------------------
 ----------------------------    USUARIOS   -------------------------------------
@@ -366,8 +407,11 @@ insert into vet_usuarios values (v_us_seq.nextval,'pau123','123','G',(select per
 --select *from vet_usuarios;
 --------------------------------------------------------------------------------
 ----------------------------    FACTURAS   -------------------------------------
-insert into vet_facturas values (v_fac_seq.nextval,(TO_DATE('2024/02/20 10:35:23', 'yyyy/mm/dd hh24:mi:ss')),52.17,7.83,60,
+insert into vet_facturas values (v_fac_seq.nextval,(TO_DATE('2024/02/20 10:35:23', 'YYYY/MM/DD HH24:MI:SS')),52.17,7.83,60,
 (select us_id from vet_usuarios where us_usuario like 'mat123'),(select per_id from vet_personas where per_nombre like 'Andrés'));
+
+insert into vet_facturas values (v_fac_seq.nextval,(TO_DATE('2024/02/20 10:36:23', 'YYYY/MM/DD HH24:MI:SS')),52.17,7.83,60,
+(select us_id from vet_usuarios where us_usuario like 'pau123'),(select per_id from vet_personas where per_nombre like 'Karen'));
 --select * from vet_facturas;
 --------------------------------------------------------------------------------
 ----------------------------    SERVICIOS  -------------------------------------
