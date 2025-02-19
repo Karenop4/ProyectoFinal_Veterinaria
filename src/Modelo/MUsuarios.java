@@ -23,6 +23,9 @@ public class MUsuarios {
         this.empleado = empleado;
     }
 
+    public MUsuarios() {
+    }
+
     public int getUs_id() {
         return us_id;
     }
@@ -43,5 +46,16 @@ public class MUsuarios {
         return empleado;
     }
     
+    public void setUs_id(int us_id) {
+        this.us_id = us_id;
+    }
+
+    public void setUs_tipo(String us_tipo) {
+        this.us_tipo = us_tipo;
+    }
+
+    public void setEmpleado(MPersonas empleado) {
+        this.empleado = empleado;
+    }
     
 }

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author karen
  */
 public class PersonasDAO {
-    Connection con;
+    Connection con = ConexionBD.conectar();
     public MPersonas buscarPersonaPorCedula(String cedula, char CoE) {
         MPersonas persona = null;
         if (con == null) {
@@ -210,4 +210,79 @@ public class PersonasDAO {
             return false;
         }
     }
+    
+    
+    public boolean crearCliente(MPersonas cliente){
+        Connection con = ConexionBD.conectar();
+        if (con != null) {
+            try {
+                String sql = "INSERT INTO vet_personas VALUES (v_per_seq.nextval,?, ?, ?, ?, ?, ?, 'C', null, 'A');";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, cliente.getPer_cedula());
+                stmt.setString(2, cliente.getPer_nombre());
+                stmt.setString(3, cliente.getPer_apellido());
+                stmt.setString(4, cliente.getPer_direccion());
+                stmt.setString(5, cliente.getPer_telefono());
+                stmt.setString(6, cliente.getPer_correo());
+
+                int filasAfectadas = stmt.executeUpdate(); // Usar executeUpdate()
+            
+               
+                return filasAfectadas > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+    
+    
+    public boolean modificarCliente(MPersonas cliente) {
+        Connection con = ConexionBD.conectar();
+        if (con != null) {
+            String sql = "UPDATE vet_personas SET per_nombre = ?, per_apellido = ?, per_direccion = ?, per_telefono = ?, per_correo = ? WHERE per_id = ?";
+
+            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+                stmt.setString(1, cliente.getPer_nombre());
+                stmt.setString(2, cliente.getPer_apellido());
+                stmt.setString(3, cliente.getPer_direccion());
+                stmt.setString(4, cliente.getPer_telefono());
+                stmt.setString(5, cliente.getPer_correo());
+                stmt.setInt(6, cliente.getPer_id());
+
+                int filasAfectadas = stmt.executeUpdate();
+                return filasAfectadas > 0; 
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+    
+    public boolean eliminarCliente(String cedula) {
+        Connection con = ConexionBD.conectar();
+        if (con != null) {
+            String sql = "DELETE FROM vet_personas WHERE per_cedula = ?";
+
+            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+                stmt.setString(1, cedula); // Asigna la cédula del cliente a eliminar
+
+                int filasAfectadas = stmt.executeUpdate();
+                return filasAfectadas > 0; // Retorna true si se eliminó al menos un registro
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } 
+        }
+        return false;
+    }
+    
+    
+
+    
 }

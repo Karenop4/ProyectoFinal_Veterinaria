@@ -4,7 +4,20 @@
  */
 package Ventanas;
 
+import Controlador.CFacturas;
+import Controlador.CPersonas;
+import Controlador.CUsuarios;
+import Modelo.MFacturas;
+import Modelo.MPersonas;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,13 +29,25 @@ public class VListarFacturas extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     private VEmpleado v;
+    private CFacturas cFacturas;
+    private CPersonas cPersonas;
+    private CUsuarios cUsuarios;
+    private List<MFacturas>listaFacturas;
     
-    public VListarFacturas(VEmpleado v) {
+    public VListarFacturas(VEmpleado v, CFacturas cFacturas, CPersonas cPersonas, CUsuarios cUsuarios) {
         initComponents();
         this.v = v;
         
         ImageIcon icono = new ImageIcon("src\\imagenes\\bill.png");
         setIconImage(icono.getImage());
+        this.cFacturas = cFacturas;
+        this.cPersonas = cPersonas;
+        this.cUsuarios = cUsuarios;
+        
+        fechaInicio.setMaxSelectableDate(new Date());
+        fechaFin.setMaxSelectableDate(new Date());
+        
+        listaFacturas = new ArrayList<>();
     }
 
     /**
@@ -120,17 +145,14 @@ public class VListarFacturas extends javax.swing.JFrame {
 
         tablaDetalleBusqueda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Num. Factura", "Fecha Emisión", "Cliente", "Total"
+                "Num. Factura", "Fecha Emisión", "Empleado", "Cliente", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -142,6 +164,11 @@ public class VListarFacturas extends javax.swing.JFrame {
         btnVisualizarFactura.setText("Visualizar");
 
         btnEliminarFactura.setText("Eliminar");
+        btnEliminarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarFacturaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -238,7 +265,39 @@ public class VListarFacturas extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
+                Date inicio = fechaInicio.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+                Date fin = fechaFin.getDate();
+
+
+                if ((inicio != null && fin != null) || txtCodigoFactura.getText() != null) {
+                    if (inicio.after(fin)) {
+                        JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser mayor a la de final");
+                    } else {
+                        DefaultTableModel model = (DefaultTableModel) tablaDetalleBusqueda.getModel();
+                        int codigoFac = 0;
+                        if(txtCodigoFactura.getText() != ""){
+                            codigoFac = Integer.parseInt(txtCodigoFactura.getText());
+                        }
+                        listaFacturas = cFacturas.listarFacturas(inicio, fin, codigoFac);
+                        
+                        for(MFacturas f: listaFacturas){
+                            MPersonas cliente = cPersonas.buscarClienteID2(f.getCliente().getPer_id(), 'C');
+                            MPersonas usuario = cPersonas.buscarClienteID2(f.getUsuario().getUs_id(), 'E');
+                            model.addRow(new Object[]{f.getFac_id(), f.getFac_fecha(), usuario.getPer_nombre() + " " + usuario.getPer_apellido() , cliente.getPer_nombre() + " " + cliente.getPer_apellido(), f.getFac_total()});
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Seleccione las fechas");
+                }
+        
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFacturaActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarFacturaActionPerformed
 
     public void salir(){
         this.setVisible(false);

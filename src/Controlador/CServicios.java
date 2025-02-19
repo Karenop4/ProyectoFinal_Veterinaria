@@ -6,6 +6,7 @@ package Controlador;
 
 import DAO.ServiciosDAO;
 import Modelo.MServicios;
+import java.util.List;
 import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,5 +30,9 @@ public class CServicios {
     }
     public void crearServicio( String nombre, int precio, char iva){
         sDAO.crearServicio(nombre, precio, iva);
+    }
+    
+    public List<MServicios> listarServicios2(){
+        return sDAO.listarServicios2();
     }
 }

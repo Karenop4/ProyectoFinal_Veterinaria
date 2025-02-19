@@ -57,5 +57,7 @@ public class MFacturas {
         return cliente;
     }
     
-    
+    public void setFac_id(int fac_id) {
+        this.fac_id = fac_id;
+    }
 }

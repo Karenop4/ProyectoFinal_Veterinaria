@@ -6,6 +6,7 @@ package Ventanas;
 
 import Controlador.CRazas;
 import Controlador.CTiposMascotas;
+import Modelo.MPersonas;
 import Modelo.MRazas;
 import Modelo.MTiposMascotas;
 import java.util.ArrayList;
@@ -23,10 +24,11 @@ public class VAgregarMascota extends javax.swing.JFrame {
     private CRazas cRazas;
     private List<MTiposMascotas> listaTiposMascotas;
     private List <MRazas> listaRazasBD;
+    private MPersonas cliente;
     /**
      * Creates new form VAgregarMascota
      */
-    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas, CRazas cRazas) {
+    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas, CRazas cRazas, MPersonas cliente) {
         initComponents();
         this.v = v;
         
@@ -35,9 +37,11 @@ public class VAgregarMascota extends javax.swing.JFrame {
         
         this.cTipoMascotas = cTipoMascotas;
         this.cRazas = cRazas;
-        
+        this.cliente = cliente;
         listaTiposMascotas = new ArrayList<>();
         listarTiposMascotas();
+        
+        txtNombreCliente.setText(cliente.getPer_nombre() + " " + cliente.getPer_apellido());
     }
 
     /**
@@ -163,6 +167,11 @@ public class VAgregarMascota extends javax.swing.JFrame {
         );
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,6 +253,10 @@ public class VAgregarMascota extends javax.swing.JFrame {
         
         listaRaza.setModel(modelo);
     }//GEN-LAST:event_listaTipoMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
+    }//GEN-LAST:event_btnGuardarActionPerformed
     
     public void salir(){
         this.setVisible(false);

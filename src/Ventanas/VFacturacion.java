@@ -4,7 +4,26 @@
  */
 package Ventanas;
 
+import Controlador.CDetalleFactura;
+import Controlador.CFacturas;
+import Controlador.CPersonas;
+import Controlador.CServicios;
+import DAO.UsuariosDAO;
+import Modelo.MDetalleFact;
+import Modelo.MFacturas;
+import Modelo.MPersonas;
+import Modelo.MServicios;
+import Modelo.MUsuarios;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,15 +31,36 @@ import javax.swing.ImageIcon;
  */
 public class VFacturacion extends javax.swing.JFrame {
     private VEmpleado v;
+    private MPersonas cliente;
+    private CFacturas cFacturas;
+    private CDetalleFactura cDetalleFactura;
+    private MUsuarios mUsuario;
+    private CPersonas cPersonas;
+    private CServicios cServicios;
+    private List<MServicios> servicios;
+    
     /**
      * Creates new form NewJFrame
      */
-    public VFacturacion(VEmpleado v) {
+    public VFacturacion(VEmpleado v, CFacturas cFacturas, CDetalleFactura cDetalleFactura, MUsuarios mUsuario, CPersonas cPersonas, CServicios cServicios) {
         initComponents();
         this.v = v;
-        
+        this.cDetalleFactura = cDetalleFactura;
+        this.cFacturas = cFacturas;
+        this.mUsuario = mUsuario;
+        this.cPersonas = cPersonas;
+        this.cServicios = cServicios;
         ImageIcon icono = new ImageIcon("src\\imagenes\\bill.png");
         setIconImage(icono.getImage());
+        
+        buscarEmpleado();
+        txtCedulaEmpleado.setText(mUsuario.getEmpleado().getPer_cedula());
+        txtNombreEmpleado.setText(mUsuario.getEmpleado().getPer_nombre() + " " + mUsuario.getEmpleado().getPer_apellido());
+        txtCodigoEmpleado.setText(String.valueOf(mUsuario.getEmpleado().getPer_id()));
+        
+        servicios = new ArrayList<>();
+        
+        llenarListaServicios();
     }
     
 
@@ -103,13 +143,20 @@ public class VFacturacion extends javax.swing.JFrame {
 
         jLabel7.setText("Email:");
 
-        txtCedulaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedulaClienteActionPerformed(evt);
-            }
-        });
+        txtNombreCliente.setEditable(false);
+
+        txtDireccionCliente.setEditable(false);
+
+        txtTelefonoCliente.setEditable(false);
+
+        txtEmailCliente.setEditable(false);
 
         btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -173,6 +220,11 @@ public class VFacturacion extends javax.swing.JFrame {
         jLabel8.setText("Código / Nombre:");
 
         btnBuscarServicio.setText("Buscar");
+        btnBuscarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarServicioActionPerformed(evt);
+            }
+        });
 
         tablaServiciosAgregados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -183,21 +235,31 @@ public class VFacturacion extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, true, false
+                false, true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tablaServiciosAgregados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaServiciosAgregadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaServiciosAgregados);
 
         btnEliminarServicio.setText("Eliminar");
+        btnEliminarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarServicioActionPerformed(evt);
+            }
+        });
 
-        listaServiciosBuscados.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listaServiciosBuscados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaServiciosBuscadosMouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(listaServiciosBuscados);
 
@@ -346,8 +408,18 @@ public class VFacturacion extends javax.swing.JFrame {
                 btnCancelarMouseClicked(evt);
             }
         });
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -417,10 +489,6 @@ public class VFacturacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCedulaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedulaClienteActionPerformed
-
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         salir();
     }//GEN-LAST:event_btnCancelarMouseClicked
@@ -429,12 +497,170 @@ public class VFacturacion extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        cliente = cPersonas.buscarCliente2(txtCedulaCliente.getText(), 'C');
+        txtNombreCliente.setText(cliente.getPer_nombre() + " " + cliente.getPer_apellido());
+        txtDireccionCliente.setText(cliente.getPer_direccion());
+        txtEmailCliente.setText(cliente.getPer_correo());
+        txtTelefonoCliente.setText(cliente.getPer_telefono());
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    private void btnBuscarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarServicioActionPerformed
+        
+    }//GEN-LAST:event_btnBuscarServicioActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        if(cliente!=null && tablaServiciosAgregados.getRowCount() > 0){
+            MFacturas factura = new MFacturas(0, new Date(), Double.parseDouble(txtSubtotal.getText()), Double.parseDouble(txtIva.getText()), Double.parseDouble(txtTotal.getText()), mUsuario, cliente);
+            int id = cFacturas.crearFactura(factura);
+            factura.setFac_id(id);
+            
+            DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                Object codigoObj = model.getValueAt(i, 0);  
+                Object cantidadObj = model.getValueAt(i, 1);
+                Object ivaObj = model.getValueAt(i, 3);
+                Object precioObj = model.getValueAt(i, 4);
+                Object totalObj = model.getValueAt(i, 5);
+
+                int codigo = (codigoObj instanceof Integer) ? (Integer) codigoObj : Integer.parseInt(codigoObj.toString().trim());
+                int cantidad = (cantidadObj instanceof Integer) ? (Integer) cantidadObj : Integer.parseInt(cantidadObj.toString().trim());
+                double iva = (ivaObj instanceof Double) ? (Double) ivaObj : Double.parseDouble(ivaObj.toString().trim());
+                double precio = (precioObj instanceof Double) ? (Double) precioObj : Double.parseDouble(precioObj.toString().trim());
+                double total = (totalObj instanceof Double) ? (Double) totalObj : Double.parseDouble(totalObj.toString().trim());
+
+                String nombre = model.getValueAt(i, 2).toString();
+                MServicios servicio = null;
+                for(MServicios s : servicios){
+                    if(s.getServ_nombre().equals(nombre)){
+                        servicio = s;
+                        break;
+                    }
+                }
+                
+                MDetalleFact detalle = new MDetalleFact(id, cantidad, total, iva, total, precio, servicio, factura);
+                
+                cDetalleFactura.crearDetalle(detalle, id);
+            }
+        JOptionPane.showMessageDialog(this, "Factura creada");
+        limpiar();    
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese los campos del cliente y los servicios");
+        }
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void listaServiciosBuscadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaServiciosBuscadosMouseClicked
+         MServicios servicioSeleccionado = null;
+         DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+         if (model.getColumnCount() == 0) {
+            model.addColumn("Código");
+            model.addColumn("Cantidad");
+            model.addColumn("Nombre");
+            model.addColumn("IVA");
+            model.addColumn("Precio");
+            model.addColumn("Total");
+        }
+         
+            for(MServicios s : servicios){
+                if(s.equals(listaServiciosBuscados.getSelectedValue())){
+                    servicioSeleccionado = s;
+                    
+                    double IVA = 0;
+                    double total = s.getServ_precio();
+                    if(s.getServ_iva() == 'S'){
+                        IVA = s.getServ_precio() * 0.12;
+                        total = total + IVA;
+                    }
+                    model.addRow(new Object[]{s.getServ_codigo(), 1, s.getServ_nombre(), new BigDecimal(IVA).setScale(2, RoundingMode.HALF_UP).doubleValue(), s.getServ_precio(), new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue()});
+                    calcularSumaTotal();
+                    break;
+                }
+            }
+    }//GEN-LAST:event_listaServiciosBuscadosMouseClicked
+
+    private void tablaServiciosAgregadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaServiciosAgregadosMouseClicked
+        tablaServiciosAgregados.getModel().addTableModelListener(e -> {
+            int column = e.getColumn(); // Columna que fue editada
+
+            // Verificamos si la columna modificada es la de "Cantidad" (Índice 1)
+            if (column == 1) { 
+                int row = e.getFirstRow(); // Fila donde ocurrió el cambio
+                DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+
+                try {
+                    int cantidad = Integer.parseInt(model.getValueAt(row, 1).toString()); // Nueva cantidad
+                    double precio = Double.parseDouble(model.getValueAt(row, 4).toString()); // Precio
+                    double iva = Double.parseDouble(model.getValueAt(row, 3).toString()); // IVA
+
+                    // Recalcular total
+                    double total = (precio + iva) * cantidad;
+
+                    // Actualizar el total en la tabla (columna 5)
+                    model.setValueAt(new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue(), row, 5);
+                    calcularSumaTotal();
+                } catch (NumberFormatException ex) {
+                    System.out.println("Error: Ingrese un número válido en la cantidad.");
+                }
+            }
+        });
+
+    }//GEN-LAST:event_tablaServiciosAgregadosMouseClicked
+
+    private void btnEliminarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarServicioActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+        int filaSeleccionada = tablaServiciosAgregados.getSelectedRow(); // Obtener fila seleccionada
+
+        if (filaSeleccionada != -1) { // Verificar si hay una fila seleccionada
+            model.removeRow(filaSeleccionada); // Eliminar la fila
+            calcularSumaTotal();
+        }
+    }//GEN-LAST:event_btnEliminarServicioActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        salir();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     
     public void salir(){
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
     }
+    
+    public void buscarEmpleado(){
+        mUsuario.setEmpleado(cPersonas.buscarClienteID2(mUsuario.getUs_id(), 'E'));
+    }
+    
+    private void calcularSumaTotal() {
+        double sumaTotal = 0.0;
+        double sumaUnitario = 0.0;
+        double sumaIva= 0.0;
+        DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+
+        // Recorrer todas las filas de la tabla
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                int cantidad = Integer.parseInt(model.getValueAt(i, 1).toString());
+                double IVA = Double.parseDouble(model.getValueAt(i, 3).toString());
+                double unitario = Double.parseDouble(model.getValueAt(i, 4).toString());
+                double total = Double.parseDouble(model.getValueAt(i, 5).toString()); // Columna "Total" (índice 5)
+                IVA = cantidad * IVA;
+                unitario = unitario * cantidad;
+                sumaTotal += total;
+                sumaUnitario += unitario;
+                sumaIva += IVA;
+            } catch (NumberFormatException | NullPointerException e) {
+                System.out.println("Error al sumar fila " + i + ": " + e.getMessage());
+            }
+        }
+
+        txtTotal.setText(String.valueOf(sumaTotal));
+        txtSubtotal.setText(String.valueOf(sumaUnitario));
+        txtIva.setText(String.valueOf(sumaIva));
+    }
+
+
     /**
      * @param args the command line arguments
      */
@@ -482,4 +708,26 @@ public class VFacturacion extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefonoCliente;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarListaServicios() {
+        servicios = cServicios.listarServicios2();
+        DefaultListModel model = new DefaultListModel();
+        
+        for (MServicios servicio : servicios) {
+            model.addElement(servicio);
+        }
+        
+        listaServiciosBuscados.setModel(model);
+    }
+
+    private void limpiar() {
+        txtCedulaCliente.setText("");
+        txtDireccionCliente.setText("");
+        txtEmailCliente.setText("");
+        txtIva.setText("");
+        txtNombreCliente.setText("");
+        txtSubtotal.setText("");
+        txtTelefonoCliente.setText("");
+        txtTotal.setText("");
+   }
 }

@@ -5,6 +5,7 @@
 package Ventanas;
 import Controlador.*;
 import DAO.*;
+import Modelo.MUsuarios;
 import Ventanas.*;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -48,13 +49,14 @@ public class VEmpleado extends javax.swing.JFrame {
     private CUsuarios cUsuarios;
     private CDetalleFactura cDetalleFactura;
     
+    private MUsuarios mUsuario;
     /**
      * Creates new form VEmpleado
      */
-    public VEmpleado(VPrincipal vP) {
+    public VEmpleado(VPrincipal vP, MUsuarios usuario) {
         initComponents();
         vPrincipal=vP;
-        
+        this.mUsuario = usuario;
         ImageIcon icono = new ImageIcon("src\\imagenes\\veterinarian_logo.png");
         setIconImage(icono.getImage());
         
@@ -590,14 +592,14 @@ public class VEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnServiciosMouseClicked
 
     private void BtnFacturacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFacturacionMouseClicked
-        VFacturacion = new VFacturacion(this);
+        VFacturacion = new VFacturacion(this,cFacturas, cDetalleFactura, mUsuario, cPersonas, cServicios);
         this.setEnabled(false);
         VFacturacion.setLocationRelativeTo(null);
         VFacturacion.setVisible(true);
     }//GEN-LAST:event_BtnFacturacionMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        VListarFacturas = new VListarFacturas(this);
+        VListarFacturas = new VListarFacturas(this,cFacturas, cPersonas, cUsuarios);
         this.setEnabled(false);
         VListarFacturas.setLocationRelativeTo(null);
         VListarFacturas.setVisible(true);

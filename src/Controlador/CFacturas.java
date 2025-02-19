@@ -5,6 +5,9 @@
 package Controlador;
 
 import DAO.FacturasDAO;
+import Modelo.MFacturas;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -17,5 +20,11 @@ public class CFacturas {
         this.facturasDAO = facturasDAO;
     }
     
+    public int crearFactura(MFacturas factura){
+        return facturasDAO.crearFactura(factura);
+    }
     
+    public List<MFacturas> listarFacturas (Date inicio, Date fin, int codigo){
+        return facturasDAO.listarFacturas(inicio, fin, codigo);
+    }
 }

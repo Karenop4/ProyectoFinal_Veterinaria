@@ -18,7 +18,9 @@ import java.util.logging.Logger;
  */
 public class UsuariosDAO {
     Connection con = ConexionBD.conectar();
-    public String buscarUsuario(String nombreUsuario, String contrasenia) {
+    
+    public MUsuarios buscarUsuario(String nombreUsuario, String contrasenia) {
+        con = ConexionBD.conectar();
         MUsuarios usuario = null;
         if (con == null) {
             con = ConexionBD.conectar();
@@ -32,7 +34,10 @@ public class UsuariosDAO {
                 ResultSet rs = stmt.executeQuery();
 
                 if (rs.next()) {
-                    return rs.getString("us_tipo").trim();
+                    usuario = new MUsuarios();
+                    usuario.setUs_id(rs.getInt("us_id"));
+                    usuario.setUs_tipo(rs.getString("us_tipo"));
+                    return usuario;
                 }
 
             } catch (SQLException ex) {
@@ -82,4 +87,5 @@ public class UsuariosDAO {
         }
         return false;
     }
+    
 }

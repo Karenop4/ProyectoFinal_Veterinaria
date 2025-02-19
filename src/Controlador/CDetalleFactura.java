@@ -5,6 +5,7 @@
 package Controlador;
 
 import DAO.DetalleFacturaDAO;
+import Modelo.MDetalleFact;
 
 /**
  *
@@ -17,5 +18,8 @@ public class CDetalleFactura {
         this.detalleFacturaDAO = detalleFacturaDAO;
     }
     
+    public void crearDetalle(MDetalleFact detalle, int facId){
+        detalleFacturaDAO.insertarDetalleFactura(detalle, facId);
+    }
     
 }

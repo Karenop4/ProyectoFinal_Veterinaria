@@ -6,10 +6,14 @@ package DAO;
 
 import Modelo.MServicios;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JRootPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -145,5 +149,27 @@ public class ServiciosDAO {
                 ex.printStackTrace();
             }
         }
+    }
+    
+    public List<MServicios> listarServicios2(){
+        Connection con = ConexionBD.conectar();
+        List<MServicios> listaServicios = new ArrayList<>();
+        
+        if(con != null){
+            try {
+                String sql = "SELECT * FROM vet_servicios";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery();
+                MServicios servicio;
+                while(rs.next()){
+                    servicio = new MServicios(rs.getInt("serv_codigo"), rs.getString("serv_nombre"), rs.getDouble("serv_precio"), rs.getString("serv_estado").charAt(0), rs.getString("serv_iva").charAt(0));
+                    listaServicios.add(servicio);
+                }
+                return listaServicios;
+            } catch (SQLException ex) {
+                Logger.getLogger(ServiciosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
     }
 }

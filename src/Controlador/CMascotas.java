@@ -23,4 +23,16 @@ public class CMascotas {
     public List<MMascotas> listarMascotasCliente(MPersonas cliente){
         return mascotasDAO.buscarMascotasCliente(cliente);
     }
+    
+    public boolean agregarMascota(MPersonas mCliente, MMascotas mMascotas){
+        return mascotasDAO.agregarMascota(mCliente, mMascotas);
+    }
+    
+    public boolean eliminarMascota(MMascotas mMascotas){
+        return mascotasDAO.eliminarMascota(mMascotas);
+    }
+    
+    public boolean actualizarMascota(MMascotas mMascota){
+        return mascotasDAO.actualizarMascota();
+    }
 }

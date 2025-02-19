@@ -29,6 +29,7 @@ public class VMascotas extends javax.swing.JFrame {
     private CRazas cRazas;
     private CPersonas cPersonas;
     private CMascotas cMascotas;
+    private MPersonas cliente;
     /**
      * Creates new form VMascotas
      */
@@ -221,7 +222,7 @@ public class VMascotas extends javax.swing.JFrame {
 
     private void btnAgregarMascotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMascotaMouseClicked
         this.setEnabled(false);
-        VAgregar = new VAgregarMascota(this, cTiposMascotas, cRazas);
+        VAgregar = new VAgregarMascota(this, cTiposMascotas, cRazas, cliente);
         VAgregar.setLocationRelativeTo(null);
         VAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarMascotaMouseClicked
@@ -231,7 +232,7 @@ public class VMascotas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        MPersonas cliente = cPersonas.buscarClienteCedula(txtCedulaCliente.getText(), 'C');
+        cliente = cPersonas.buscarClienteCedula(txtCedulaCliente.getText(), 'C');
         txtNombreCliente.setText(cliente.getPer_nombre() + " " + cliente.getPer_apellido());
         List<MMascotas> lista = new ArrayList<>();
         lista = cMascotas.listarMascotasCliente(cliente);

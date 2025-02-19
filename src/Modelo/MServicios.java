@@ -43,5 +43,8 @@ public class MServicios {
         return serv_iva;
     }
     
-    
+    @Override
+    public String toString() {
+        return serv_nombre;
+    }
 }

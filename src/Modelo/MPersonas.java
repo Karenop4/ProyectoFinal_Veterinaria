@@ -49,7 +49,23 @@ public class MPersonas {
         this.per_nombre=per_nombre;
         this.per_apellido=per_apellido;
     }
+    
+    public MPersonas() {
+    }
 
+
+    
+    public MPersonas(int per_id, String per_cedula, String per_nombre, String per_apellido, String per_direccion, String per_telefono, String per_correo, char per_coe, char per_estado) {
+        this.per_id = per_id;
+        this.per_cedula = per_cedula;
+        this.per_nombre = per_nombre;
+        this.per_apellido = per_apellido;
+        this.per_direccion = per_direccion;
+        this.per_telefono = per_telefono;
+        this.per_correo = per_correo;
+        this.per_estado = per_estado;
+    }
+    
     public int getPer_id() {
         return per_id;
     }
@@ -89,4 +105,8 @@ public class MPersonas {
     public char getPer_estado() {
         return per_estado;
     }  
+    
+    public void setPer_id(int per_id) {
+        this.per_id = per_id;
+    }
 }

@@ -4,10 +4,12 @@
  */
 package Ventanas;
 
+import Controlador.CUsuarios;
 import javax.swing.JOptionPane;
 import DAO.ConexionBD;
 import DAO.PersonasDAO;
 import DAO.UsuariosDAO;
+import Modelo.MUsuarios;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -18,10 +20,11 @@ import javax.swing.ImageIcon;
  * @author USER
  */
 public class VPrincipal extends javax.swing.JFrame {
-    VEmpleado vEmpleado=new VEmpleado(this);
+    VEmpleado vEmpleado;
     UsuariosDAO udao = new UsuariosDAO();
     ConexionBD bd = new ConexionBD();
     PersonasDAO pdao=new PersonasDAO();
+    CUsuarios cUsuarios;
     StringBuilder passwordBuilder = new StringBuilder();
     /**
      * Creates new form VPrincipal
@@ -30,6 +33,7 @@ public class VPrincipal extends javax.swing.JFrame {
         initComponents();
         ConexionBD.conectar();
         
+        this.cUsuarios = new CUsuarios(udao);
         ImageIcon cliIcon = new ImageIcon("src\\imagenes\\user.png");
         Image image = cliIcon.getImage(); // Obtener la imagen
         Image newImage = image.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Redimensionar
@@ -220,6 +224,19 @@ public class VPrincipal extends javax.swing.JFrame {
     } 
     
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
+
+        MUsuarios usuario = cUsuarios.buscarUsuario(TxtUsuario.getText(), passwordBuilder.toString());
+        
+        if(usuario == null){
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
+        }else{
+            this.setVisible(false);
+            vEmpleado=new VEmpleado(this, usuario);
+            vEmpleado.setLocationRelativeTo(null);
+            vEmpleado.setVisible(true);
+            vEmpleado.setTipo(usuario.getUs_tipo());
+        }
+
         //En caso de que los datos esten correctos
         TxtContraseña.setText(passwordBuilder.toString());
         char tipoE=udao.validarUsuario(TxtUsuario.getText(), TxtContraseña.getText());

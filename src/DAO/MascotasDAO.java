@@ -53,4 +53,49 @@ public class MascotasDAO {
         }
     return null;
     }
+    
+    public boolean agregarMascota(MPersonas mCliente, MMascotas mMascotas){
+        Connection con = ConexionBD.conectar();
+        
+        if(con!=null){
+            try {
+                String sql = "INSERT INTO vet_mascotas VALUES (v_masc_seq.nextval, ?, ?, (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE '?'))";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, mMascotas.getMasc_nombre());
+                stmt.setInt(2, mCliente.getPer_id());
+                stmt.setInt(3, mMascotas.getMascota().getRaza_id());
+                stmt.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                Logger.getLogger(MascotasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+    
+    public boolean eliminarMascota(MMascotas mMascotas){
+        Connection con = ConexionBD.conectar();
+        if(con!=null){
+            try {
+                String sql = "DELETE FROM vet_mascotas WHERE mascota_id = ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setInt(1, mMascotas.getMasc_id());
+                int rowsDeleted = stmt.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    System.out.println("Registro eliminado correctamente.");
+                } else {
+                    System.out.println("No se encontró el registro.");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MascotasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+    
+    public boolean actualizarMascota(){
+        
+        return false;
+    }
 }

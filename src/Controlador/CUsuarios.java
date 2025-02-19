@@ -5,6 +5,7 @@
 package Controlador;
 
 import DAO.UsuariosDAO;
+import Modelo.MUsuarios;
 
 /**
  *
@@ -17,7 +18,7 @@ public class CUsuarios {
         this.usuariosDAO = usuariosDAO;
     }
     
-    public String buscarUsuario(String nombreUsuario, String contrasenia){
+    public MUsuarios buscarUsuario(String nombreUsuario, String contrasenia){
         return usuariosDAO.buscarUsuario(nombreUsuario, contrasenia);
     }
     public boolean crearUsuario(String usr,String contr, char tipo, int id){
