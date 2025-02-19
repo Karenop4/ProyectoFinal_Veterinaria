@@ -33,9 +33,6 @@ public class DetalleFacturaDAO {
 
                 int filasAfectadas = stmt.executeUpdate();
 
-                stmt.close();
-                con.close();
-
                 return filasAfectadas > 0; // Retorna true si la inserción fue exitosa
             } catch (SQLException ex) {
                 Logger.getLogger(FacturasDAO.class.getName()).log(Level.SEVERE, null, ex);

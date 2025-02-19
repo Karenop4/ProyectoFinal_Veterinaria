@@ -111,7 +111,7 @@ public class FacturasDAO {
         Connection con = ConexionBD.conectar();
         if (con != null) {
             try {
-                String sql = "DELETE FROM vet_facturas WHERE fac_id = ?";
+                String sql = "update vet_facturas set ";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setInt(1, fac_id);
 

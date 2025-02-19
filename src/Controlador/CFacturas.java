@@ -27,4 +27,7 @@ public class CFacturas {
     public List<MFacturas> listarFacturas (Date inicio, Date fin, int codigo){
         return facturasDAO.listarFacturas(inicio, fin, codigo);
     }
+    public void eliminarFacturas(int id){
+        facturasDAO.eliminarFactura(id);
+    }
 }
