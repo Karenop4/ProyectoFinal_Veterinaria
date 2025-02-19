@@ -23,4 +23,10 @@ public class CRazas {
     public List<MRazas> listarRazasPorTipo (List<MTiposMascotas> listaTiposMacotas, String tipoMascota){
         return razasDAO.devolverRazas(listaTiposMacotas, tipoMascota);
     }
+    public void crearRaza(int id,String nombre){
+        razasDAO.crearRaza(id,nombre);
+    }
+    public void eliminarRaza(String nombre){
+        razasDAO.eliminarRaza(nombre);
+    }
 }

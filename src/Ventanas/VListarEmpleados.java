@@ -4,23 +4,34 @@
  */
 package Ventanas;
 
+import Controlador.CEmpleados;
+import DAO.PersonasDAO;
+import Modelo.MPersonas;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
  * @author karen
  */
 public class VListarEmpleados extends javax.swing.JFrame {
-    private VRegistro VRegistro;
-    private VEmpleado v;
+
+    VRegistro VRegistro = new VRegistro(this);
+    VActualizarEmpleado vAct;
+    PersonasDAO pDAO = new PersonasDAO();
+    CEmpleados cemp = new CEmpleados(pDAO);
+    VEmpleado v;
+    MPersonas emp;
+
     /**
      * Creates new form VListarEmpleados
      */
     public VListarEmpleados(VEmpleado v) {
         initComponents();
         this.v = v;
-        
+
         ImageIcon icono = new ImageIcon("src\\imagenes\\veterinarian.png");
         setIconImage(icono.getImage());
     }
@@ -40,12 +51,10 @@ public class VListarEmpleados extends javax.swing.JFrame {
         PanelInformacion = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TxAreaInfoCliente = new javax.swing.JTextArea();
-        BtnAgregar = new javax.swing.JToggleButton();
-        BtnCancelar = new javax.swing.JToggleButton();
         PanelBotones = new javax.swing.JPanel();
-        BtnGuardarCambios = new javax.swing.JToggleButton();
         BtnActualizarInfo = new javax.swing.JToggleButton();
         BtnEliminarReg = new javax.swing.JToggleButton();
+        BtnAgregar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Gestión de Empleados");
@@ -58,7 +67,6 @@ public class VListarEmpleados extends javax.swing.JFrame {
         PanelBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         TxtCedula.setForeground(new java.awt.Color(153, 153, 153));
-        TxtCedula.setText("Numero de cedula");
         TxtCedula.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TxtCedulaMouseClicked(evt);
@@ -106,7 +114,7 @@ public class VListarEmpleados extends javax.swing.JFrame {
             PanelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelInformacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         PanelInformacionLayout.setVerticalGroup(
@@ -116,27 +124,30 @@ public class VListarEmpleados extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        PanelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        BtnActualizarInfo.setText("Actualizar Informacion");
+        BtnActualizarInfo.setEnabled(false);
+        BtnActualizarInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnActualizarInfoMouseClicked(evt);
+            }
+        });
+
+        BtnEliminarReg.setText("Desactivar Empleado");
+        BtnEliminarReg.setEnabled(false);
+        BtnEliminarReg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnEliminarRegMouseClicked(evt);
+            }
+        });
+
         BtnAgregar.setText("Agregar Empleado");
         BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnAgregarMouseClicked(evt);
             }
         });
-
-        BtnCancelar.setText("Salir sin Guardar");
-        BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnCancelarMouseClicked(evt);
-            }
-        });
-
-        PanelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        BtnGuardarCambios.setText("Guardar cambios");
-
-        BtnActualizarInfo.setText("Actualizar Informacion");
-
-        BtnEliminarReg.setText("Eliminar registro");
 
         javax.swing.GroupLayout PanelBotonesLayout = new javax.swing.GroupLayout(PanelBotones);
         PanelBotones.setLayout(PanelBotonesLayout);
@@ -145,9 +156,9 @@ public class VListarEmpleados extends javax.swing.JFrame {
             .addGroup(PanelBotonesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnGuardarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnActualizarInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                    .addComponent(BtnEliminarReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtnActualizarInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(BtnEliminarReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelBotonesLayout.setVerticalGroup(
@@ -155,11 +166,11 @@ public class VListarEmpleados extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBotonesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BtnActualizarInfo)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnEliminarReg)
-                .addGap(18, 18, 18)
-                .addComponent(BtnGuardarCambios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnAgregar)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,40 +180,22 @@ public class VListarEmpleados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnCancelar)
-                            .addComponent(BtnAgregar)))
-                    .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(236, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(399, 399, 399)
-                    .addComponent(PanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(10, 10, 10)))
+                        .addComponent(PanelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar)
-                        .addGap(18, 18, 18)))
-                .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(149, 149, 149)
                     .addComponent(PanelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -211,45 +204,134 @@ public class VListarEmpleados extends javax.swing.JFrame {
     private void TxtCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtCedulaMouseClicked
         TxtCedula.setText("");
         TxtCedula.setForeground(Color.BLACK);
+        BtnActualizarInfo.setEnabled(false);
+        BtnEliminarReg.setEnabled(false);
     }//GEN-LAST:event_TxtCedulaMouseClicked
 
     private void BtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseClicked
-        
+        if (!"".equals(TxtCedula.getText())) {
+            String ced = TxtCedula.getText();
+            emp = cemp.listarEmpleado(ced, 'E');
+            actualizar(emp);
+            if(emp!=null){
+            if (emp.getPer_estado() == 'I') {
+                BtnEliminarReg.setText("Reactivar Empleado");
+            } else {
+                BtnEliminarReg.setText("Desactivar Empleado");
+            }
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un numero de cedula.");
+        }
     }//GEN-LAST:event_BtnBuscarMouseClicked
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         this.setEnabled(false);
-        VRegistro = new VRegistro(this);
         VRegistro.setLocationRelativeTo(null);
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked
 
-    private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
-        salir();
-    }//GEN-LAST:event_BtnCancelarMouseClicked
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
-    
-    
-    public void salir(){
+
+    private void BtnActualizarInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnActualizarInfoMouseClicked
+        if ("".equals(TxtCedula.getText())) {
+            JOptionPane.showConfirmDialog(this, "Primero se debe ingresar un numero de cedula.");
+        } else {
+            vAct = new VActualizarEmpleado(this, TxtCedula.getText());
+            this.setEnabled(false);
+            vAct.setLocationRelativeTo(null);
+            vAct.setVisible(true);
+        }
+    }//GEN-LAST:event_BtnActualizarInfoMouseClicked
+
+    private void BtnEliminarRegMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEliminarRegMouseClicked
+        if (BtnEliminarReg.getText().equals("Desactivar Empleado")) {
+            if ("".equals(TxtCedula.getText())) {
+                JOptionPane.showConfirmDialog(this, "Primero se debe ingresar un numero de cedula.");
+            } else {
+                int c = JOptionPane.showConfirmDialog(this, "Seguro que desea desactivar el empleado?", "Confrmación", YES_NO_OPTION);
+                if (c == 0) {
+                    String ced = TxtCedula.getText();
+                    MPersonas empleado = cemp.listarEmpleado(ced, 'E');
+                    if (empleado.getPer_estado() == 'A') {
+                        cemp.eliminarEmpleado(ced);
+                        JOptionPane.showMessageDialog(this, "Empleado desactivado.");
+                        BtnEliminarReg.setText("Reactivar Empleado");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El empleado ya se encuentra inactivo.");
+                    }
+                }
+            }
+            MPersonas empleado = cemp.listarEmpleado(TxtCedula.getText(), 'E');
+            actualizar(empleado);
+        } else if (BtnEliminarReg.getText().equals("Reactivar Empleado")) {
+            if ("".equals(TxtCedula.getText())) {
+                JOptionPane.showConfirmDialog(this, "Primero se debe ingresar un numero de cedula.");
+            } else {
+                String ced = TxtCedula.getText();
+                MPersonas empleado = cemp.listarEmpleado(ced, 'E');
+                if (empleado.getPer_estado() == 'I') {
+                    cemp.activarEmp(ced);
+                    JOptionPane.showMessageDialog(this, "Empleado reactivado.");
+                    BtnEliminarReg.setText("Desactivar Empleado");
+                } else {
+                    JOptionPane.showMessageDialog(this, "El empleado ya se encuentra activo.");
+                }
+            }
+            MPersonas empleado = cemp.listarEmpleado(TxtCedula.getText(), 'E');
+            actualizar(empleado);
+
+        }
+    }//GEN-LAST:event_BtnEliminarRegMouseClicked
+
+    public void salir() {
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
     }
+
+    public void actualizar(MPersonas emp) {
+        if (emp != null) {
+            String estado;
+            if (emp.getPer_estado() == 'I') {
+                estado = "Inactivo";
+            } else {
+                estado = "Activo";
+            }
+            String permisos;
+            if(emp.getPer_empleado()=='A'){
+                permisos="Atencion al cliente";
+            } else{
+                permisos="Veterinario";
+            }
+            TxAreaInfoCliente.setText("ID: " + emp.getPer_id()
+                    + "\n" + "Nombre: " + emp.getPer_nombre()
+                    + "\n" + "Apellido: " + emp.getPer_apellido()
+                    + "\n" + "Cedula: " + emp.getPer_cedula()
+                    + "\n" + "Correo: " + emp.getPer_correo()
+                    + "\n" + "Dirección: " + emp.getPer_direccion()
+                    + "\n" + "Telefono: " + emp.getPer_telefono()
+                    + "\n" + "Tipo: " + permisos
+                    + "\n" + "Estado: " + estado);
+            BtnActualizarInfo.setEnabled(true);
+            BtnEliminarReg.setEnabled(true);
+        } else {
+            TxAreaInfoCliente.setText("Datos del empleado no encontrados");
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnActualizarInfo;
     private javax.swing.JToggleButton BtnAgregar;
     private javax.swing.JToggleButton BtnBuscar;
-    private javax.swing.JToggleButton BtnCancelar;
     private javax.swing.JToggleButton BtnEliminarReg;
-    private javax.swing.JToggleButton BtnGuardarCambios;
     private javax.swing.JPanel PanelBotones;
     private javax.swing.JPanel PanelBuscar;
     private javax.swing.JPanel PanelInformacion;

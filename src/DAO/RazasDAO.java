@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  * @author karen
  */
 public class RazasDAO {
+    Connection con;
     public List<MRazas> devolverRazas(List<MTiposMascotas> listaTiposMacotas, String tipoMascota){
         Connection con = ConexionBD.conectar();
         MRazas raza = null;
@@ -52,5 +53,31 @@ public class RazasDAO {
             }
         }
         return null;
+    }
+    public void crearRaza(int id, String nombre){
+     if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        try {
+            String sql = "insert into vet_razas values (v_ra_seq.nextval, ?,?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombre);
+            stmt.setInt(2, id);
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException ex) {
+        }
+    }
+    public void eliminarRaza( String nombre){
+     if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        try {
+            String sql = "DELETE from vet_razas where raza_nombre=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

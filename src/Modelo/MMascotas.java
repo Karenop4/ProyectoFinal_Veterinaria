@@ -36,6 +36,4 @@ public class MMascotas {
     public MRazas getMascota() {
         return mascota;
     }
-    
-    
 }

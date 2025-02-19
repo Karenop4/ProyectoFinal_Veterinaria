@@ -20,7 +20,11 @@ public class CPersonas {
         this.personaDAO = personaDAO;
     }
     
-    public MPersonas buscarCliente(String cedula, char CoE){
-        return personaDAO.buscarClientePorCedula(cedula, CoE);
-    }
+    public MPersonas buscarClienteCedula(String cedula, char CoE){
+        return personaDAO.buscarPersonaPorCedula(cedula, CoE);
+    } 
+    public MPersonas buscarClienteID(String id, char CoE){
+        int id1=Integer.parseInt(id);
+        return personaDAO.buscarPersonaPorID(id1, CoE);
+    } 
 }

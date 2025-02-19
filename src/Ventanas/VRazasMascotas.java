@@ -12,29 +12,33 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
  * @author karen
  */
 public class VRazasMascotas extends javax.swing.JFrame {
+
     private VEmpleado v;
     private CTiposMascotas cTipoMascotas;
     private CRazas cRazas;
     private List<MTiposMascotas> listaTiposMascotas;
-    private List <MRazas> listaRazasBD;
+    private List<MRazas> listaRazasBD;
+
     /**
      * Creates new form VRazasMascotas
      */
     public VRazasMascotas(VEmpleado v, CTiposMascotas cTipoMascotas, CRazas cRazas) {
         initComponents();
-        this.v =v;
+        this.v = v;
         ImageIcon icono = new ImageIcon("src\\imagenes\\animals.png");
         setIconImage(icono.getImage());
-        
+
         this.cRazas = cRazas;
         this.cTipoMascotas = cTipoMascotas;
-        
+
         listaTiposMascotas = new ArrayList<>();
         listarTiposMascotas();
     }
@@ -50,21 +54,18 @@ public class VRazasMascotas extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtRaza = new javax.swing.JTextField();
-        btnBuscarRaza = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaRazas = new javax.swing.JList<>();
-        btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtTipoAnimal = new javax.swing.JTextField();
-        btnBuscarTipo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaTipo = new javax.swing.JList<>();
         btnAgregar = new javax.swing.JButton();
-        btnActualizar1 = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
+        btnAgregar1 = new javax.swing.JButton();
+        btnEliminar2 = new javax.swing.JButton();
+        TxtTipo = new javax.swing.JTextField();
+        TxtRaza = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Razas de Animales");
@@ -76,18 +77,15 @@ public class VRazasMascotas extends javax.swing.JFrame {
 
         jLabel1.setText("Raza:");
 
-        btnBuscarRaza.setText("Buscar");
-
-        listaRazas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listaRazas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaRazas);
 
-        btnActualizar.setText("Actualizar");
-
         btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,13 +96,7 @@ public class VRazasMascotas extends javax.swing.JFrame {
 
         jLabel2.setText("Tipo:");
 
-        btnBuscarTipo.setText("Buscar");
-
-        listaTipo.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listaTipo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaTipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaTipoMouseClicked(evt);
@@ -113,86 +105,93 @@ public class VRazasMascotas extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listaTipo);
 
         btnAgregar.setText("Agregar");
-        btnAgregar.setEnabled(false);
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
 
-        btnActualizar1.setText("Actualizar");
+        btnAgregar1.setText("Agregar");
+        btnAgregar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregar1MouseClicked(evt);
+            }
+        });
 
-        btnEliminar1.setText("Eliminar");
+        btnEliminar2.setText("Eliminar");
+        btnEliminar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminar2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(178, 178, 178))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(txtTipoAnimal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarTipo)
-                            .addComponent(btnActualizar1)
-                            .addComponent(btnEliminar1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnSalir))
+                                .addGap(1, 1, 1)
+                                .addComponent(TxtRaza, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnActualizar)
-                                    .addComponent(btnEliminar)
-                                    .addComponent(btnBuscarRaza)
-                                    .addComponent(btnAgregar))
-                                .addGap(0, 14, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TxtTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAgregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar1)
                     .addComponent(jLabel2)
-                    .addComponent(txtTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarTipo))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarRaza))
+                    .addComponent(btnEliminar2)
+                    .addComponent(TxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(TxtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnSalir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(71, 71, 71))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregar)
+                            .addComponent(btnEliminar))
+                        .addGap(0, 7, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,7 +205,7 @@ public class VRazasMascotas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -224,44 +223,103 @@ public class VRazasMascotas extends javax.swing.JFrame {
     private void listaTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaTipoMouseClicked
         listaRazasBD = new ArrayList<>();
         listaRazasBD = cRazas.listarRazasPorTipo(listaTiposMascotas, listaTipo.getSelectedValue().toString());
-        
+
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (MRazas elemento : listaRazasBD) {
             modelo.addElement(elemento.getRaza_nombre());
         }
-        
+
         listaRazas.setModel(modelo);
     }//GEN-LAST:event_listaTipoMouseClicked
+
+    private void btnAgregar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregar1MouseClicked
+        if (TxtTipo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre.");
+        } else {
+            cTipoMascotas.crearTipoMascota(TxtTipo.getText());
+            actualizar();
+        }
+    }//GEN-LAST:event_btnAgregar1MouseClicked
+
+    private void btnEliminar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar2MouseClicked
+        int c = JOptionPane.showConfirmDialog(this, "Si elimina un tipo de animal también eliminará las mascotas asociadas a este tipo! ¿Seguro que desea elimnarlo?", "Advertencia", YES_NO_OPTION);
+        switch (c) {
+            case 0:
+                if (listaTipo.getSelectedValue() == null) {
+                    JOptionPane.showMessageDialog(this, "Seleccione un tipo a eliminar.");
+                } else {
+                    cTipoMascotas.eliminarTipoMascota(listaTipo.getSelectedValue());
+                    actualizar();
+                }
+                break;
+            case 1:
+                break;
+        }
+    }//GEN-LAST:event_btnEliminar2MouseClicked
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        if (TxtRaza.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre.");
+        } else {
+            if (listaTipo.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione un tipo.");
+            } else {
+                String nombre = listaTipo.getSelectedValue();
+                int codigo = cTipoMascotas.verCodigoTipo(nombre);
+                cRazas.crearRaza(codigo, TxtRaza.getText());
+                actualizar();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int c = JOptionPane.showConfirmDialog(this, "Si elimina un tipo de animal también eliminará las mascotas asociadas a este tipo! ¿Seguro que desea elimnarlo?", "Advertencia", YES_NO_OPTION);
+        switch (c) {
+            case 0:
+                if (listaRazas.getSelectedValue() == null) {
+                    JOptionPane.showMessageDialog(this, "Seleccione una raza a eliminar.");
+                } else {
+                    cRazas.eliminarRaza(listaRazas.getSelectedValue());
+                    actualizar();
+                }
+                break;
+            case 1:
+                break;
+        }
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    
-    public void listarTiposMascotas(){
+    public void listarTiposMascotas() {
         listaTiposMascotas = cTipoMascotas.listarTiposMascotas();
-        
+
         DefaultListModel<String> modelo = new DefaultListModel<>();
         for (MTiposMascotas elemento : listaTiposMascotas) {
             modelo.addElement(elemento.getTipoM_nombre());
         }
-        
+
         listaTipo.setModel(modelo);
     }
-    
-    public void salir(){
+
+    public void actualizar() {
+        listarTiposMascotas();
+
+    }
+
+    public void salir() {
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnActualizar1;
+    private javax.swing.JTextField TxtRaza;
+    private javax.swing.JTextField TxtTipo;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnBuscarRaza;
-    private javax.swing.JButton btnBuscarTipo;
+    private javax.swing.JButton btnAgregar1;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -270,7 +328,5 @@ public class VRazasMascotas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> listaRazas;
     private javax.swing.JList<String> listaTipo;
-    private javax.swing.JTextField txtRaza;
-    private javax.swing.JTextField txtTipoAnimal;
     // End of variables declaration//GEN-END:variables
 }

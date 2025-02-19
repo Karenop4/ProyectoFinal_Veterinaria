@@ -231,7 +231,7 @@ public class VMascotas extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        MPersonas cliente = cPersonas.buscarCliente(txtCedulaCliente.getText(), 'C');
+        MPersonas cliente = cPersonas.buscarClienteCedula(txtCedulaCliente.getText(), 'C');
         txtNombreCliente.setText(cliente.getPer_nombre() + " " + cliente.getPer_apellido());
         List<MMascotas> lista = new ArrayList<>();
         lista = cMascotas.listarMascotasCliente(cliente);

@@ -4,13 +4,13 @@
  */
 package Ventanas;
 
-import Clases.Busquedas;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Controlador.CPersonas;
+import DAO.PersonasDAO;
 import Modelo.MPersonas;
 
 /**
@@ -18,11 +18,11 @@ import Modelo.MPersonas;
  * @author USER
  */
 public class VCliente extends javax.swing.JFrame {
-    Busquedas b=new Busquedas();
-    private VEmpleado v;
-    private VRegistro VRegistro;
-    
-    CPersonas persona;
+    //Busquedas b=new Busquedas();
+    VEmpleado v;
+    VRegistro VRegistro=new VRegistro(this);
+    PersonasDAO pDAO=new PersonasDAO();
+    CPersonas persona = new CPersonas(pDAO);
     /**
      * Creates new form VClientes
      */
@@ -247,7 +247,7 @@ public class VCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtCedulaMouseClicked
 
     private void BtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseClicked
-        if(b.validarCliente(TxtCedula.getText())){
+        /*if(b.validarCliente(TxtCedula.getText())){
             PanelInformacion.setEnabled(true);
             estadoBotones(true);
         }    
@@ -255,7 +255,7 @@ public class VCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido registrado.");
             BtnAgregar.setEnabled(true);
         }
-        limpiarCedula(TxtCedula);   
+        limpiarCedula(TxtCedula);  */ 
     }//GEN-LAST:event_BtnBuscarMouseClicked
 
     private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
@@ -268,7 +268,6 @@ public class VCliente extends javax.swing.JFrame {
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
         this.setEnabled(false);
-        VRegistro=new VRegistro(this);
         VRegistro.setLocationRelativeTo(null);
         VRegistro.setVisible(true);
     }//GEN-LAST:event_BtnAgregarMouseClicked
@@ -276,7 +275,7 @@ public class VCliente extends javax.swing.JFrame {
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         String celdula = TxtCedula.getText();
         char CoE = 'C';
-        MPersonas cliente = persona.buscarCliente(celdula, CoE);
+        MPersonas cliente = persona.buscarClienteCedula(celdula, CoE);
         
         if(cliente != null){
             TxtAreaInfoCliente.setText(

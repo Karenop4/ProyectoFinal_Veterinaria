@@ -20,4 +20,7 @@ public class CUsuarios {
     public String buscarUsuario(String nombreUsuario, String contrasenia){
         return usuariosDAO.buscarUsuario(nombreUsuario, contrasenia);
     }
+    public boolean crearUsuario(String usr,String contr, char tipo, int id){
+        return usuariosDAO.crearUsuario(usr, contr,tipo,id);
+    }
 }

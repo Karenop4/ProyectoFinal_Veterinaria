@@ -44,6 +44,11 @@ public class MPersonas {
         
         this.per_estado = per_estado;
     }
+    public MPersonas(int per_id, String per_nombre, String per_apellido){
+        this.per_id=per_id;
+        this.per_nombre=per_nombre;
+        this.per_apellido=per_apellido;
+    }
 
     public int getPer_id() {
         return per_id;
@@ -83,7 +88,5 @@ public class MPersonas {
 
     public char getPer_estado() {
         return per_estado;
-    }
-
-    
+    }  
 }

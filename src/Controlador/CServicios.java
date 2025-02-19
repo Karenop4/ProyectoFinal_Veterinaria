@@ -5,16 +5,29 @@
 package Controlador;
 
 import DAO.ServiciosDAO;
+import Modelo.MServicios;
+import javax.swing.JRootPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author karen
  */
 public class CServicios {
-    private ServiciosDAO serviciosDAO;
-
+    ServiciosDAO sDAO=new ServiciosDAO();
     public CServicios(ServiciosDAO serviciosDAO) {
-        this.serviciosDAO = serviciosDAO;
+        this.sDAO = serviciosDAO;
     }
-    
+    public DefaultTableModel listarServicios(){
+        return sDAO.listarServicios();
+    }
+    public MServicios listarServicio(String codigo, MServicios servicio){
+        return sDAO.listarServicio(codigo, servicio);
+    }
+    public void eliminarServicio(String codigo, MServicios servicio, JRootPane r){
+        sDAO.eliminarServicio(codigo, servicio, r);
+    }
+    public void crearServicio( String nombre, int precio, char iva){
+        sDAO.crearServicio(nombre, precio, iva);
+    }
 }

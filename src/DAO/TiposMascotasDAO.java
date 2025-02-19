@@ -4,9 +4,9 @@
  */
 package DAO;
 
+
 import Modelo.MTiposMascotas;
 import java.util.List;
-import DAO.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,18 +20,21 @@ import java.util.logging.Logger;
  * @author karen
  */
 public class TiposMascotasDAO {
-    public List<MTiposMascotas> listarTiposMascotas(){
+
+    Connection con;
+
+    public List<MTiposMascotas> listarTiposMascotas() {
         Connection con = ConexionBD.conectar();
         MTiposMascotas tipo = null;
         List<MTiposMascotas> listaTipos = new ArrayList<>();
-        
-        if(con != null){
+
+        if (con != null) {
             try {
                 String sql = "SELECT * FROM vet_tiposmascotas";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery();
-                
-                while(rs.next()){
+
+                while (rs.next()) {
                     tipo = new MTiposMascotas(rs.getInt("tipoM_id"), rs.getString("tipoM_nombre"));
                     listaTipos.add(tipo);
                 }
@@ -41,5 +44,49 @@ public class TiposMascotasDAO {
             }
         }
         return null;
+    }
+
+    public void crearTipo(String nombre) {
+        if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        try {
+            String sql = "insert into vet_tiposmascotas values (v_tmas_seq.nextval, ?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException ex) {
+           
+        }
+    }
+    public void eliminarTipo(String nombre) {
+        if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        try {
+            String sql = "DELETE from vet_tiposmascotas where tipom_nombre=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public int verCodigo(String nombre){
+        if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        try {
+            String sql = "select tipom_id from vet_tiposmascotas where tipom_nombre=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nombre);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            return -1;
+        }
+        return -1;
     }
 }

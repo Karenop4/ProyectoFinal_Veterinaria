@@ -4,22 +4,37 @@
  */
 package Ventanas;
 
+import Controlador.CCitas;
+import Controlador.CPersonas;
+import DAO.CitasDAO;
+import DAO.PersonasDAO;
+import Modelo.MPersonas;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author karen
  */
 public class VCitas extends javax.swing.JFrame {
-    private VCrearCita VcrearCitas;
-    private VEmpleado v;
+
+    PersonasDAO pDAO = new PersonasDAO();
+    CPersonas cper = new CPersonas(pDAO);
+    VCrearCita VcrearCitas = new VCrearCita(this);
+    VEmpleado v;
+    CitasDAO cDAO = new CitasDAO();
+    CCitas ccitas = new CCitas(cDAO);
+
     /**
      * Creates new form VCitas
      */
     public VCitas(VEmpleado v) {
         initComponents();
         this.v = v;
-        
+
         ImageIcon icono = new ImageIcon("src\\imagenes\\reserve.png");
         setIconImage(icono.getImage());
     }
@@ -42,7 +57,6 @@ public class VCitas extends javax.swing.JFrame {
         btnBuscarCliente = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
-        btnSeleccionarFecha = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnIngresarCita = new javax.swing.JButton();
         btnEliminarCita = new javax.swing.JButton();
@@ -62,15 +76,20 @@ public class VCitas extends javax.swing.JFrame {
 
         jLabel1.setText("Fecha:");
 
+        fechaCitas.setDateFormatString("yyyy/MM/dd");
+
         jLabel2.setText("C.I Cliente:");
 
         btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarClienteMouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Nombre:");
 
         txtNombreCliente.setEditable(false);
-
-        btnSeleccionarFecha.setText("Seleccionar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -82,37 +101,33 @@ public class VCitas extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fechaCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBuscarCliente))
-                    .addComponent(txtNombreCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fechaCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSeleccionarFecha)
-                .addGap(25, 25, 25))
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fechaCitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionarFecha)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarCliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(btnBuscarCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -126,6 +141,11 @@ public class VCitas extends javax.swing.JFrame {
         });
 
         btnEliminarCita.setText("Eliminar Cita");
+        btnEliminarCita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarCitaMouseClicked(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -136,13 +156,10 @@ public class VCitas extends javax.swing.JFrame {
 
         tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Cliente", "Veterinario", "Mascota", "Tipo", "Fecha", "Hora"
+                "Cliente", "Veterinario", "Mascota", "Estado", "Fecha", "Hora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -217,9 +234,9 @@ public class VCitas extends javax.swing.JFrame {
 
     private void btnIngresarCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarCitaMouseClicked
         this.setEnabled(false);
-        VcrearCitas = new VCrearCita(this);
         VcrearCitas.setLocationRelativeTo(null);
         VcrearCitas.setVisible(true);
+        VcrearCitas.actualizarV();
     }//GEN-LAST:event_btnIngresarCitaMouseClicked
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
@@ -229,8 +246,45 @@ public class VCitas extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
-    
-    public void salir(){
+
+    private void btnBuscarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteMouseClicked
+        String cedula = txtCedulaCliente.getText();
+        MPersonas per = cper.buscarClienteCedula(cedula, 'C');
+        if (per == null) {
+            JOptionPane.showMessageDialog(rootPane, "No se ha encontrado el cliente.");
+        } else {
+            txtNombreCliente.setText(per.getPer_nombre() + " " + per.getPer_apellido());
+            if (fechaCitas.getDate() == null || cedula == null) {
+                JOptionPane.showMessageDialog(rootPane, "Ingrese un numero de cedula y una fecha.");
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date newDate = new Date();
+                String fecha = dateFormat.format(fechaCitas.getDate());
+                tablaCitas.setModel(ccitas.consultarCitas(cedula, fecha));
+
+            }
+        }
+    }//GEN-LAST:event_btnBuscarClienteMouseClicked
+
+
+    private void btnEliminarCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarCitaMouseClicked
+        if (tablaCitas.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita a cancelar.");
+        } else {
+            int id = Integer.valueOf(tablaCitas.getValueAt(tablaCitas.getSelectedRow(), 0).toString());
+            if (ccitas.eliminarCitas(id) == true) {
+                JOptionPane.showMessageDialog(this, "Cita Cancelada.");
+                String cedula = txtCedulaCliente.getText();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date newDate = new Date();
+                String fecha = dateFormat.format(fechaCitas.getDate());
+                tablaCitas.setModel(ccitas.consultarCitas(cedula, fecha));
+
+            }
+        }
+    }//GEN-LAST:event_btnEliminarCitaMouseClicked
+
+    public void salir() {
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
@@ -238,14 +292,13 @@ public class VCitas extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnEliminarCita;
     private javax.swing.JButton btnIngresarCita;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSeleccionarFecha;
     private com.toedter.calendar.JDateChooser fechaCitas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

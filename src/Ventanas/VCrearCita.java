@@ -4,11 +4,27 @@
  */
 package Ventanas;
 
+import Controlador.CCitas;
+import Controlador.CEmpleados;
+import Controlador.CMascotas;
+import Controlador.CPersonas;
+import DAO.CitasDAO;
+import DAO.MascotasDAO;
+import DAO.PersonasDAO;
+import Modelo.MMascotas;
+import Modelo.MPersonas;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
@@ -17,31 +33,39 @@ import javax.swing.text.NumberFormatter;
  * @author karen
  */
 public class VCrearCita extends javax.swing.JFrame {
-    private VCitas v;
+
+    VCitas v;
+    PersonasDAO pDAO = new PersonasDAO();
+    CPersonas cper = new CPersonas(pDAO);
+    CEmpleados cemp = new CEmpleados(pDAO);
+    MascotasDAO mDAO = new MascotasDAO();
+    CMascotas cmas = new CMascotas(mDAO);
+    CitasDAO cDAO = new CitasDAO();
+    CCitas ccit = new CCitas(cDAO);
+
     /**
      * Creates new form VCrearCita
      */
     public VCrearCita(VCitas v) {
         initComponents();
         this.v = v;
-        
+
         ImageIcon icono = new ImageIcon("src\\imagenes\\reserve.png");
         setIconImage(icono.getImage());
-        
-        
+
         int valorInicial = 8;  // Valor por defecto
         int valorMinimo = 8;   // Límite inferior
-        int valorMaximo = 20;  // Límite superior
+        int valorMaximo = 19;  // Límite superior
         int incremento = 1;   // Paso al incrementar o decrementar
         SpinnerNumberModel modelo = new SpinnerNumberModel(valorInicial, valorMinimo, valorMaximo, incremento);
         horaCita.setModel(modelo);
-        
+
         valorInicial = 0;  // Valor por defecto
         valorMinimo = 0;   // Límite inferior
         valorMaximo = 59;  // Límite superior
         SpinnerNumberModel modelo2 = new SpinnerNumberModel(valorInicial, valorMinimo, valorMaximo, incremento);
         minutosCita.setModel(modelo2);
-        
+
         DecimalFormat formato = new DecimalFormat("00");
         NumberFormatter formateador = new NumberFormatter(formato);
         formateador.setMinimum(0);  // Límite inferior
@@ -74,10 +98,7 @@ public class VCrearCita extends javax.swing.JFrame {
         tablaMascotas = new javax.swing.JTable();
         btnSeleccionarMascota = new javax.swing.JButton();
         panelVeterinario = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCedulaVeterinario = new javax.swing.JTextField();
-        btnBuscarVeterinario = new javax.swing.JButton();
         txtNombreVeterinario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         fechaCita = new com.toedter.calendar.JDateChooser();
@@ -86,6 +107,8 @@ public class VCrearCita extends javax.swing.JFrame {
         minutosCita = new javax.swing.JSpinner();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TableVet = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -103,21 +126,39 @@ public class VCrearCita extends javax.swing.JFrame {
         txtNombreCliente.setEditable(false);
 
         btnBuscarCliente.setText("Buscar");
+        btnBuscarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarClienteMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Seleccionar mascota");
 
         tablaMascotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Mascota", "Tipo"
+                "ID", "Mascota", "Tipo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaMascotas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaMascotas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaMascotas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaMascotas);
+        if (tablaMascotas.getColumnModel().getColumnCount() > 0) {
+            tablaMascotas.getColumnModel().getColumn(0).setResizable(false);
+            tablaMascotas.getColumnModel().getColumn(1).setResizable(false);
+            tablaMascotas.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnSeleccionarMascota.setText("Seleccionar");
 
@@ -130,7 +171,7 @@ public class VCrearCita extends javax.swing.JFrame {
                 .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelClienteLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSeleccionarMascota))
                     .addComponent(jLabel2)
                     .addGroup(panelClienteLayout.createSequentialGroup()
@@ -138,12 +179,12 @@ public class VCrearCita extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelClienteLayout.createSequentialGroup()
-                                .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCedulaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscarCliente))
-                            .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelClienteLayout.setVerticalGroup(
@@ -160,23 +201,16 @@ public class VCrearCita extends javax.swing.JFrame {
                     .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelClienteLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelClienteLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btnSeleccionarMascota)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarMascota))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelVeterinario.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Veterinario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jLabel4.setText("C:.I Veterinario:");
-
         jLabel5.setText("Nombre:");
-
-        btnBuscarVeterinario.setText("Buscar");
 
         txtNombreVeterinario.setEditable(false);
 
@@ -189,18 +223,13 @@ public class VCrearCita extends javax.swing.JFrame {
         panelVeterinarioLayout.setHorizontalGroup(
             panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVeterinarioLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelVeterinarioLayout.createSequentialGroup()
-                        .addComponent(txtCedulaVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(btnBuscarVeterinario))
                     .addComponent(txtNombreVeterinario)
                     .addGroup(panelVeterinarioLayout.createSequentialGroup()
                         .addGroup(panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,12 +244,7 @@ public class VCrearCita extends javax.swing.JFrame {
         panelVeterinarioLayout.setVerticalGroup(
             panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelVeterinarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtCedulaVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarVeterinario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(panelVeterinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtNombreVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,10 +257,15 @@ public class VCrearCita extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(minutosCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(horaCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistrarMouseClicked(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,35 +274,61 @@ public class VCrearCita extends javax.swing.JFrame {
             }
         });
 
+        TableVet.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombres"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TableVet.getTableHeader().setReorderingAllowed(false);
+        TableVet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableVetMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TableVet);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(btnRegistrar)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnCancelar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(89, 89, 89)
+                        .addComponent(btnRegistrar)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnCancelar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelVeterinario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
@@ -302,19 +357,89 @@ public class VCrearCita extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
-    
-    public void salir(){
+
+    private void btnBuscarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarClienteMouseClicked
+        String cedula = txtCedulaCliente.getText();
+        MPersonas per = cper.buscarClienteCedula(cedula, 'C');
+        if (per == null) {
+            JOptionPane.showMessageDialog(rootPane, "No se ha encontrado el cliente.");
+        } else {
+            txtNombreCliente.setText(per.getPer_nombre() + " " + per.getPer_apellido());
+            List<MMascotas> listamasc = cmas.listarMascotasCliente(per);
+            DefaultTableModel modelo = (DefaultTableModel) tablaMascotas.getModel();
+            modelo.setNumRows(0);
+            for (MMascotas m : listamasc) {
+                Object[] fila = new Object[3];
+                fila[0] = m.getMasc_id();
+                fila[1] = m.getMasc_nombre();
+                fila[2] = m.getMascota().getTipo_mascota().getTipoM_nombre();
+                modelo.addRow(fila);
+            }
+            tablaMascotas.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnBuscarClienteMouseClicked
+
+    private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
+
+        if (fechaCita.getDate() == null || tablaMascotas.getSelectedRow() == -1 || "".equals(txtNombreVeterinario.getText()) || "".equals(txtNombreCliente.getText())) {
+            JOptionPane.showMessageDialog(this, "Seleccione todos los items necesarios: \nMascota\nVeterinario\nFecha y hora", "Campos necesarios", INFORMATION_MESSAGE);
+        } else {
+            if ((int) horaCita.getValue() > 19 || (int) horaCita.getValue() < 8) {
+                JOptionPane.showMessageDialog(this, "Horarios de atencion: 8am a 8pm");
+            } else if (((int) horaCita.getValue() == 19 && (int) minutosCita.getValue() == 00) || ((int) horaCita.getValue() < 19 && (int) horaCita.getValue() >= 8)) {
+                String hora = String.valueOf(horaCita.getValue());
+                String minutos = String.valueOf(minutosCita.getValue());
+                MPersonas vet=cper.buscarClienteID(TableVet.getValueAt(TableVet.getSelectedRow(), 0).toString(), 'E');
+                String cedula=vet.getPer_cedula();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Date newDate = new Date();
+                String fecha = dateFormat.format(fechaCita.getDate());
+
+                int codigoMasc = (int) tablaMascotas.getValueAt(tablaMascotas.getSelectedRow(), 0);
+                MPersonas per = cper.buscarClienteCedula(cedula, 'E');
+                if (per == null) {
+                    JOptionPane.showMessageDialog(this, "Numero de cedula incorrecto");
+                } else {
+                    String conf = ccit.consultarCitasHora(per.getPer_id(), fecha, hora, minutos);
+                    if (conf == null) {
+                        if (ccit.crearCitas(per.getPer_id(), codigoMasc, fecha, hora, minutos) == true) {
+                            JOptionPane.showMessageDialog(this, "Cita agendada correctamente");
+                            salir();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Cita Activa en el horario:" + conf, "Horario no disponible", INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnRegistrarMouseClicked
+
+    private void TableVetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableVetMouseClicked
+       if(TableVet.getSelectedRow()!=-1){
+        String n=TableVet.getValueAt(TableVet.getSelectedRow(), 1).toString();
+        txtNombreVeterinario.setText(n);
+       }
+    }//GEN-LAST:event_TableVetMouseClicked
+
+    public void salir() {
         this.setVisible(false);
         v.setEnabled(true);
         v.setVisible(true);
+    }
+
+    public void actualizarV() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = cemp.listarVeterinarios();
+        TableVet.setModel(modelo);
+        txtNombreVeterinario.setText("");
     }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableVet;
     private javax.swing.JButton btnBuscarCliente;
-    private javax.swing.JButton btnBuscarVeterinario;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSeleccionarMascota;
@@ -323,18 +448,17 @@ public class VCrearCita extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner minutosCita;
     private javax.swing.JPanel panelCliente;
     private javax.swing.JPanel panelVeterinario;
     private javax.swing.JTable tablaMascotas;
     private javax.swing.JTextField txtCedulaCliente;
-    private javax.swing.JTextField txtCedulaVeterinario;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreVeterinario;
     // End of variables declaration//GEN-END:variables

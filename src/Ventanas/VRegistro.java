@@ -4,42 +4,53 @@
  */
 package Ventanas;
 
+import Controlador.CEmpleados;
+import Controlador.CPersonas;
+import Controlador.CUsuarios;
+import DAO.PersonasDAO;
+import DAO.UsuariosDAO;
+import Modelo.MPersonas;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author karen
  */
 public class VRegistro extends javax.swing.JFrame {
-    
+
+    PersonasDAO pDAO = new PersonasDAO();
+    CEmpleados cemp = new CEmpleados(pDAO);
+    UsuariosDAO uDAO = new UsuariosDAO();
+    CUsuarios cus = new CUsuarios(uDAO);
     private String tipoRegistro = " "; //E para registrar empleado, C para registrar cliente
     /**
      * Creates new form VRegistro
      */
-    private VCliente vCliente;
-    private VListarEmpleados vEmpleado;
-    
+    VCliente vCliente;
+    VListarEmpleados vEmpleado;
+
     public VRegistro(VCliente v) {
         initComponents();
         this.vCliente = v;
         tipoRegistro = "C";
-        
-        if(tipoRegistro == "C"){
+
+        if (tipoRegistro == "C") {
             panelDetalleEmp.setVisible(false);
         }
-        
+
         agregarIcono();
     }
-    
+
     public VRegistro(VListarEmpleados v) {
         initComponents();
         this.vEmpleado = v;
         tipoRegistro = "E";
-        
+
         agregarIcono();
     }
-    
-    private void agregarIcono(){
+
+    private void agregarIcono() {
         ImageIcon icono = new ImageIcon("src\\imagenes\\add.png");
         setIconImage(icono.getImage());
     }
@@ -63,12 +74,12 @@ public class VRegistro extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        txtApellido = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
+        TxC = new javax.swing.JTextField();
+        TxN = new javax.swing.JTextField();
+        TxA = new javax.swing.JTextField();
+        TxD = new javax.swing.JTextField();
+        TxT = new javax.swing.JTextField();
+        TxE = new javax.swing.JTextField();
         panelDetalleEmp = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         rdAtenciónCliente = new javax.swing.JRadioButton();
@@ -79,6 +90,11 @@ public class VRegistro extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        PanelCuenta = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        TxtUsuario2 = new javax.swing.JTextField();
+        TxtContrasenia2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registro");
@@ -94,9 +110,9 @@ public class VRegistro extends javax.swing.JFrame {
 
         jLabel1.setText("Cédula:");
 
-        jLabel2.setText("Nombres:");
+        jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Apellidos:");
+        jLabel3.setText("Apellido:");
 
         jLabel4.setText("Dirección:");
 
@@ -123,12 +139,12 @@ public class VRegistro extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCedula)
-                    .addComponent(txtNombre)
-                    .addComponent(txtApellido)
-                    .addComponent(txtDireccion)
-                    .addComponent(txtTelefono)
-                    .addComponent(txtEmail))
+                    .addComponent(TxC)
+                    .addComponent(TxN)
+                    .addComponent(TxA)
+                    .addComponent(TxD)
+                    .addComponent(TxT)
+                    .addComponent(TxE))
                 .addContainerGap())
         );
         panelRegistroLayout.setVerticalGroup(
@@ -137,27 +153,27 @@ public class VRegistro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -168,9 +184,19 @@ public class VRegistro extends javax.swing.JFrame {
         tipoEmpleado.add(rdAtenciónCliente);
         rdAtenciónCliente.setSelected(true);
         rdAtenciónCliente.setText("Atención al Cliente");
+        rdAtenciónCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdAtenciónClienteMouseClicked(evt);
+            }
+        });
 
         tipoEmpleado.add(rdVeterinario);
         rdVeterinario.setText("Veterinario");
+        rdVeterinario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rdVeterinarioMouseClicked(evt);
+            }
+        });
 
         jLabel8.setText("¿Tiene permisos de Administrador?");
 
@@ -236,6 +262,11 @@ public class VRegistro extends javax.swing.JFrame {
         );
 
         jButton1.setText("Registrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,25 +275,61 @@ public class VRegistro extends javax.swing.JFrame {
             }
         });
 
+        PanelCuenta.setBorder(javax.swing.BorderFactory.createTitledBorder("Cuenta"));
+
+        jLabel13.setText("Usuario:");
+
+        jLabel14.setText("Contraseña:");
+
+        javax.swing.GroupLayout PanelCuentaLayout = new javax.swing.GroupLayout(PanelCuenta);
+        PanelCuenta.setLayout(PanelCuentaLayout);
+        PanelCuentaLayout.setHorizontalGroup(
+            PanelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCuentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(TxtUsuario2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtContrasenia2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelCuentaLayout.setVerticalGroup(
+            PanelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCuentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtContrasenia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
+                    .addComponent(PanelCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -274,18 +341,18 @@ public class VRegistro extends javax.swing.JFrame {
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -299,12 +366,75 @@ public class VRegistro extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_formWindowClosing
 
-    public void salir(){
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (!"".equals(TxC.getText()) && !"".equals(TxN.getText()) && !"".equals(TxA.getText()) && !"".equals(TxD.getText()) && !"".equals(TxT.getText()) && !"".equals(TxE.getText())) {
+            String cedula = TxC.getText();
+            String nombre = TxN.getText();
+            String apellido = TxA.getText();
+            String dir = TxD.getText();
+            String tel = TxT.getText();
+            String email = TxE.getText();
+            String usuario;
+            String contr;
+            char AoV = 'x';
+            char tipo = 'x';
+            if (rdAtenciónCliente.isSelected()) {
+                if (rdPermisoSi.isSelected()) {
+                    tipo = 'A';
+                } else {
+                    tipo = 'G';
+                }
+                AoV = 'A';
+            } else {
+                AoV = 'V';
+            }
+            if (cemp.listarEmpleado(cedula, 'E') == null) {
+                if (rdAtenciónCliente.isSelected()) {
+                    if (!"".equals(TxtUsuario2.getText()) && TxtContrasenia2.getText().length() > 5) {
+                        cemp.crearEmpleado(cedula, nombre, apellido, dir, tel, email, AoV);
+                        usuario = TxtUsuario2.getText();
+                        contr = TxtContrasenia2.getText();
+                        MPersonas per = cemp.listarEmpleado(cedula, 'E');
+                        int id = per.getPer_id();
+                        cus.crearUsuario(usuario, contr, tipo, id);
+                        JOptionPane.showMessageDialog(this, "Empleado agregado con exito");
+                        salir();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Datos de entrada invalidos: \nContraseña debe tener al menos 5 caracteres");
+                    }
+                } else if (rdVeterinario.isSelected()) {
+                    cemp.crearEmpleado(cedula, nombre, apellido, dir, tel, email, AoV);
+                    MPersonas per = cemp.listarEmpleado(cedula, 'E');
+                    int id = per.getPer_id();
+                    JOptionPane.showMessageDialog(this, "Empleado agregado con exito");
+                    salir();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Registros duplicados");
+            }
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void rdAtenciónClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAtenciónClienteMouseClicked
+        TxtUsuario2.setEnabled(true);
+        TxtContrasenia2.setEnabled(true);
+        rdPermisoSi.setEnabled(true);
+        rdPermisoNo.setEnabled(true);
+    }//GEN-LAST:event_rdAtenciónClienteMouseClicked
+
+    private void rdVeterinarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdVeterinarioMouseClicked
+        TxtUsuario2.setEnabled(false);
+        TxtContrasenia2.setEnabled(false);
+        rdPermisoSi.setEnabled(false);
+        rdPermisoNo.setEnabled(false);
+    }//GEN-LAST:event_rdVeterinarioMouseClicked
+
+    public void salir() {
         this.setVisible(false);
-        if(tipoRegistro == "E"){
+        if (tipoRegistro == "E") {
             vEmpleado.setEnabled(true);
             vEmpleado.setVisible(true);
-        }else if(tipoRegistro == "C"){
+        } else if (tipoRegistro == "C") {
             vCliente.setEnabled(true);
             vCliente.setVisible(true);
         }
@@ -315,9 +445,28 @@ public class VRegistro extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelCuenta;
+    private javax.swing.JPanel PanelUsuario;
+    private javax.swing.JPanel PanelUsuario1;
+    private javax.swing.JPanel PanelUsuario2;
+    private javax.swing.JPanel PanelUsuario3;
+    private javax.swing.JPanel PanelUsuario4;
+    private javax.swing.JTextField TxA;
+    private javax.swing.JTextField TxC;
+    private javax.swing.JTextField TxD;
+    private javax.swing.JTextField TxE;
+    private javax.swing.JTextField TxN;
+    private javax.swing.JTextField TxT;
+    private javax.swing.JTextField TxtContrasenia;
+    private javax.swing.JTextField TxtContrasenia2;
+    private javax.swing.JTextField TxtUsuario;
+    private javax.swing.JTextField TxtUsuario2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -325,6 +474,7 @@ public class VRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panelDetalleEmp;
     private javax.swing.JPanel panelPrincipal;
@@ -335,11 +485,5 @@ public class VRegistro extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdPermisoSi;
     private javax.swing.JRadioButton rdVeterinario;
     private javax.swing.ButtonGroup tipoEmpleado;
-    private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

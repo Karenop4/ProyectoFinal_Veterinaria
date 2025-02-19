@@ -22,7 +22,6 @@ public class VEmpleado extends javax.swing.JFrame {
     VFacturacion VFacturacion;
     VListarFacturas VListarFacturas;
     VListarEmpleados VListarEmpleados;
-    VTiposMascotas VTiposMascotas;
     VRazasMascotas VRazasMascotas;
     VCitas VCitas;
     VMascotas VMascotas;
@@ -563,6 +562,7 @@ public class VEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
         vPrincipal.setVisible(true);
         panelPrincipal.setVisible(true);
+        panelPrincipal.setSelectedComponent(panelEmpleado);
         
     }//GEN-LAST:event_BtnCerrarSesionActionPerformed
 
@@ -636,8 +636,7 @@ public class VEmpleado extends javax.swing.JFrame {
      */
     //Para establecer el mensaje y esconder o mostrar las opciones disponibles
     public void setTipo(String tipo){
-        
-        if(tipo.equals("G")){
+        if(tipo.charAt(0)=='G'){
             panelPrincipal.setEnabled(false);
             LblTipo.setText("Usted está registrado como usuario General");
         }

@@ -1,29 +1,31 @@
 ------ELIMINAR TABLAS---------
--- DROP TABLE VET_RAZAS;
--- DROP TABLE VET_CITAS;
--- DROP TABLE VET_MASCOTAS;
--- DROP TABLE VET_TIPOSMASCOTAS;
--- DROP TABLE VET_DETALLES_FAC;
--- DROP TABLE VET_FACTURAS;
--- DROP TABLE VET_SERVICIOS;
--- DROP TABLE VET_USUARIOS;
--- DROP TABLE VET_PERSONAS;
+/*
+DROP TABLE VET_CITAS;
+DROP TABLE VET_DETALLES_FAC;
+DROP TABLE VET_FACTURAS;
+DROP TABLE VET_SERVICIOS;
+DROP TABLE VET_USUARIOS;
+DROP TABLE VET_MASCOTAS;
+DROP TABLE VET_PERSONAS;
+DROP TABLE VET_RAZAS;
+DROP TABLE VET_TIPOSMASCOTAS;
+*/
 
 ----TABLESPACE y CREACION DE USUARIO-------
---/*
---alter session set "_ORACLE_SCRIPT"=TRUE;
---create user admin_vet identified by 1234;
---GRANT DBA TO admin_vet;
---*/
+/*
+alter session set "_ORACLE_SCRIPT"=TRUE;
+create user admin_vet identified by 1234;
+GRANT DBA TO admin_vet;
+*/
 
 
-create tablespace TBS_VET_FINAL datafile 'tbs_vet_final.ora' size 40M online;
-create temporary tablespace TBS_VET_FINAL_TEMP tempfile 'tbs_vet_final_temp.ora' size 5M autoextend on;
-
+--create tablespace TBS_VET_FINAL datafile 'tbs_vet_final.ora' size 40M online;
+--create temporary tablespace TBS_VET_FINAL_TEMP tempfile 'tbs_vet_final_temp.ora' size 5M autoextend on;
+/*
 alter user admin_vet default tablespace TBS_VET_FINAL
 temporary tablespace TBS_VET_FINAL_TEMP
 quota unlimited on TBS_VET_FINAL;
-
+*/
 
 --------------------------------Cración tablas----------------------------------
 CREATE TABLE vet_citas (
@@ -166,7 +168,7 @@ ALTER TABLE vet_personas ADD CONSTRAINT vet_personas_pk PRIMARY KEY ( per_id );
 CREATE TABLE vet_razas (
     raza_id                    NUMBER(5) NOT NULL,
     raza_nombre                VARCHAR2(20) NOT NULL UNIQUE,
-    vet_tiposmascotas_tipom_id NUMBER(5) NOT NULL
+    vet_tiposmascotas_tipom_id NUMBER(5) NOT NULL 
 );
 
 COMMENT ON COLUMN vet_razas.raza_id IS
@@ -272,11 +274,11 @@ ALTER TABLE vet_mascotas
 
 ALTER TABLE vet_mascotas
     ADD CONSTRAINT vet_mascotas_vet_razas_fk FOREIGN KEY ( vet_razas_raza_id )
-        REFERENCES vet_razas ( raza_id );
+        REFERENCES vet_razas ( raza_id ) ON DELETE CASCADE;
 
 ALTER TABLE vet_razas
     ADD CONSTRAINT vet_razas_vet_tiposmascotas_fk FOREIGN KEY ( vet_tiposmascotas_tipom_id )
-        REFERENCES vet_tiposmascotas ( tipom_id );
+        REFERENCES vet_tiposmascotas ( tipom_id ) ON DELETE CASCADE;
 
 ALTER TABLE vet_usuarios
     ADD CONSTRAINT vet_usuarios_vet_personas_fk FOREIGN KEY ( vet_personas_per_id )
@@ -295,15 +297,17 @@ create sequence v_serv_seq start with 1;
 create sequence v_detf_seq start with 1;
 
 --Eliminar sequencias
---drop sequence v_tmas_seq;
---drop sequence v_ra_seq;
---drop sequence v_masc_seq; 
---drop sequence v_per_seq;
---drop sequence v_cit_seq;
---drop sequence v_us_seq;
---drop sequence v_fac_seq;
---drop sequence v_serv_seq;
---drop sequence v_detf_seq;
+/*
+drop sequence v_tmas_seq;
+drop sequence v_ra_seq;
+drop sequence v_masc_seq; 
+drop sequence v_per_seq;
+drop sequence v_cit_seq;
+drop sequence v_us_seq;
+drop sequence v_fac_seq;
+drop sequence v_serv_seq;
+drop sequence v_detf_seq;
+*/
 ------------------------------------------------
 ------------------------------------------------
 -------------------------------Insertar datos-----------------------------------
@@ -322,6 +326,16 @@ insert into vet_razas values(v_ra_seq.nextval,'Labrador',(select tipom_id from v
 insert into vet_razas values(v_ra_seq.nextval,'n/d',(select tipom_id from vet_tiposmascotas where tipom_nombre like 'otro'));
 --SELECT * FROM vet_razas;
 --------------------------------------------------------------------------------
+----------------------------    PERSONAS   -------------------------------------
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0000000000', 'Admin', 'Vet', '-', '0000000000', 'admin@ejemplo.com', 'E', 'A', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0950094508', 'Andrés', 'Encalada', '-', '0983586619', 'andres23102004@gmail.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0150741742', 'Karen', 'Ortiz', '-', '0994441682', 'karen@ejemplo.com', 'C', null, 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124466754', 'Carlos', 'General', '-', '0937162846', 'carlos@ejemplo.com', 'E', 'V', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'1123544634', 'Mateo', 'Suarez', '-', '0987654321', 'mateo@ejemplo.com', 'E', 'A', 'A');
+INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Paula', 'Acevedo', '-', '0981253462', 'paula@ejemplo.com', 'E', 'A', 'I');
+--select * from vet_personas;
+--------------------------------------------------------------------------------
+----------------------------    MASCOTAS   -------------------------------------
 insert into vet_mascotas 
 values (
   v_masc_seq.nextval,
@@ -340,18 +354,8 @@ values (
 
 --select * from vet_mascotas;
 --------------------------------------------------------------------------------
-----------------------------    PERSONAS   -------------------------------------
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0000000000', 'Admin', 'Vet', '-', '0000000000', 'admin@ejemplo.com', 'E', 'A', 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0950094508', 'Andrés', 'Encalada', '-', '0983586619', 'andres23102004@gmail.com', 'C', null, 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0150741742', 'Karen', 'Ortiz', '-', '0994441682', 'karen@ejemplo.com', 'C', null, 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124466754', 'Carlos', 'General', '-', '0937162846', 'carlos@ejemplo.com', 'E', 'V', 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'1123544634', 'Mateo', 'Suarez', '-', '0987654321', 'mateo@ejemplo.com', 'E', 'A', 'A');
-INSERT INTO vet_personas VALUES (v_per_seq.nextval,'0124435456', 'Paula', 'Acevedo', '-', '0981253462', 'paula@ejemplo.com', 'E', 'A', 'I');
---select * from vet_personas;
---------------------------------------------------------------------------------
 ----------------------------    CITAS   ----------------------------------------
-insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,
-(select vet_personas_per_id from vet_mascotas where masc_id like 1));
+insert into vet_citas values(v_cit_seq.nextval,(TO_TIMESTAMP('2025/02/15 10:30:00', 'YYYY/MM/DD HH24:MI:SS')),'A',1,4);
 --select * from vet_citas;
 --------------------------------------------------------------------------------
 ----------------------------    USUARIOS   -------------------------------------
@@ -380,5 +384,3 @@ insert into vet_detalles_fac values (v_detf_seq.nextval,1,30.43,0,30.43,30.43,(s
 
 --select * from vet_detalles_fac;
 commit;
-
-

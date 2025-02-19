@@ -4,39 +4,31 @@
  */
 package Ventanas;
 
-import java.awt.Color;
-import java.awt.Panel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import Ventanas.*;
-import Clases.*;
-import Controlador.CUsuarios;
 import DAO.ConexionBD;
+import DAO.PersonasDAO;
 import DAO.UsuariosDAO;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
 /**
  *
  * @author USER
  */
 public class VPrincipal extends javax.swing.JFrame {
-    private VEmpleado vEmpleado;
-    Busquedas b=new Busquedas();
-    private UsuariosDAO usuariosDAO;
-    private CUsuarios cUsuarios;
-    
-    public StringBuilder passwordBuilder = new StringBuilder();
-     /* Creates new form VPrincipal
+    VEmpleado vEmpleado=new VEmpleado(this);
+    UsuariosDAO udao = new UsuariosDAO();
+    ConexionBD bd = new ConexionBD();
+    PersonasDAO pdao=new PersonasDAO();
+    StringBuilder passwordBuilder = new StringBuilder();
+    /**
+     * Creates new form VPrincipal
      */
     public VPrincipal() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        ConexionBD.conectar();
         
         ImageIcon cliIcon = new ImageIcon("src\\imagenes\\user.png");
         Image image = cliIcon.getImage(); // Obtener la imagen
@@ -57,10 +49,7 @@ public class VPrincipal extends javax.swing.JFrame {
         
         ImageIcon icono = new ImageIcon("src\\imagenes\\login.png");
         setIconImage(icono.getImage());
-        
-        usuariosDAO = new UsuariosDAO();
-        cUsuarios = new CUsuarios(usuariosDAO);
-        
+
         // Listener para ocultar caracteres al escribir
         TxtContraseña.addKeyListener(new KeyAdapter() {
             @Override
@@ -83,9 +72,6 @@ public class VPrincipal extends javax.swing.JFrame {
             }
         });
 
-        
-        button.addActionListener(e -> JOptionPane.showMessageDialog(PanelUsuario, 
-            "Contraseña: " + passwordBuilder.toString()));
 
     }
 
@@ -105,6 +91,8 @@ public class VPrincipal extends javax.swing.JFrame {
         lblUsuIcono = new javax.swing.JLabel();
         lblContIcono = new javax.swing.JLabel();
         button = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,23 +104,9 @@ public class VPrincipal extends javax.swing.JFrame {
         PanelUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelUsuario.setPreferredSize(new java.awt.Dimension(231, 220));
 
-        TxtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        TxtUsuario.setText("Usuario");
         TxtUsuario.setName("TxtUsuario"); // NOI18N
-        TxtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtUsuarioMouseClicked(evt);
-            }
-        });
 
-        TxtContraseña.setForeground(new java.awt.Color(153, 153, 153));
-        TxtContraseña.setText("Contraseña");
         TxtContraseña.setName("TxtContraseña"); // NOI18N
-        TxtContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TxtContraseñaMouseClicked(evt);
-            }
-        });
 
         BtnIngresar.setText("Ingresar");
         BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,42 +116,61 @@ public class VPrincipal extends javax.swing.JFrame {
         });
 
         button.setToolTipText("Ver contraseña");
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buttonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonMouseReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Usuario");
+
+        jLabel3.setText("Contraseña");
 
         javax.swing.GroupLayout PanelUsuarioLayout = new javax.swing.GroupLayout(PanelUsuario);
         PanelUsuario.setLayout(PanelUsuarioLayout);
         PanelUsuarioLayout.setHorizontalGroup(
             PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(BtnIngresar)
+                .addGap(17, 17, 17))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelUsuarioLayout.createSequentialGroup()
                 .addContainerGap(9, Short.MAX_VALUE)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblContIcono, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                     .addComponent(lblUsuIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelUsuarioLayout.createSequentialGroup()
                         .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addGap(12, 12, 12))
-            .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(BtnIngresar)
-                .addGap(17, 17, 17))
         );
         PanelUsuarioLayout.setVerticalGroup(
             PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelUsuarioLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUsuIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(22, 22, 22)
                 .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblContIcono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblContIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(PanelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnIngresar)
                 .addGap(28, 28, 28))
@@ -194,7 +187,7 @@ public class VPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(154, Short.MAX_VALUE)
+                .addContainerGap(155, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -209,54 +202,51 @@ public class VPrincipal extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addComponent(PanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarTXT(JTextField Txt){
-        Txt.setForeground(Color.BLACK);
-        Txt.setText("");
-    }
-    private void llenarTXT(JTextField Txt){
-        Txt.setForeground(Color.GRAY);
-        if(Txt.getName().equals("TxtUsuario")){
-            Txt.setText("Usuario");
+    //Metodo para obtener que tipo de empleado es (General o administrativo) de la base de datos
+    private String tipoEmpl(char usr){
+        if(usr=='G'){
+            return "General";
         }
         else{
-            Txt.setText("Contraseña");
+            return "Administrativo";     
         }
-    }
-    //Metodo para obtener que tipo de empleado es (General o administrativo) de la base de datos
-    private String tipoEmpl(String usr){
-        return "Administrativo";
-    }
-    private void TxtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtUsuarioMouseClicked
-       this.limpiarTXT(TxtUsuario);
-    }//GEN-LAST:event_TxtUsuarioMouseClicked
- 
+    } 
     
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        String tipoUsuario = cUsuarios.buscarUsuario(TxtUsuario.getText(), passwordBuilder.toString());
+        //En caso de que los datos esten correctos
+        TxtContraseña.setText(passwordBuilder.toString());
+        char tipoE=udao.validarUsuario(TxtUsuario.getText(), TxtContraseña.getText());
+        TxtContraseña.setText("*".repeat(passwordBuilder.length()));       
+            if(tipoE=='G'||tipoE=='A'){
+                    this.setVisible(false);
+                    vEmpleado.setLocationRelativeTo(null);
+                    vEmpleado.setVisible(true);
+                    String tipo=this.tipoEmpl(tipoE);
+                    vEmpleado.setTipo(tipo);
+            }
+        //Caso contrario:
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
+                
+            }
         
-        if(tipoUsuario == null){
-            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
-        }else{
-            this.setVisible(false);
-            vEmpleado=new VEmpleado(this);
-            vEmpleado.setLocationRelativeTo(null);
-            vEmpleado.setVisible(true);
-            vEmpleado.setTipo(tipoUsuario);
-        }
-        this.llenarTXT(TxtUsuario);
-        this.llenarTXT(TxtContraseña);
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
-    private void TxtContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TxtContraseñaMouseClicked
-        this.limpiarTXT(TxtContraseña);
-    }//GEN-LAST:event_TxtContraseñaMouseClicked
+    private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
+        TxtContraseña.setText(passwordBuilder.toString());
+    }//GEN-LAST:event_buttonMousePressed
+
+    private void buttonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseReleased
+        int c=passwordBuilder.toString().length();
+        TxtContraseña.setText("*".repeat(passwordBuilder.length()));
+    }//GEN-LAST:event_buttonMouseReleased
 
     /**
      * @param args the command line arguments
@@ -300,6 +290,8 @@ public class VPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField TxtUsuario;
     private javax.swing.JButton button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblContIcono;
     private javax.swing.JLabel lblUsuIcono;
     // End of variables declaration//GEN-END:variables

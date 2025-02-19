@@ -17,20 +17,20 @@ import java.util.logging.Logger;
  * @author karen
  */
 public class UsuariosDAO {
-    
-    public String buscarUsuario(String nombreUsuario, String contrasenia){
+    Connection con = ConexionBD.conectar();
+    public String buscarUsuario(String nombreUsuario, String contrasenia) {
         MUsuarios usuario = null;
-        Connection con = ConexionBD.conectar();
-
-        if (con != null){
+        if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        if (con != null) {
             try {
                 String sql = "SELECT * FROM vet_usuarios WHERE us_usuario = ? AND us_contrasenia = ?";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setString(1, nombreUsuario);
-                stmt.setString(2, contrasenia); 
+                stmt.setString(2, contrasenia);
                 ResultSet rs = stmt.executeQuery();
-                System.out.println("Consulta ejecutada: " + stmt.toString());
-                
+
                 if (rs.next()) {
                     return rs.getString("us_tipo").trim();
                 }
@@ -40,5 +40,46 @@ public class UsuariosDAO {
             }
         }
         return null;
+    }
+    public char validarUsuario(String usr, String passwd) {
+        Connection con = ConexionBD.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT us_tipo FROM vet_usuarios WHERE us_usuario = ? AND us_contrasenia = ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, usr);
+                stmt.setString(2, passwd);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    String l = rs.getString(1);
+                    return l.charAt(0);
+
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return 'x';
+    }
+    public boolean crearUsuario(String usr, String contr, char tipo, int idusr) {
+        if (con == null) {
+            con = ConexionBD.conectar();
+        }
+        if (con != null) {
+            try {
+                String sql = "insert into vet_usuarios values (v_us_seq.nextval, ?,?,?,?)";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, usr);
+                stmt.setString(2, contr);
+                stmt.setObject(3, tipo);
+                stmt.setInt(4,idusr);
+                ResultSet rs = stmt.executeQuery();
+                return true;
+            } catch (SQLException ex) {
+                return false;
+            }
+        }
+        return false;
     }
 }
