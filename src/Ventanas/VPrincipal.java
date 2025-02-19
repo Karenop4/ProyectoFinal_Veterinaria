@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import DAO.ConexionBD;
 import DAO.PersonasDAO;
 import DAO.UsuariosDAO;
+import Modelo.MPersonas;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -18,35 +19,37 @@ import javax.swing.ImageIcon;
  * @author USER
  */
 public class VPrincipal extends javax.swing.JFrame {
-    VEmpleado vEmpleado=new VEmpleado(this);
+
+    VEmpleado vEmpleado = new VEmpleado(this);
     UsuariosDAO udao = new UsuariosDAO();
     ConexionBD bd = new ConexionBD();
-    PersonasDAO pdao=new PersonasDAO();
+    PersonasDAO pdao = new PersonasDAO();
     StringBuilder passwordBuilder = new StringBuilder();
+
     /**
      * Creates new form VPrincipal
      */
     public VPrincipal() {
         initComponents();
         ConexionBD.conectar();
-        
+
         ImageIcon cliIcon = new ImageIcon("src\\imagenes\\user.png");
         Image image = cliIcon.getImage(); // Obtener la imagen
         Image newImage = image.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Redimensionar
         cliIcon = new ImageIcon(newImage);
         lblUsuIcono.setIcon(cliIcon);
-        
+
         ImageIcon contIcon = new ImageIcon("src\\imagenes\\padlock.png");
         Image image2 = contIcon.getImage(); // Obtener la imagen
         Image newImage2 = image2.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Redimensionar
         contIcon = new ImageIcon(newImage2);
         lblContIcono.setIcon(contIcon);
-        
+
         ImageIcon mostrarContrasenia = new ImageIcon("src\\imagenes\\hide.png");
         Image scaledImage = mostrarContrasenia.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         mostrarContrasenia = new ImageIcon(scaledImage);
         button.setIcon(mostrarContrasenia);
-        
+
         ImageIcon icono = new ImageIcon("src\\imagenes\\login.png");
         setIconImage(icono.getImage());
 
@@ -71,7 +74,6 @@ public class VPrincipal extends javax.swing.JFrame {
                 TxtContraseña.setText("*".repeat(passwordBuilder.length()));
             }
         });
-
 
     }
 
@@ -210,33 +212,40 @@ public class VPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Metodo para obtener que tipo de empleado es (General o administrativo) de la base de datos
-    private String tipoEmpl(char usr){
-        if(usr=='G'){
+    private String tipoEmpl(char usr) {
+        if (usr == 'G') {
             return "General";
+        } else {
+            return "Administrativo";
         }
-        else{
-            return "Administrativo";     
-        }
-    } 
-    
+    }
+
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
         //En caso de que los datos esten correctos
         TxtContraseña.setText(passwordBuilder.toString());
-        char tipoE=udao.validarUsuario(TxtUsuario.getText(), TxtContraseña.getText());
-        TxtContraseña.setText("*".repeat(passwordBuilder.length()));       
-            if(tipoE=='G'||tipoE=='A'){
-                    this.setVisible(false);
-                    vEmpleado.setLocationRelativeTo(null);
-                    vEmpleado.setVisible(true);
-                    String tipo=this.tipoEmpl(tipoE);
-                    vEmpleado.setTipo(tipo);
+        char tipoE = udao.validarUsuario(TxtUsuario.getText(), TxtContraseña.getText());
+        TxtContraseña.setText("*".repeat(passwordBuilder.length()));
+        if (tipoE == 'G' || tipoE == 'A') {
+            String contr=passwordBuilder.toString();
+            int id=udao.validarUsuarioActivo(TxtUsuario.getText(), contr);
+            MPersonas per=pdao.buscarPersonaPorID(id, 'E');
+            
+            if (per.getPer_estado()=='A') {
+                this.setVisible(false);
+                vEmpleado.setLocationRelativeTo(null);
+                vEmpleado.setVisible(true);
+                String tipo = this.tipoEmpl(tipoE);
+                vEmpleado.setTipo(tipo);
             }
-        //Caso contrario:
             else{
-                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto");
-                
+                JOptionPane.showMessageDialog(rootPane, "Este usuario está desactivado.");
             }
-        
+        } //Caso contrario:
+        else {
+            JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrecto.");
+
+        }
+
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMousePressed
@@ -244,7 +253,7 @@ public class VPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonMousePressed
 
     private void buttonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonMouseReleased
-        int c=passwordBuilder.toString().length();
+        int c = passwordBuilder.toString().length();
         TxtContraseña.setText("*".repeat(passwordBuilder.length()));
     }//GEN-LAST:event_buttonMouseReleased
 

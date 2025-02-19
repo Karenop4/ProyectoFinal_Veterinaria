@@ -139,7 +139,7 @@ public class ServiciosDAO {
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setString(1, nombre);
                 stmt.setInt(2, precio);
-                stmt.setObject(3, iva);
+                stmt.setString(3, String.valueOf(iva));
                 ResultSet rs = stmt.executeQuery();
             } catch (SQLException ex) {
                 ex.printStackTrace();
