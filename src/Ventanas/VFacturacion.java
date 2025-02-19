@@ -4,6 +4,7 @@
  */
 package Ventanas;
 
+import Clases.VentaPDF;
 import Controlador.CDetalleFactura;
 import Controlador.CFacturas;
 import Controlador.CPersonas;
@@ -38,6 +39,7 @@ public class VFacturacion extends javax.swing.JFrame {
     private CPersonas cPersonas;
     private CServicios cServicios;
     private List<MServicios> servicios;
+    private VentaPDF vPDF=new VentaPDF();
     
     /**
      * Creates new form NewJFrame
@@ -248,6 +250,7 @@ public class VFacturacion extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tablaServiciosAgregados);
+        tablaServiciosAgregados.getAccessibleContext().setAccessibleName("TablaProductos");
 
         btnEliminarServicio.setText("Eliminar");
         btnEliminarServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -543,7 +546,8 @@ public class VFacturacion extends javax.swing.JFrame {
                 
                 cDetalleFactura.crearDetalle(detalle, id);
             }
-        JOptionPane.showMessageDialog(this, "Factura creada");
+        vPDF.setDatos(cliente,this);
+        vPDF.generarFacturaPDF(id);
         limpiar();    
         }else{
             JOptionPane.showMessageDialog(this, "Ingrese los campos del cliente y los servicios");
@@ -694,19 +698,19 @@ public class VFacturacion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblNumeroFactura;
     private javax.swing.JList<String> listaServiciosBuscados;
-    private javax.swing.JTable tablaServiciosAgregados;
+    public javax.swing.JTable tablaServiciosAgregados;
     private javax.swing.JTextField txtCedulaCliente;
     private javax.swing.JTextField txtCedulaEmpleado;
     private javax.swing.JTextField txtCodigoEmpleado;
     private javax.swing.JTextField txtDireccionCliente;
     private javax.swing.JTextField txtEmailCliente;
-    private javax.swing.JTextField txtIva;
+    public javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtNombreCliente;
-    private javax.swing.JTextField txtNombreEmpleado;
+    public javax.swing.JTextField txtNombreEmpleado;
     private javax.swing.JTextField txtServicio;
-    private javax.swing.JTextField txtSubtotal;
+    public javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTelefonoCliente;
-    private javax.swing.JTextField txtTotal;
+    public javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 
     private void llenarListaServicios() {

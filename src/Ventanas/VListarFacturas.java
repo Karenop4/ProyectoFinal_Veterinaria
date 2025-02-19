@@ -71,8 +71,6 @@ public class VListarFacturas extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDetalleBusqueda = new javax.swing.JTable();
-        btnVisualizarFactura = new javax.swing.JButton();
-        btnEliminarFactura = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -161,40 +159,21 @@ public class VListarFacturas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaDetalleBusqueda);
 
-        btnVisualizarFactura.setText("Visualizar");
-
-        btnEliminarFactura.setText("Eliminar");
-        btnEliminarFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarFacturaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnVisualizarFactura)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarFactura)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVisualizarFactura)
-                    .addComponent(btnEliminarFactura))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         btnSalir.setText("Salir");
@@ -215,8 +194,10 @@ public class VListarFacturas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(278, 278, 278)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -276,6 +257,7 @@ public class VListarFacturas extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser mayor a la de final");
                     } else {
                         DefaultTableModel model = (DefaultTableModel) tablaDetalleBusqueda.getModel();
+                        model.setNumRows(0);
                         int codigoFac = 0;
                         if(txtCodigoFactura.getText() != ""){
                             codigoFac = Integer.parseInt(txtCodigoFactura.getText());
@@ -295,10 +277,6 @@ public class VListarFacturas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnEliminarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFacturaActionPerformed
-        
-    }//GEN-LAST:event_btnEliminarFacturaActionPerformed
-
     public void salir(){
         this.setVisible(false);
         v.setEnabled(true);
@@ -310,9 +288,7 @@ public class VListarFacturas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminarFactura;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnVisualizarFactura;
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;
     private javax.swing.JLabel jLabel1;
