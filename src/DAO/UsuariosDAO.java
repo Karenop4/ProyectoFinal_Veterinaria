@@ -47,7 +47,7 @@ public class UsuariosDAO {
         return null;
     }
     public char validarUsuario(String usr, String passwd) {
-        Connection con = ConexionBD.conectar();
+        con = ConexionBD.conectar();
         if (con != null) {
             try {
                 String sql = "SELECT us_tipo FROM vet_usuarios WHERE us_usuario = ? AND us_contrasenia = ?";
@@ -59,6 +59,26 @@ public class UsuariosDAO {
                     String l = rs.getString(1);
                     return l.charAt(0);
 
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return 'x';
+    }
+    public int validarUsuarioActivo(String usr, String passwd) {
+        con = ConexionBD.conectar();
+        if (con != null) {
+            try {
+                String sql = "SELECT vet_personas_per_id FROM vet_usuarios WHERE us_usuario = ? AND us_contrasenia = ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, usr);
+                stmt.setString(2, passwd);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    return id;
                 }
 
             } catch (SQLException ex) {
