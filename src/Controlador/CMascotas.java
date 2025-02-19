@@ -32,7 +32,11 @@ public class CMascotas {
         return mascotasDAO.eliminarMascota(mMascotas);
     }
     
-    public boolean actualizarMascota(MMascotas mMascota){
-        return mascotasDAO.actualizarMascota();
+    public MMascotas buscarMascota(MPersonas cliente, String nombre) {
+        return mascotasDAO.buscarMascota(cliente, nombre);
+    }
+
+    public void actualizarMascota(MPersonas cliente, MMascotas mascota) {
+        mascotasDAO.actualizarMascota(cliente, mascota);
     }
 }

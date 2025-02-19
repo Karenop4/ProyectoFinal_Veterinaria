@@ -14,10 +14,18 @@ import java.sql.*;
  * @author karen
  */
 public class CPersonas {
+
+    
     private PersonasDAO personaDAO;
+    
+    
     
     public CPersonas(PersonasDAO personaDAO){
         this.personaDAO = personaDAO;
+    }
+    
+    public boolean eliminarCliente(String text) {
+        return personaDAO.eliminarCliente(text);
     }
     
     public MPersonas buscarClienteCedula(String cedula, char CoE){
@@ -35,5 +43,13 @@ public class CPersonas {
     
     public MPersonas buscarClienteID2(int id, char CoE){
         return personaDAO.buscarPersonaPorID(id, CoE);
+    }
+
+    public boolean crearCliente(MPersonas cliente) {
+        return personaDAO.crearCliente(cliente);
+    }
+
+    public boolean actualizarCliente(MPersonas clienteNuevo, int per_id) {
+        return personaDAO.modificarCliente(clienteNuevo, per_id);
     }
 }

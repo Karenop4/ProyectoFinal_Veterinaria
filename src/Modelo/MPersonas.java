@@ -109,4 +109,10 @@ public class MPersonas {
     public void setPer_id(int per_id) {
         this.per_id = per_id;
     }
+
+    public void setPer_cedula(String per_cedula) {
+        this.per_cedula = per_cedula;
+    }
+    
+    
 }

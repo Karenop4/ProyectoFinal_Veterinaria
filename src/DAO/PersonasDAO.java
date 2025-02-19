@@ -216,7 +216,7 @@ public class PersonasDAO {
         Connection con = ConexionBD.conectar();
         if (con != null) {
             try {
-                String sql = "INSERT INTO vet_personas VALUES (v_per_seq.nextval,?, ?, ?, ?, ?, ?, 'C', null, 'A');";
+                String sql = "insert into vet_personas values (v_per_seq.nextval,?,?,?,?,?,?,'C',?,'A')";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setString(1, cliente.getPer_cedula());
                 stmt.setString(2, cliente.getPer_nombre());
@@ -224,11 +224,13 @@ public class PersonasDAO {
                 stmt.setString(4, cliente.getPer_direccion());
                 stmt.setString(5, cliente.getPer_telefono());
                 stmt.setString(6, cliente.getPer_correo());
+                stmt.setString(7, null);
+                
 
-                int filasAfectadas = stmt.executeUpdate(); // Usar executeUpdate()
+                ResultSet rs = stmt.executeQuery(); 
             
                
-                return filasAfectadas > 0;
+                return rs.next();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -237,10 +239,10 @@ public class PersonasDAO {
     }
     
     
-    public boolean modificarCliente(MPersonas cliente) {
+    public boolean modificarCliente(MPersonas cliente, int id) {
         Connection con = ConexionBD.conectar();
         if (con != null) {
-            String sql = "UPDATE vet_personas SET per_nombre = ?, per_apellido = ?, per_direccion = ?, per_telefono = ?, per_correo = ? WHERE per_id = ?";
+            String sql = "UPDATE vet_personas SET per_nombre = ?, per_apellido = ?, per_direccion = ?, per_telefono = ?, per_correo = ?, per_cedula=? WHERE per_id = ?";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)) {
                 stmt.setString(1, cliente.getPer_nombre());
@@ -248,19 +250,14 @@ public class PersonasDAO {
                 stmt.setString(3, cliente.getPer_direccion());
                 stmt.setString(4, cliente.getPer_telefono());
                 stmt.setString(5, cliente.getPer_correo());
-                stmt.setInt(6, cliente.getPer_id());
+                stmt.setString(6, cliente.getPer_cedula());
+                stmt.setInt(7, id);
 
                 int filasAfectadas = stmt.executeUpdate();
                 return filasAfectadas > 0; 
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            } 
         }
         return false;
     }

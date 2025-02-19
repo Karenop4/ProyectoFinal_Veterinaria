@@ -46,6 +46,7 @@ public class UsuariosDAO {
         }
         return null;
     }
+    
     public char validarUsuario(String usr, String passwd) {
         con = ConexionBD.conectar();
         if (con != null) {
@@ -80,7 +81,6 @@ public class UsuariosDAO {
                     int id = rs.getInt(1);
                     return id;
                 }
-
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }

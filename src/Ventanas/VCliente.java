@@ -20,9 +20,11 @@ import Modelo.MPersonas;
 public class VCliente extends javax.swing.JFrame {
     //Busquedas b=new Busquedas();
     VEmpleado v;
-    VRegistro VRegistro=new VRegistro(this);
+    VRegistro VRegistro;
+    VActualizarCliente vActualizarCliente;
     PersonasDAO pDAO=new PersonasDAO();
     CPersonas persona = new CPersonas(pDAO);
+    MPersonas cliente;
     /**
      * Creates new form VClientes
      */
@@ -37,6 +39,7 @@ public class VCliente extends javax.swing.JFrame {
         setIconImage(icono.getImage());
         
         this.persona = persona;
+        
     }
 
     /**
@@ -55,10 +58,9 @@ public class VCliente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         TxtAreaInfoCliente = new javax.swing.JTextArea();
         PanelBotones = new javax.swing.JPanel();
-        BtnGuardarCambios = new javax.swing.JToggleButton();
         BtnActualizarInfo = new javax.swing.JToggleButton();
         BtnEliminarReg = new javax.swing.JToggleButton();
-        BtnCancelar = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
         BtnAgregar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -138,11 +140,26 @@ public class VCliente extends javax.swing.JFrame {
 
         PanelBotones.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        BtnGuardarCambios.setText("Guardar cambios");
-
         BtnActualizarInfo.setText("Actualizar Informacion");
+        BtnActualizarInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnActualizarInfoActionPerformed(evt);
+            }
+        });
 
         BtnEliminarReg.setText("Eliminar registro");
+        BtnEliminarReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarRegActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelBotonesLayout = new javax.swing.GroupLayout(PanelBotones);
         PanelBotones.setLayout(PanelBotonesLayout);
@@ -151,9 +168,9 @@ public class VCliente extends javax.swing.JFrame {
             .addGroup(PanelBotonesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnGuardarCambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnActualizarInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(BtnEliminarReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtnEliminarReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelBotonesLayout.setVerticalGroup(
@@ -163,22 +180,20 @@ public class VCliente extends javax.swing.JFrame {
                 .addComponent(BtnActualizarInfo)
                 .addGap(18, 18, 18)
                 .addComponent(BtnEliminarReg)
-                .addGap(18, 18, 18)
-                .addComponent(BtnGuardarCambios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
-
-        BtnCancelar.setText("Salir sin Guardar");
-        BtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnCancelarMouseClicked(evt);
-            }
-        });
 
         BtnAgregar.setText("Agregar Cliente");
         BtnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnAgregarMouseClicked(evt);
+            }
+        });
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarActionPerformed(evt);
             }
         });
 
@@ -192,9 +207,7 @@ public class VCliente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,9 +221,7 @@ public class VCliente extends javax.swing.JFrame {
                     .addComponent(PanelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(BtnAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnCancelar)))
+                        .addComponent(BtnAgregar)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,14 +235,10 @@ public class VCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarCedula(JTextField Txt){
-        Txt.setText("");
-        Txt.setForeground(Color.GRAY);
-    }
+    
     public void estadoBotones(boolean t){
         BtnActualizarInfo.setEnabled(t);
         BtnEliminarReg.setEnabled(t);
-        BtnGuardarCambios.setEnabled(t);
     }
     public void salir(){
         PanelInformacion.setEnabled(false);
@@ -247,26 +254,15 @@ public class VCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtCedulaMouseClicked
 
     private void BtnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBuscarMouseClicked
-        /*if(b.validarCliente(TxtCedula.getText())){
-            PanelInformacion.setEnabled(true);
-            estadoBotones(true);
-        }    
-        else{
-            JOptionPane.showMessageDialog(rootPane, "El cliente no ha sido registrado.");
-            BtnAgregar.setEnabled(true);
-        }
-        limpiarCedula(TxtCedula);  */ 
+        
     }//GEN-LAST:event_BtnBuscarMouseClicked
-
-    private void BtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCancelarMouseClicked
-        salir();
-    }//GEN-LAST:event_BtnCancelarMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
 
     private void BtnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAgregarMouseClicked
+        VRegistro=new VRegistro(this, persona);
         this.setEnabled(false);
         VRegistro.setLocationRelativeTo(null);
         VRegistro.setVisible(true);
@@ -275,7 +271,7 @@ public class VCliente extends javax.swing.JFrame {
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         String celdula = TxtCedula.getText();
         char CoE = 'C';
-        MPersonas cliente = persona.buscarClienteCedula(celdula, CoE);
+        cliente = persona.buscarClienteCedula(celdula, CoE);
         
         if(cliente != null){
             TxtAreaInfoCliente.setText(
@@ -285,25 +281,49 @@ public class VCliente extends javax.swing.JFrame {
                                         "Dirección: " + cliente.getPer_direccion() + "\n" +
                                         "Telefono: " + cliente.getPer_telefono() + "\n" +
                                         "Correo: " + cliente.getPer_correo());
-                    
+            
+            estadoBotones(true);
         }else{
             TxtAreaInfoCliente.setText("Datos del cliente no encontrados");
         }
     }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnActualizarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnActualizarInfoActionPerformed
+        vActualizarCliente = new VActualizarCliente(this, persona, cliente);
+        this.setEnabled(false);
+        vActualizarCliente.setLocationRelativeTo(null);
+        vActualizarCliente.setVisible(true);
+    }//GEN-LAST:event_BtnActualizarInfoActionPerformed
+
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+        
+    }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void BtnEliminarRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarRegActionPerformed
+        boolean borrado = persona.eliminarCliente(TxtCedula.getText());
+        if(borrado){
+            JOptionPane.showMessageDialog(this, "Registro borrado");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo borrar el registro");
+        }
+    }//GEN-LAST:event_BtnEliminarRegActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        salir();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnActualizarInfo;
     private javax.swing.JToggleButton BtnAgregar;
     private javax.swing.JToggleButton BtnBuscar;
-    private javax.swing.JToggleButton BtnCancelar;
     private javax.swing.JToggleButton BtnEliminarReg;
-    private javax.swing.JToggleButton BtnGuardarCambios;
     private javax.swing.JPanel PanelBotones;
     private javax.swing.JPanel PanelBuscar;
     private javax.swing.JPanel PanelInformacion;
     private javax.swing.JTextArea TxtAreaInfoCliente;
     private javax.swing.JTextField TxtCedula;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

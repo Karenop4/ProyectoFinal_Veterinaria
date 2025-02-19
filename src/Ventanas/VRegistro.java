@@ -19,24 +19,27 @@ import javax.swing.JOptionPane;
  */
 public class VRegistro extends javax.swing.JFrame {
 
-    PersonasDAO pDAO = new PersonasDAO();
-    CEmpleados cemp = new CEmpleados(pDAO);
-    UsuariosDAO uDAO = new UsuariosDAO();
-    CUsuarios cus = new CUsuarios(uDAO);
+    private PersonasDAO pDAO = new PersonasDAO();
+    private CEmpleados cemp = new CEmpleados(pDAO);
+    private UsuariosDAO uDAO = new UsuariosDAO();
+    private CUsuarios cus = new CUsuarios(uDAO);
     private String tipoRegistro = " "; //E para registrar empleado, C para registrar cliente
+    private CPersonas cPersona;
     /**
      * Creates new form VRegistro
      */
     VCliente vCliente;
     VListarEmpleados vEmpleado;
 
-    public VRegistro(VCliente v) {
+    public VRegistro(VCliente v, CPersonas cPersona) {
         initComponents();
         this.vCliente = v;
+        this.cPersona = cPersona;
         tipoRegistro = "C";
 
         if (tipoRegistro == "C") {
             panelDetalleEmp.setVisible(false);
+            PanelCuenta.setVisible(false);
         }
 
         agregarIcono();
@@ -88,8 +91,8 @@ public class VRegistro extends javax.swing.JFrame {
         rdPermisoSi = new javax.swing.JRadioButton();
         rdPermisoNo = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         PanelCuenta = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -261,17 +264,17 @@ public class VRegistro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Registrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnRegistrarMouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnCancelarMouseClicked(evt);
             }
         });
 
@@ -316,9 +319,9 @@ public class VRegistro extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(btnCancelar))
                     .addComponent(PanelCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -326,8 +329,8 @@ public class VRegistro extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PanelCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -358,62 +361,78 @@ public class VRegistro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         salir();
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         salir();
     }//GEN-LAST:event_formWindowClosing
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (!"".equals(TxC.getText()) && !"".equals(TxN.getText()) && !"".equals(TxA.getText()) && !"".equals(TxD.getText()) && !"".equals(TxT.getText()) && !"".equals(TxE.getText())) {
-            String cedula = TxC.getText();
-            String nombre = TxN.getText();
-            String apellido = TxA.getText();
-            String dir = TxD.getText();
-            String tel = TxT.getText();
-            String email = TxE.getText();
-            String usuario;
-            String contr;
-            char AoV = 'x';
-            char tipo = 'x';
-            if (rdAtenciónCliente.isSelected()) {
-                if (rdPermisoSi.isSelected()) {
-                    tipo = 'A';
-                } else {
-                    tipo = 'G';
-                }
-                AoV = 'A';
-            } else {
-                AoV = 'V';
-            }
-            if (cemp.listarEmpleado(cedula, 'E') == null) {
+    private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
+        if(tipoRegistro.equals("E")){
+            if (!"".equals(TxC.getText()) && !"".equals(TxN.getText()) && !"".equals(TxA.getText()) && !"".equals(TxD.getText()) && !"".equals(TxT.getText()) && !"".equals(TxE.getText())) {
+                String cedula = TxC.getText();
+                String nombre = TxN.getText();
+                String apellido = TxA.getText();
+                String dir = TxD.getText();
+                String tel = TxT.getText();
+                String email = TxE.getText();
+                String usuario;
+                String contr;
+                char AoV = 'x';
+                char tipo = 'x';
                 if (rdAtenciónCliente.isSelected()) {
-                    if (!"".equals(TxtUsuario2.getText()) && TxtContrasenia2.getText().length() > 5) {
+                    if (rdPermisoSi.isSelected()) {
+                        tipo = 'A';
+                    } else {
+                        tipo = 'G';
+                    }
+                    AoV = 'A';
+                } else {
+                    AoV = 'V';
+                }
+                if (cemp.listarEmpleado(cedula, 'E') == null) {
+                    if (rdAtenciónCliente.isSelected()) {
+                        if (!"".equals(TxtUsuario2.getText()) && TxtContrasenia2.getText().length() > 5) {
+                            cemp.crearEmpleado(cedula, nombre, apellido, dir, tel, email, AoV);
+                            usuario = TxtUsuario2.getText();
+                            contr = TxtContrasenia2.getText();
+                            MPersonas per = cemp.listarEmpleado(cedula, 'E');
+                            int id = per.getPer_id();
+                            cus.crearUsuario(usuario, contr, tipo, id);
+                            JOptionPane.showMessageDialog(this, "Empleado agregado con exito");
+                            salir();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Datos de entrada invalidos: \nContraseña debe tener al menos 5 caracteres");
+                        }
+                    } else if (rdVeterinario.isSelected()) {
                         cemp.crearEmpleado(cedula, nombre, apellido, dir, tel, email, AoV);
-                        usuario = TxtUsuario2.getText();
-                        contr = TxtContrasenia2.getText();
                         MPersonas per = cemp.listarEmpleado(cedula, 'E');
                         int id = per.getPer_id();
-                        cus.crearUsuario(usuario, contr, tipo, id);
                         JOptionPane.showMessageDialog(this, "Empleado agregado con exito");
                         salir();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Datos de entrada invalidos: \nContraseña debe tener al menos 5 caracteres");
                     }
-                } else if (rdVeterinario.isSelected()) {
-                    cemp.crearEmpleado(cedula, nombre, apellido, dir, tel, email, AoV);
-                    MPersonas per = cemp.listarEmpleado(cedula, 'E');
-                    int id = per.getPer_id();
-                    JOptionPane.showMessageDialog(this, "Empleado agregado con exito");
-                    salir();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Registros duplicados");
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Registros duplicados");
+            }
+        }else if(tipoRegistro.equals("C")){
+            if (!"".equals(TxC.getText()) && !"".equals(TxN.getText()) && !"".equals(TxA.getText()) && !"".equals(TxD.getText()) && !"".equals(TxT.getText()) && !"".equals(TxE.getText())){
+                MPersonas cliente = new MPersonas(0, TxC.getText(), TxN.getText(), TxA.getText(), TxD.getText(), TxT.getText(), TxC.getText(), 'C', 'A');
+                boolean creado = cPersona.crearCliente(cliente);
+                if(creado){
+                    JOptionPane.showMessageDialog(this, "Registro Creado");
+                    salir();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Registro Duplicado");
+                }
+                
+                
             }
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+        
+    }//GEN-LAST:event_btnRegistrarMouseClicked
 
     private void rdAtenciónClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdAtenciónClienteMouseClicked
         TxtUsuario2.setEnabled(true);
@@ -446,25 +465,17 @@ public class VRegistro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelCuenta;
-    private javax.swing.JPanel PanelUsuario;
-    private javax.swing.JPanel PanelUsuario1;
-    private javax.swing.JPanel PanelUsuario2;
-    private javax.swing.JPanel PanelUsuario3;
-    private javax.swing.JPanel PanelUsuario4;
     private javax.swing.JTextField TxA;
     private javax.swing.JTextField TxC;
     private javax.swing.JTextField TxD;
     private javax.swing.JTextField TxE;
     private javax.swing.JTextField TxN;
     private javax.swing.JTextField TxT;
-    private javax.swing.JTextField TxtContrasenia;
     private javax.swing.JTextField TxtContrasenia2;
-    private javax.swing.JTextField TxtUsuario;
     private javax.swing.JTextField TxtUsuario2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -474,7 +485,6 @@ public class VRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel panelDetalleEmp;
     private javax.swing.JPanel panelPrincipal;

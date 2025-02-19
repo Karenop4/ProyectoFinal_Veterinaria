@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class VMascotas extends javax.swing.JFrame {
     
     private VAgregarMascota VAgregar;
+    private VActualizarMascota VActualizar;
     private VEmpleado v;
     
     private CTiposMascotas cTiposMascotas;
@@ -106,6 +107,7 @@ public class VMascotas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaMascotas);
 
         btnAgregarMascota.setText("Agregar");
+        btnAgregarMascota.setEnabled(false);
         btnAgregarMascota.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAgregarMascotaMouseClicked(evt);
@@ -113,8 +115,18 @@ public class VMascotas extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -222,7 +234,7 @@ public class VMascotas extends javax.swing.JFrame {
 
     private void btnAgregarMascotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMascotaMouseClicked
         this.setEnabled(false);
-        VAgregar = new VAgregarMascota(this, cTiposMascotas, cRazas, cliente);
+        VAgregar = new VAgregarMascota(this, cTiposMascotas, cRazas, cliente, cMascotas);
         VAgregar.setLocationRelativeTo(null);
         VAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarMascotaMouseClicked
@@ -249,7 +261,38 @@ public class VMascotas extends javax.swing.JFrame {
         
         tablaMascotas.setModel(model);
         
+        btnAgregarMascota.setEnabled(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tablaMascotas.getModel();
+        int filaSeleccionada = tablaMascotas.getSelectedRow(); // Obtener fila seleccionada
+
+        if (filaSeleccionada != -1) { // Verificar si hay una fila seleccionada
+            // Obtener el nombre de la mascota (columna 2)
+            String nombreMascota = model.getValueAt(filaSeleccionada, 0).toString();
+
+            // Crear el objeto MMascotas con los datos obtenidos
+            MMascotas mascota = new MMascotas(0, nombreMascota, cliente, null);
+
+            // Eliminar la mascota
+            cMascotas.eliminarMascota(mascota);
+
+            // Eliminar la fila de la tabla
+            model.removeRow(filaSeleccionada);
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        this.setEnabled(false);
+        DefaultTableModel model = (DefaultTableModel) tablaMascotas.getModel();
+        int filaSeleccionada = tablaMascotas.getSelectedRow();
+        String nombre = model.getValueAt(filaSeleccionada, 0).toString();
+        VActualizar = new VActualizarMascota(this, cTiposMascotas, cRazas, cliente, cMascotas, nombre);
+        VActualizar.setLocationRelativeTo(null);
+        VActualizar.setVisible(true);
+    }//GEN-LAST:event_btnActualizarActionPerformed
     
     public void salir(){
         this.setVisible(false);

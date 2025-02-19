@@ -59,7 +59,7 @@ public class MascotasDAO {
         
         if(con!=null){
             try {
-                String sql = "INSERT INTO vet_mascotas VALUES (v_masc_seq.nextval, ?, ?, (SELECT raza_id FROM vet_razas WHERE raza_nombre LIKE '?'))";
+                String sql = "INSERT INTO vet_mascotas VALUES (v_masc_seq.nextval, ?, ?, ?)";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setString(1, mMascotas.getMasc_nombre());
                 stmt.setInt(2, mCliente.getPer_id());
@@ -77,9 +77,9 @@ public class MascotasDAO {
         Connection con = ConexionBD.conectar();
         if(con!=null){
             try {
-                String sql = "DELETE FROM vet_mascotas WHERE mascota_id = ?";
+                String sql = "DELETE FROM vet_mascotas WHERE masc_nombre LIKE ?";
                 PreparedStatement stmt = con.prepareStatement(sql);
-                stmt.setInt(1, mMascotas.getMasc_id());
+                stmt.setString(1, mMascotas.getMasc_nombre());
                 int rowsDeleted = stmt.executeUpdate();
                 
                 if (rowsDeleted > 0) {
@@ -94,8 +94,57 @@ public class MascotasDAO {
         return false;
     }
     
-    public boolean actualizarMascota(){
-        
-        return false;
+    public boolean actualizarMascota(MPersonas cliente, MMascotas mascota) {
+        Connection con = ConexionBD.conectar();
+        String sql = "UPDATE vet_mascotas SET masc_nombre = ?, VET_RAZAS_RAZA_ID = ? WHERE masc_id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            // Asignar valores a los parámetros
+            stmt.setString(1, mascota.getMasc_nombre());
+            stmt.setInt(2, mascota.getMascota().getRaza_id());
+            stmt.setInt(3, mascota.getMasc_id()); 
+
+            // Ejecutar la consulta
+            int filasActualizadas = stmt.executeUpdate();
+
+            // Si se actualizó al menos una fila, retornar true
+            return filasActualizadas > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar la mascota: " + e.getMessage());
+            return false;
+        }
+    }
+
+    
+    public MMascotas buscarMascota(MPersonas cliente, String nombre){
+        MMascotas mMascota = null;
+        Connection con = ConexionBD.conectar();
+        List<MMascotas> listaMascotas = new ArrayList<>();
+        if (con != null) {
+            try {
+                String sql = "SELECT m.masc_id, m.masc_nombre, r.raza_nombre, t.tipom_nombre "
+                        + "FROM vet_mascotas m "
+                        + "JOIN vet_razas r ON m.vet_razas_raza_id = r.raza_id "
+                        + "JOIN vet_tiposmascotas t ON r.vet_tiposmascotas_tipom_id = t.tipom_id "
+                        + "WHERE m.vet_personas_per_id = ? AND m.masc_nombre LIKE ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setInt(1, cliente.getPer_id());
+                stmt.setString(2, nombre);
+                ResultSet rs = stmt.executeQuery();
+                
+                if(rs.next()){
+                    MTiposMascotas tipo = new MTiposMascotas(rs.getString("tipom_nombre"));
+                    MRazas raza = new MRazas(rs.getString("raza_nombre"), tipo);
+                    mMascota = new MMascotas(rs.getInt("masc_id"), rs.getString("masc_nombre"), cliente, raza);
+                    listaMascotas.add(mMascota);
+                }
+                
+                return mMascota;
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(MascotasDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    return null;
     }
 }

@@ -4,8 +4,10 @@
  */
 package Ventanas;
 
+import Controlador.CMascotas;
 import Controlador.CRazas;
 import Controlador.CTiposMascotas;
+import Modelo.MMascotas;
 import Modelo.MPersonas;
 import Modelo.MRazas;
 import Modelo.MTiposMascotas;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,10 +28,11 @@ public class VAgregarMascota extends javax.swing.JFrame {
     private List<MTiposMascotas> listaTiposMascotas;
     private List <MRazas> listaRazasBD;
     private MPersonas cliente;
+    private CMascotas cMascotas;
     /**
      * Creates new form VAgregarMascota
      */
-    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas, CRazas cRazas, MPersonas cliente) {
+    public VAgregarMascota(VMascotas v, CTiposMascotas cTipoMascotas, CRazas cRazas, MPersonas cliente, CMascotas cMascotas) {
         initComponents();
         this.v = v;
         
@@ -38,6 +42,7 @@ public class VAgregarMascota extends javax.swing.JFrame {
         this.cTipoMascotas = cTipoMascotas;
         this.cRazas = cRazas;
         this.cliente = cliente;
+        this.cMascotas = cMascotas;
         listaTiposMascotas = new ArrayList<>();
         listarTiposMascotas();
         
@@ -61,10 +66,6 @@ public class VAgregarMascota extends javax.swing.JFrame {
         txtNombreMascota = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtTipoAnimal = new javax.swing.JTextField();
-        txtRazaAnimal = new javax.swing.JTextField();
-        btnBuscarTipo = new javax.swing.JButton();
-        btnBuscarRaza = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaTipo = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -90,10 +91,6 @@ public class VAgregarMascota extends javax.swing.JFrame {
         jLabel3.setText("Tipo");
 
         jLabel4.setText("Raza");
-
-        btnBuscarTipo.setText("Buscar");
-
-        btnBuscarRaza.setText("Buscar");
 
         listaTipo.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -121,26 +118,16 @@ public class VAgregarMascota extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNombreMascota))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtRazaAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarRaza))
-                            .addComponent(jScrollPane2))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
+                .addGap(86, 86, 86)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addGap(103, 103, 103))
+                .addGap(122, 122, 122))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,17 +136,11 @@ public class VAgregarMascota extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombreMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTipoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRazaAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarTipo)
-                    .addComponent(btnBuscarRaza))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2))
@@ -255,7 +236,18 @@ public class VAgregarMascota extends javax.swing.JFrame {
     }//GEN-LAST:event_listaTipoMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        MRazas raza = null;
+        for(MRazas r : listaRazasBD){
+            if(listaRaza.getSelectedValue().equals(r.getRaza_nombre())){
+                raza = r;
+                break;
+            }
+        }
         
+        MMascotas mascota = new MMascotas(0, txtNombreMascota.getText(), cliente, raza);
+        cMascotas.agregarMascota(cliente, mascota);
+        
+        JOptionPane.showMessageDialog(this, "Mascota creada");
     }//GEN-LAST:event_btnGuardarActionPerformed
     
     public void salir(){
@@ -282,8 +274,6 @@ public class VAgregarMascota extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarRaza;
-    private javax.swing.JButton btnBuscarTipo;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
@@ -298,7 +288,5 @@ public class VAgregarMascota extends javax.swing.JFrame {
     private javax.swing.JList<String> listaTipo;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreMascota;
-    private javax.swing.JTextField txtRazaAnimal;
-    private javax.swing.JTextField txtTipoAnimal;
     // End of variables declaration//GEN-END:variables
 }

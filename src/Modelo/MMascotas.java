@@ -36,4 +36,22 @@ public class MMascotas {
     public MRazas getMascota() {
         return mascota;
     }
+
+    public void setMasc_id(int masc_id) {
+        this.masc_id = masc_id;
+    }
+
+    public void setMasc_nombre(String masc_nombre) {
+        this.masc_nombre = masc_nombre;
+    }
+
+    public void setCliente(MPersonas cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setMascota(MRazas mascota) {
+        this.mascota = mascota;
+    }
+    
+    
 }
