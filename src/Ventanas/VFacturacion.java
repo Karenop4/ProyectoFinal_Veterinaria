@@ -509,7 +509,30 @@ public class VFacturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarClienteActionPerformed
 
     private void btnBuscarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarServicioActionPerformed
+        if(txtServicio.getText().equals("")){
+            llenarListaServicios();
+        }else{
+            String servicio = txtServicio.getText();
+ 
+            DefaultListModel model = new DefaultListModel();
         
+            model.addElement(cServicios.buscarServicio(servicio));
+        
+            listaServiciosBuscados.setModel(model);
+            
+            MServicios servicioSeleccionado = cServicios.buscarServicio(servicio);
+            DefaultTableModel modelT = (DefaultTableModel) tablaServiciosAgregados.getModel();
+            
+                    
+                    double IVA = 0;
+                    double total = servicioSeleccionado.getServ_precio();
+                    if(servicioSeleccionado.getServ_iva() == 'S'){
+                        IVA = servicioSeleccionado.getServ_precio() * 0.12;
+                        total = total + IVA;
+                    }
+                    modelT.addRow(new Object[]{servicioSeleccionado.getServ_codigo(), 1, servicioSeleccionado.getServ_nombre(), new BigDecimal(IVA).setScale(2, RoundingMode.HALF_UP).doubleValue(), servicioSeleccionado.getServ_precio(), new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue()});
+                    calcularSumaTotal();
+        }
     }//GEN-LAST:event_btnBuscarServicioActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
@@ -565,6 +588,8 @@ public class VFacturacion extends javax.swing.JFrame {
             model.addColumn("Precio");
             model.addColumn("Total");
         }
+        
+       
          
             for(MServicios s : servicios){
                 if(s.equals(listaServiciosBuscados.getSelectedValue())){
@@ -714,7 +739,7 @@ public class VFacturacion extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarListaServicios() {
-        servicios = cServicios.listarServicios2();
+        servicios = cServicios.listarServiciosLista();
         DefaultListModel model = new DefaultListModel();
         
         for (MServicios servicio : servicios) {
@@ -733,5 +758,9 @@ public class VFacturacion extends javax.swing.JFrame {
         txtSubtotal.setText("");
         txtTelefonoCliente.setText("");
         txtTotal.setText("");
+        
+        DefaultTableModel model = (DefaultTableModel) tablaServiciosAgregados.getModel();
+        model.setRowCount(0); // Borra todas las filas
+
    }
 }

@@ -172,4 +172,26 @@ public class ServiciosDAO {
         }
         return null;
     }
+
+    public MServicios buscarServicio(String nombre) {
+        Connection con = ConexionBD.conectar();
+        
+        if(con != null){
+            try {
+                String sql = "SELECT * FROM vet_servicios WHERE serv_nombre LIKE ?";
+                PreparedStatement stmt = con.prepareStatement(sql);
+                stmt.setString(1, nombre);
+                ResultSet rs = stmt.executeQuery();
+                MServicios servicio = null;
+                if(rs.next()){
+                    servicio = new MServicios(rs.getInt("serv_codigo"), rs.getString("serv_nombre"), rs.getDouble("serv_precio"), rs.getString("serv_estado").charAt(0), rs.getString("serv_iva").charAt(0));
+                    
+                }
+                return servicio;
+            } catch (SQLException ex) {
+                Logger.getLogger(ServiciosDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
 }

@@ -32,7 +32,11 @@ public class CServicios {
         sDAO.crearServicio(nombre, precio, iva);
     }
     
-    public List<MServicios> listarServicios2(){
+    public List<MServicios> listarServiciosLista(){
         return sDAO.listarServicios2();
+    }
+    
+    public MServicios buscarServicio(String nombre){
+        return sDAO.buscarServicio(nombre);
     }
 }
